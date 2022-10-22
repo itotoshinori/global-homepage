@@ -27,16 +27,18 @@
 							<form action="{{ route('articles.destroy', $article->id) }}" method="POST">
 								@csrf
 								@method('DELETE')
-								<h4>
-									<a href="{{ route('articles.show', $article->id) }}">
-										詳細へ
-									</a>
-								</h4>
-								@auth
-									<a class="button is-success" href="{{ route('articles.edit', $article->id) }}">編集</a>
-									<button class="btn btn-danger" type="submit" class="btn btn-danger"
-										onclick="return confirm('本当に削除しますか?')">削除</button>
-								@endauth
+								<div>
+									<span class="mr-2">
+										<a class="button is-primary" href="{{ route('articles.show', $article->id) }}">
+											詳細へ
+										</a>
+									</span>
+									@auth
+										<a class="button is-success" href="{{ route('articles.edit', $article->id) }}">編集</a>
+										<button class="btn btn-danger" type="submit" class="btn btn-danger"
+											onclick="return confirm('本当に削除しますか?')">削除</button>
+									@endauth
+								</div>
 							</form>
 						</div>
 					</div>

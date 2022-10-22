@@ -9,7 +9,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
 		<div class="container-fluid container-sm">
-			<h4 style="text-decoration: none; color:white;">株式会社グローバル</h4>
+			<h4 style="text-decoration: none; color:white;">グローバル</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

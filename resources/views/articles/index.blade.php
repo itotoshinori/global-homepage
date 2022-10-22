@@ -29,7 +29,7 @@
 								@method('DELETE')
 								<div>
 									<span class="mr-2">
-										<a class="button is-primary" href="{{ route('articles.show', $article->id) }}">
+										<a class="button is-primary" style="text-decoration: none;" href="{{ route('articles.show', $article->id) }}">
 											詳細へ
 										</a>
 									</span>

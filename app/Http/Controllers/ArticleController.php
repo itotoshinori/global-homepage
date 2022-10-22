@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreArticleRequest;
+use Illuminate\Database\Eloquent\Collection;
+
+use App\lib\My_func;
+
+class ArticleController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->class_func = new My_func();
+    }
+
+    public function index()
+    {
+        $articles = Article::oldest()->get()->where('category', 0);
+        $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(9);
+        return view('articles.index', [
+            'articles' => $articles,
+            'info_articles' => $info_articles,
+            'class_func' => $this->class_func,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $main = $request->main_content;
+        return view('articles.create', compact('main'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreArticleRequest $request)
+    {
+        $create = $this->class_func->request_content($request);
+        $image = $request->file('image');
+        if (isset($image)) {
+            // ファイルの保存とパスの取得
+            $path =  $image->store('images', 'public');
+            $image = ltrim($path, 'images/');
+            $create['image'] = $image;
+        }
+        $image_detail = $request->file('image_detail');
+        if (isset($image_detail)) {
+            // ファイルの保存とパスの取得
+            $path =  $image_detail->store('images', 'public');
+            $image_detail = ltrim($path, 'images/');
+            $create['image_detail'] = $image_detail;
+        }
+        Article::create($create);
+        return redirect()->route('articles.index')->with('success', '新規登録完了しました');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Article $article)
+    {
+        return view('articles.show', [
+            'article' => $article,
+            'class_func' => $this->class_func,
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Article $article)
+    {
+        if ($article->category==0) {
+            $main = true;
+        } else {
+            $main = false;
+        }
+
+        return view('articles.edit', compact('article', 'main'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StoreArticleRequest $request, Article $article)
+    {
+        $update = $this->class_func->request_content($request);
+        $image = $request->file('image');
+        if (isset($image)) {
+            $path =  $image->store('images', 'public');
+            $image = ltrim($path, 'images/');
+            $update['image'] = $image;
+        } elseif ($request->image_del == "on") {
+            //ファイル削除システム
+            Storage::disk('public')->delete("/images/".$article->image);
+            $update['image'] = null;
+        }
+        $image_detail = $request->file('image_detail');
+        if (isset($image_detail)) {
+            // ファイルの保存とパスの取得
+            $path =  $image_detail->store('images', 'public');
+            $image_detail = ltrim($path, 'images/');
+            $update['image_detail'] = $image_detail;
+        } elseif ($request->image_detail_del == "on") {
+            //ファイル削除システム
+            Storage::disk('public')->delete("/images/".$article->image_detail);
+            $update['image_detail'] = null;
+        }
+        $article->update($update);
+        return redirect("articles/".$article->id)->with('success', '更新完了しました');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Article $article)
+    {
+        //画像ファイルを削除
+        if (isset($article->image)) {
+            Storage::disk('public')->delete("/images/".$article->image);
+        }
+        $article->delete();
+        return redirect()->route('articles.index')
+                        ->with('success', '削除しました。');
+    }
+}

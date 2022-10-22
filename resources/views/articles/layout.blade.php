@@ -16,25 +16,25 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-5 mb-lg-0">
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/" style="color:white;">Home</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/1" style="color:white;">企業理念</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/2" style="color:white;">事業内容</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/3" style="color:white;">会社概要</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/4" style="color:white;">お問合せ</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/5" style="color:white;">採用</a></h4>
 					</li>
-					<li class="nav-item ms-5">
+					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/#info" style="color:white;">お知らせ</a></h4>
 					</li>
 				</ul>

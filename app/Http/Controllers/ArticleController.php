@@ -136,7 +136,10 @@ class ArticleController extends Controller
         }
         $article->update($update);
         $t = "記事の更新がありました";
-        Mail::to("tito40358@gmail.com")->send(new Admin($t, $article->id));
+        $my_url = config('my-url.url');
+        if ($my_url=="http://global.asagaya.tk") {
+            Mail::to("tito40358@gmail.com")->send(new Admin($t, $article->id));
+        }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }
 

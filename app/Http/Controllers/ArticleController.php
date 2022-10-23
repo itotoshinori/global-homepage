@@ -25,7 +25,7 @@ class ArticleController extends Controller
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
         $this->articles_url = "${my_url}/articles/";
-        $this->to_email = "tnitoh@global-software.co.jp"
+        $this->to_email = "tnitoh@global-software.co.jp";
     }
 
     public function index()

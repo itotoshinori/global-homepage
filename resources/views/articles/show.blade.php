@@ -3,6 +3,7 @@
 
 @section('content')
 	<div class="wrapper">
+		<br />
 		@if ($message = Session::get('success'))
 			<p class="alert alert-success">
 				{{ $message }}</p>

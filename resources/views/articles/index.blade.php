@@ -5,7 +5,6 @@
 	@auth
 		<h2>
 			<a href="{{ route('articles.create', ['main_content' => true]) }}">主項目新規作成</a>
-			<a href="{{ route('articles.create') }}">お知らせ新規作成</a>
 		</h2>
 	@endauth
 	<div class="menu-card-wrapper">
@@ -49,6 +48,9 @@
 			<div class="menu-card-inner">
 				<div class="menu-title mb-2" id="info">
 					お知らせ
+					@auth
+						<span class="fs-4 ml-5"><a href="{{ route('articles.create') }}">新規作成</a></span>
+					@endauth
 				</div>
 				<div class="menu-text">
 					@foreach ($info_articles as $info)

@@ -25,6 +25,7 @@ class ArticleController extends Controller
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
         $this->articles_url = "${my_url}/articles/";
+        $this->to_email = "tnitoh@global-software.co.jp"
     }
 
     public function index()
@@ -77,7 +78,7 @@ class ArticleController extends Controller
             $id = Article::max('id');
             $message = "記事の新規登録がありました";
             if ($this->my_url=="http://global-asagaya.tk") {
-                Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->articles_url.$id));
+                Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$id));
             }
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
@@ -147,7 +148,7 @@ class ArticleController extends Controller
         $article->update($update);
         $message = "記事の更新がありました";
         if ($this->my_url=="http://global-asagaya.tk") {
-            Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->articles_url.$article->id));
+            Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$article->id));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }

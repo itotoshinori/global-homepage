@@ -1,5 +1,6 @@
-{!! $name !!}さんが<br />
+{!! $name !!}<br />
 {!! $my_text !!}<br />
+{!! nl2br($my_text) !!}
 
 グローバルホームページ <br />
 {{ $url }}<br />

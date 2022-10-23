@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreArticleRequest;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\lib\My_func;
+use App\Mail\Admin;
 
 class ArticleController extends Controller
 {
@@ -98,7 +100,6 @@ class ArticleController extends Controller
         } else {
             $main = false;
         }
-
         return view('articles.edit', compact('article', 'main'));
     }
 
@@ -134,6 +135,8 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
+        $t = "記事の更新がありました";
+        Mail::to("tito40358@gmail.com")->send(new Admin($t, $article->id));
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }
 

@@ -3,57 +3,36 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Admin extends Mailable
 {
-    use Queueable, SerializesModels;
-
+    use Queueable;
+    use SerializesModels;
+    private $message;
     /**
      * Create a new message instance.
-     *
      * @return void
      */
-    public function __construct()
+    public function __construct($m, $id)
     {
-        //
+        $this->message = $m;
+        $this->id = $id;
     }
-
     /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
+     * Build the message.
+     * @return $this
      */
-    public function envelope()
+    public function build()
     {
-        return new Envelope(
-            subject: 'Admin',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    public function content()
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+        return $this->from('info@titonet384.sakura.ne.jp')
+                    ->subject("記事の新規登録がありました")
+                    ->view('mails.admin')
+                    ->with([
+                        'id' => $this->id ,
+                        'my_text'   => $this->message ,
+                    ]);
     }
 }

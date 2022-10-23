@@ -7,6 +7,13 @@
 			<a href="{{ route('articles.create', ['main_content' => true]) }}">主項目新規作成</a>
 		</h2>
 	@endauth
+	@if ($message = Session::get('success'))
+		<p class="alert alert-success">
+			{{ $message }}</p>
+	@endif
+	@if ($message = Session::get('danger'))
+		<p class="alert alert-danger">{{ $message }}</p>
+	@endif
 	<div class="menu-card-wrapper">
 		@foreach ($articles as $article)
 			<div class="menu-card">

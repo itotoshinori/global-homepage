@@ -1,9 +1,11 @@
-<form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('contact.send') }}" enctype="multipart/form-data">
+	@csrf
+	@method('POST')
 	<div class="md-form">
 		<label>
 			<h5>会社名及びお名前 <span class="essential">※</span></h5>
 		</label>
-		<input type="text" name="title" required class="form-control mb-4" style="border-color: black;">
+		<input type="text" name="name" required class="form-control mb-4" style="border-color: black;">
 	</div>
 	<div class="md-form">
 		<label>
@@ -27,7 +29,7 @@
 		<label>
 			<h5>お問合せ内容　<span class="essential">※</span></h5>
 		</label>
-		<textarea name="body" required class="form-control" rows="8" style="border-color: black;"></textarea>
+		<textarea name="message" required class="form-control" rows="8" style="border-color: black;"></textarea>
 		<button type="submit" class="btn btn-secondary mt-4">メール送信</button>
 	</div>
 </form>

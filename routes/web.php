@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ContactController;
 use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 
 /*
@@ -24,5 +25,6 @@ Route::resource('articles', ArticleController::class)->except(['index','show'])-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/contact', [ContactController::class,'send'])->name('contact.send');
 
 require __DIR__.'/auth.php';

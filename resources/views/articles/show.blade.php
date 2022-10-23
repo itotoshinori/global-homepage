@@ -3,6 +3,15 @@
 
 @section('content')
 	<div class="wrapper">
+		@auth
+			<h2>
+				<a href="{{ route('articles.create', ['main_content' => true]) }}">主項目新規作成</a>
+			</h2>
+		@endauth
+		@if ($message = Session::get('success'))
+			<p class="alert alert-success">
+				{{ $message }}</p>
+		@endif
 		<div class="card mt-3 border border-secondary">
 			<div class="fw-bolder fs-2 ml-5 mt-2">
 				{{ $article->title }}

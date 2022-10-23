@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('contact.send') }}" enctype="multipart/form-data">
 	<div class="md-form">
 		<label>
 			<h5>お名前 <span class="essential">※</span></h5>

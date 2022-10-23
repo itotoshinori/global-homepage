@@ -1,5 +1,4 @@
-{!! $my_text !!}<br />
-グローバルホームページ <br />
+{{ $message }}
 http://global-asagaya.tk/articles/{{ $id }}<br />
 
 <p>

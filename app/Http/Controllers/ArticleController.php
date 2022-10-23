@@ -75,7 +75,7 @@ class ArticleController extends Controller
             $id = Article::max('id');
             $message = "記事の新規登録がありました";
             if ($this->my_url=="http://global-asagaya.tk") {
-                Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->my_url."/".$id));
+                Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->my_url."/articles/".$id));
             }
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
@@ -145,7 +145,7 @@ class ArticleController extends Controller
         $article->update($update);
         $message = "記事の更新がありました";
         if ($this->my_url=="http://global-asagaya.tk") {
-            Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->my_url."/".$article->id));
+            Mail::to("tito40358@gmail.com")->send(new Admin($message, $this->my_url."/articles/".$article->id));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }

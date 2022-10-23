@@ -1,5 +1,5 @@
 {!! $name !!}<br />
-{!! nl2br($my_text) !!}<br />
+{!! nl2br($my_text) !!}<br /><br />
 
 グローバルホームページ <br />
 {{ $url }}<br />

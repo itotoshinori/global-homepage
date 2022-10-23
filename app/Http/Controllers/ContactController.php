@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function send(Request $request)
     {
-        $introduce = $request->name."様(email:".$request->email." tel:".$request->tel.")様よりお問合せがありました";
+        $introduce = $request->name."様よりお問合せがありました　email:".$request->email."　tel:".$request->tel;
         $message = $request->message;
         $my_url = config('my-url.url');
         $to_email = "tnitoh@global-software.co.jp";

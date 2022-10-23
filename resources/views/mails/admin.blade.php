@@ -1,4 +1,4 @@
-{!! $message !!}<br />
+{!! $my_text !!}<br />
 グローバルホームページ <br />
 http://global-asagaya.tk/articles/{{ $id }}<br />
 

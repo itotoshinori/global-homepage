@@ -16,9 +16,9 @@ class Admin extends Mailable
      * Create a new message instance.
      * @return void
      */
-    public function __construct($message, $id)
+    public function __construct($m, $id)
     {
-        $this->message = $message;
+        $this->message = $m;
         $this->id = $id;
     }
     /**
@@ -28,11 +28,11 @@ class Admin extends Mailable
     public function build()
     {
         return $this->from('info@titonet384.sakura.ne.jp')
-                    ->subject("記事の新規登録がありました")
+                    ->subject("コメントがありました")
                     ->view('mails.admin')
                     ->with([
                         'id' => $this->id ,
-                        'message'   => $this->message ,
+                        'my_text'   => $this->message ,
                     ]);
     }
 }

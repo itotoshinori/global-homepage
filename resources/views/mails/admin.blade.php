@@ -1,6 +1,6 @@
 {!! $my_text !!}<br />
 グローバルホームページ <br />
-http://global-asagaya.tk/articles/{{ $id }}<br />
+{{ $id }}<br />
 
 <p>
 	※このメールアドレスは送信専用です。返信されましても<br />

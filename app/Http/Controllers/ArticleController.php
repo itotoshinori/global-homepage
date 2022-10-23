@@ -135,8 +135,8 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
-        $massage = "記事の更新がありました";
-        Mail::to("tito40358@gmail.com")->send(new Admin($massage, $article->id));
+        $message = "記事の更新がありました";
+        Mail::to("tito40358@gmail.com")->send(new Admin($message, $article->id));
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }
 

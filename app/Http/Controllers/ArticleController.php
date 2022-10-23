@@ -76,7 +76,7 @@ class ArticleController extends Controller
         $result = Article::create($create);
         if ($result) {
             $id = Article::max('id');
-            $message = "記事の新規登録がありました";
+            $message = "記事の新規登録がありました。\nご確認ください";
             if ($this->my_url=="http://global-asagaya.tk") {
                 Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$id));
             }
@@ -146,7 +146,7 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
-        $message = "記事の更新がありました";
+        $message = "記事の更新がありました\nご確認ください";
         if ($this->my_url=="http://global-asagaya.tk") {
             Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$article->id));
         }

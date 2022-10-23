@@ -24,7 +24,7 @@ class ArticleController extends Controller
         $this->class_func = new My_func();
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
-        $this->articles_url = "${$my_url}/articles/";
+        $this->articles_url = "${my_url}/articles/";
     }
 
     public function index()

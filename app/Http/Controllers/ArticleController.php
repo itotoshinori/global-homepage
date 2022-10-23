@@ -22,6 +22,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->class_func = new My_func();
+        $this->my_url = config('my-url.url');
     }
 
     public function index()
@@ -136,8 +137,7 @@ class ArticleController extends Controller
         }
         $article->update($update);
         $message = "記事の更新がありました";
-        $my_url = config('my-url.url');
-        if ($my_url=="http://global-asagaya.tk") {
+        if ($this->my_url=="http://global-asagaya.tk") {
             Mail::to("tito40358@gmail.com")->send(new Admin($message, $article->id));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');

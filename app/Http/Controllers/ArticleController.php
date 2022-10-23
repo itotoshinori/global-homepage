@@ -79,7 +79,7 @@ class ArticleController extends Controller
             $id = Article::max('id');
             $message = "記事の新規登録がありました。ご確認ください。";
             if ($this->my_url=="http://global-asagaya.tk") {
-                Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$id));
+                Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->articles_url.$id));
             }
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');

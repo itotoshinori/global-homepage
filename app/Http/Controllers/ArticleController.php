@@ -70,7 +70,14 @@ class ArticleController extends Controller
             $image_detail = ltrim($path, 'images/');
             $create['image_detail'] = $image_detail;
         }
-        Article::create($create);
+        $result = Article::create($create);
+        if ($result) {
+            $id = Article::max('id');
+            $message = "記事の新規登録がありました";
+            if ($this->my_url=="http://global-asagaya.tk") {
+                Mail::to("tito40358@gmail.com")->send(new Admin($message, $id));
+            }
+        }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
     }
 

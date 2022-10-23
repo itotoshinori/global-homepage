@@ -22,6 +22,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->class_func = new My_func();
+        $this->name = "伊藤";
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
         $this->articles_url = "${my_url}/articles/";
@@ -76,7 +77,7 @@ class ArticleController extends Controller
         $result = Article::create($create);
         if ($result) {
             $id = Article::max('id');
-            $message = "記事の新規登録がありました¥nご確認ください";
+            $message = "記事の新規登録がありました。ご確認ください。";
             if ($this->my_url=="http://global-asagaya.tk") {
                 Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$id));
             }
@@ -146,9 +147,9 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
-        $message = "記事の更新がありました¥nご確認ください";
+        $message = "記事の更新がありました。ご確認ください。";
         if ($this->my_url=="http://global-asagaya.tk") {
-            Mail::to($this->to_email)->send(new Admin($message, $this->articles_url.$article->id));
+            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->articles_url.$article->id));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }

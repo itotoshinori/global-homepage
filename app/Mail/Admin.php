@@ -16,8 +16,9 @@ class Admin extends Mailable
      * Create a new message instance.
      * @return void
      */
-    public function __construct($message, $url)
+    public function __construct($name, $message, $url)
     {
+        $this->name = $name;
         $this->message = $message;
         $this->url = $url;
     }
@@ -31,6 +32,7 @@ class Admin extends Mailable
                     ->subject("グローバルホームページからのお知らせ")
                     ->view('mails.admin')
                     ->with([
+                        'name' => $this->name ,
                         'url' => $this->url ,
                         'my_text' => $this->message ,
                     ]);

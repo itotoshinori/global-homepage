@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->class_func = new My_func();
-        $this->name = "伊藤";
+        $this->name = "";
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
         $this->articles_url = "${my_url}/articles/";

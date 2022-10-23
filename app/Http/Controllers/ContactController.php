@@ -17,6 +17,6 @@ class ContactController extends Controller
         if ($my_url=="http://global-asagaya.tk") {
             Mail::to($to_email)->send(new Admin($introduce, $message, $my_url));
         }
-        return redirect("articles/4")->with('success', '送信完了しました。少々お待ち下さい。');
+        return redirect("articles.index")->with('success', 'メール送信完了しました。返信まで少々お待ち下さい。');
     }
 }

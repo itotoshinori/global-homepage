@@ -77,9 +77,9 @@ class ArticleController extends Controller
         $result = Article::create($create);
         if ($result) {
             $id = Article::max('id');
-            $message = "記事の新規登録がありました。ご確認ください。";
+            $message = "記事の新規登録がありました。ご確認ください。\n".$this->articles_url;
             if ($this->my_url=="http://global-asagaya.tk") {
-                Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->articles_url.$id));
+                Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
             }
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
@@ -152,9 +152,9 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
-        $message = "記事の更新がありました。ご確認ください。";
+        $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
         if ($this->my_url=="http://global-asagaya.tk") {
-            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->articles_url.$article->id));
+            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }

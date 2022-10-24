@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdoptionController;
 use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 
 /*
@@ -26,5 +27,5 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/contact', [ContactController::class,'send'])->name('contact.send');
-
+Route::post('/contact', [AdoptionController::class,'send'])->name('adoption.send');
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-{!! nl2br($name) !!}<br /><br />
+{!! nl2br($name) !!}<br />
 {!! nl2br($my_text) !!}<br /><br />
 グローバルホームページ <br />
 {{ $url }}<br />

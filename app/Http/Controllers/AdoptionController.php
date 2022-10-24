@@ -10,8 +10,8 @@ class AdoptionController extends Controller
 {
     public function send(Request $request)
     {
-        $introduce = $request->name." 様よりホームページ採用のページから面談の申し込みがありました\nemail:".$request->email."\n電話番号:".$request->tel;
-        $introduce_tosender = $request->name." 様\n下記にてメールを送信しましたので返信をお待ち下さい\nemail:".$request->email."\n電話番号:".$request->tel;
+        $introduce = $request->name." 様よりホームページ採用のページから面談の申し込みがありました\nアドレス：".$request->email."\n電話番号：".$request->tel;
+        $introduce_tosender = $request->name." 様\n下記にてメールを送信しましたので返信をお待ち下さい\nアドレス：".$request->email."\n電話番号：".$request->tel;
         $message = $request->message;
         $my_url = config('my-url.url');
         $to_email = "tnitoh@global-software.co.jp";

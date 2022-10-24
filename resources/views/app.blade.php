@@ -22,3 +22,15 @@
 		margin-bottom: 60px;
 	}
 </style>
+<script>
+	$(function() {
+		$("#btn1").on("click", function() {
+			let num = $("#btn2").val()
+			let comment_num = $("#comment_num").text();
+			if (num != comment_num) {
+				alert("正しい数字を入力してください！")
+				return false;
+			}
+		});
+	});
+</script>

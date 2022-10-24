@@ -21,16 +21,18 @@
 	</div>
 	<div class="md-form">
 		<label>
-			<h5>右の番号を入力して下さい 3608 <span class="essential">※</span></h5>
+			<h5>右の番号を入力して下さい <span id="comment_num">{{ $randam_num }}</span>
 		</label>
-		<input type="text" name="contact-number" required class="form-control mb-4" style="border-color: black;">
+		<span class="essential ml-2">※</span></h5>
+		</label>
+		<input type="text" id="btn2" class="form-control mb-4" style="border-color: black;" required>
 	</div>
 	<div class="form-group">
 		<label>
 			<h5>経験・実績・自己PR等　具体的にお願いします　<span class="essential">※</span></h5>
 		</label>
 		<textarea name="message" required class="form-control" rows="8" style="border-color: black;"></textarea>
-		<button type="submit" class="btn btn-secondary mt-4">メール送信</button>
+		<button type="submit" id="btn1" class="btn btn-secondary mt-4">メール送信</button>
 	</div>
 </form>
 

@@ -153,9 +153,9 @@ class ArticleController extends Controller
         }
         $article->update($update);
         $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
-        if ($this->my_url=="http://global-asagaya.tk") {
-            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
-        }
+        //if ($this->my_url=="http://global-asagaya.tk") {
+        Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+        //}
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }
 

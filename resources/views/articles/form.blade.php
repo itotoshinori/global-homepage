@@ -22,11 +22,11 @@
 </div><br />
 @if ($main)
 	<div class="md-form">
-		<label>Home画面に表示の写真</label><br />
+		<label>Home画面に表示の写真 横ショットでの写真でお願いします</label><br />
 		<input type="file" name="image" id="file" accept="image/*">
 	</div><br />
 @endif
 <div class="md-form">
-	<label>詳細画面に表示の写真</label><br />
+	<label>詳細画面に表示の写真　詳細左上に１枚追加できます。横ショット写真でお願いします。</label><br />
 	<input type="file" name="image_detail" id="file" accept="image/*">
 </div><br />

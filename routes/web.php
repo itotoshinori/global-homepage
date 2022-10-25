@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\ResisterProtectController;
 use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 
 /*
@@ -23,6 +25,7 @@ use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 Route::resource('/', ArticleController::class)->only(['index']);
 Route::resource('articles', ArticleController::class)->only(['index','show','create','edit']);
 Route::resource('articles', ArticleController::class)->except(['index','show'])->middleware('auth');
+Route::resource('/users', UserController::class)->only(['index','destroy']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

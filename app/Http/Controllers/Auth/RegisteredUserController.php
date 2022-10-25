@@ -38,17 +38,20 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        if ($request->pass_code == "2245") {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+            event(new Registered($user));
 
-        event(new Registered($user));
+            Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->route('articles.index')->with('danger', '新規登録に失敗しました。管理者からパスコードを入手して下さい');
+        }
     }
 }

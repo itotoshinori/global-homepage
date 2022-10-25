@@ -5,7 +5,6 @@
 				<x-application-logo class="w-20 h-20 fill-current text-gray-500" />
 			</a>
 		</x-slot>
-
 		<form method="POST" action="{{ route('register') }}">
 			@csrf
 
@@ -46,6 +45,13 @@
 					required />
 
 				<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+			</div>
+
+			<!-- Confirm Password -->
+			<div class="mt-4">
+				<x-input-label for="pass_code" :value="__('Pass_Code(必須管理者から入手して下さい)')" />
+
+				<x-text-input id="pass_code" class="block mt-1 w-full" type="password" name="pass_code" required />
 			</div>
 
 			<div class="flex items-center justify-end mt-4">

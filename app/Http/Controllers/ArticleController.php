@@ -78,7 +78,6 @@ class ArticleController extends Controller
         }
         $result = Article::create($create);
         if ($result) {
-            //$id = Article::max('id');
             $message = "記事の新規登録がありました。ご確認ください。\n".$this->articles_url;
             if ($this->my_url != "http://localhost") {
                 foreach ($this->users as $user) {

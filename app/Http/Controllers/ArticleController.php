@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,7 @@ class ArticleController extends Controller
         $this->my_url = $my_url;
         $this->articles_url = "${my_url}/articles/";
         $this->to_email = "tnitoh@global-software.co.jp";
+        $this->users = User::all();
     }
 
     public function index()
@@ -76,10 +78,12 @@ class ArticleController extends Controller
         }
         $result = Article::create($create);
         if ($result) {
-            $id = Article::max('id');
+            //$id = Article::max('id');
             $message = "記事の新規登録がありました。ご確認ください。\n".$this->articles_url;
-            if ($this->my_url=="http://global-asagaya.tk") {
-                Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            if ($this->my_url != "http://localhost") {
+                foreach ($this->users as $user) {
+                    Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
+                }
             }
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
@@ -153,9 +157,11 @@ class ArticleController extends Controller
         }
         $article->update($update);
         $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
-        //if ($this->my_url=="http://global-asagaya.tk") {
-        Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
-        //}
+        if ($this->my_url != "http://localhost") {
+            foreach ($this->users as $user) {
+                Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            }
+        }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }
 

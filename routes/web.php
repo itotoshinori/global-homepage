@@ -25,7 +25,7 @@ use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 Route::resource('/', ArticleController::class)->only(['index']);
 Route::resource('articles', ArticleController::class)->only(['index','show','create','edit']);
 Route::resource('articles', ArticleController::class)->except(['index','show'])->middleware('auth');
-Route::resource('/users', UserController::class)->only(['index','destroy']);
+Route::resource('/users', UserController::class)->only(['index','destroy'])->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

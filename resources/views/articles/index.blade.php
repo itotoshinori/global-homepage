@@ -12,7 +12,7 @@
 			{{ $message }}</p>
 	@endif
 	@if ($message = Session::get('danger'))
-		<p class="alert alert-danger">{{ $message }}</p>
+		<p class="alert alert-danger mt-2">{{ $message }}</p>
 	@endif
 	<div class="menu-card-wrapper">
 		@foreach ($articles as $article)

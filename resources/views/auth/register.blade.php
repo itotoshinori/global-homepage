@@ -49,7 +49,7 @@
 
 			<!-- Confirm Password -->
 			<div class="mt-4">
-				<x-input-label for="pass_code" :value="__('PassCode（必須　管理者から入手して下さい）')" />
+				<x-input-label for="pass_code" :value="__('Pass Code（必須　管理者から入手して下さい）')" />
 
 				<x-text-input id="pass_code" class="block mt-1 w-full" type="password" name="pass_code" required />
 			</div>

@@ -76,7 +76,7 @@
 <style>
 	.text-date {
 		text-align: left;
-		padding-left: 10px;
+		padding-left: 2px;
 	}
 
 	.menu-card {
@@ -115,11 +115,12 @@
 	.menu-card-wrapper {
 		display: flex;
 		flex-wrap: wrap;
+		width: 100%;
 	}
 
 	@media screen and (min-width:600px) {
 		.menu-card {
-			width: 75%;
+			width: 80%;
 			margin-top: 35px;
 		}
 

@@ -16,7 +16,7 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-		<div class="container-fluid container-sm">
+		<div class="container-fluid container">
 			<h4 style="text-decoration: none; color:white;">株式会社グローバル</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,8 @@
 					</li>
 					@foreach ($articles as $article)
 						<li class="nav-item ms-3">
-							<h4><a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a></h4>
+							<h4><a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a>
+							</h4>
 						</li>
 					@endforeach
 					<li class="nav-item ms-3">
@@ -39,7 +40,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container-sm">
+	<div class="container">
 		@yield('content')
 	</div>
 </body>
@@ -48,6 +49,18 @@
 
 <style>
 	.container {
-		width: 70%;
+		width: 90%;
+	}
+
+	@media screen and (min-width:600px) {
+		.container {
+			width: 80%;
+		}
+	}
+
+	@media screen and (min-width:1025px) {
+		.container {
+			width: 60%;
+		}
 	}
 </style>

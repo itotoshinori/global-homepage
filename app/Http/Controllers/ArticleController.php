@@ -33,7 +33,8 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::oldest()->get()->where('category', 0);
+        $articles = $this->class_func->main_articles();
+        //$articles = Article::oldest()->get()->where('category', 0);
         $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(9);
         return view('articles.index', [
             'articles' => $articles,

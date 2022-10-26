@@ -1,3 +1,11 @@
+@php
+	use App\lib\My_func;
+	$class_func = new My_func();
+	$articles = $class_func->main_articles();
+	$i = 0;
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -19,21 +27,11 @@
 					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/" style="color:white;">Home</a></h4>
 					</li>
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/1" style="color:white;">企業理念</a></h4>
-					</li>
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/2" style="color:white;">事業内容</a></h4>
-					</li>
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/3" style="color:white;">会社概要</a></h4>
-					</li>
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/4" style="color:white;">お問合せ</a></h4>
-					</li>
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/5" style="color:white;">採用</a></h4>
-					</li>
+					@foreach ($articles as $article)
+						<li class="nav-item ms-3">
+							<h4><a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a></h4>
+						</li>
+					@endforeach
 					<li class="nav-item ms-3">
 						<h4><a class="nav-link" href="/articles/#info" style="color:white;">お知らせ</a></h4>
 					</li>

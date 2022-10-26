@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Models\Article;
 use Carbon\Carbon;
 
 class My_func
@@ -58,5 +59,10 @@ class My_func
         if ($day>$ten_day_before) {
             return "New!";
         }
+    }
+    public function main_articles()
+    {
+        $articles = Article::oldest()->get()->where('category', 0);
+        return $articles;
     }
 }

@@ -32,7 +32,7 @@ class StoreArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => '20文字以下でタイトルを入力して下さい。',
+            'title.required' => '全角20文字以下でタイトルを入力して下さい。',
             'body.required' => '本文を入力して下さい。',
             'image' => '1MB以上の画像ファイルをアップロードできません',
         ];

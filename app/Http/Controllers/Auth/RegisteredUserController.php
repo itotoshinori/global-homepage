@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Mail\Admin;
 
 class RegisteredUserController extends Controller
 {
@@ -45,7 +47,19 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            event(new Registered($user));
+            $result = event(new Registered($user));
+
+            if ($result) {
+                $my_url = config('my-url.url');
+                $users_url = "${my_url}/users";
+                $message = $request->name."さんの新規ユーザー登録がありました。ご確認ください。";
+                if ($my_url != "http://localhost") {
+                    //foreach ($this->users as $user) {
+                    //Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
+                    Mail::to("tito40358@gmail.com")->send(new Admin(null, $message, $users_url));
+                    //}
+                }
+            }
 
             Auth::login($user);
 

@@ -48,16 +48,14 @@ class RegisteredUserController extends Controller
             ]);
 
             $result = event(new Registered($user));
-
-            if ($result) {
-                $my_url = config('my-url.url');
+            $my_url = config('my-url.url');
+            if ($result && $my_url != "http://localhost") {
                 $users_url = "${my_url}/users";
                 $message = $request->name."さんの新規ユーザー登録がありました。ご確認ください。";
                 $users = User::all();
-                if ($my_url != "http://localhost") {
-                    foreach ($users as $user) {
-                        Mail::to($user->email)->send(new Admin(null, $message, $users_url));
-                    }
+                foreach ($users as $user) {
+                    Mail::to("tito40358@gmail.com")->send(new Admin(null, $message, $users_url));
+                    //Mail::to($user->email)->send(new Admin(null, $message, $users_url));
                 }
             }
 

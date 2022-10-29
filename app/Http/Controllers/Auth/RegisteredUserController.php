@@ -54,8 +54,7 @@ class RegisteredUserController extends Controller
                 $message = $request->name."さんの新規ユーザー登録がありました。ご確認ください。";
                 $send_users = User::all();
                 foreach ($send_users as $send_user) {
-                    Mail::to("tito40358@outlook.jp")->send(new Admin(null, $message, $users_url));
-                    //Mail::to($send_user->email)->send(new Admin(null, $message, $users_url));
+                    Mail::to($send_user->email)->send(new Admin(null, $message, $users_url));
                 }
             }
 

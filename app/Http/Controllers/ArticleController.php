@@ -85,6 +85,7 @@ class ArticleController extends Controller
             //Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
             //}
             //}
+            //メールテスト用に残す
             Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');

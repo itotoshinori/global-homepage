@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        $condition = config('mycondition.condition');
-        if ($condition == 'production') {
-            URL::forceScheme('https');
-        }
+        //$condition = config('mycondition.condition');
+        //if ($condition == 'production') {
+        //URL::forceScheme('https');
+        //}
     }
 }

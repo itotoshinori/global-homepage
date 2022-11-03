@@ -4,9 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\App; // 追加
-use Illuminate\Support\Facades\URL; // 追加
-use App\lib\mycondition;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        $condition = config('mycondition.condition');
-        if ($condition == 'production') {
-            URL::forceScheme('https');
-        }
+        //$condition = config('mycondition.condition');
+        //if ($condition == 'production') {
+        URL::forceScheme('https');
+        //}
     }
 }

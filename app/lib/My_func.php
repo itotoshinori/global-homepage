@@ -55,7 +55,8 @@ class My_func
     }
     public function dis_new($day)
     {
-        $ten_day_before = new Carbon('-10 days');
+        $carbon= Carbon::now();
+        $ten_day_before = $carbon->subDays(10);
         if ($day>$ten_day_before) {
             return "New!";
         }

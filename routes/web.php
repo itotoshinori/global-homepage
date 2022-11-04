@@ -31,5 +31,5 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/contact', [ContactController::class,'send'])->name('contact.send');
 Route::post('/adoption', [AdoptionController::class,'send'])->name('adoption.send');
-//URL::forceScheme('https');
+URL::forceScheme('https');
 require __DIR__.'/auth.php';

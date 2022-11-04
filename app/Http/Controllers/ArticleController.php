@@ -78,15 +78,13 @@ class ArticleController extends Controller
             $create['image_detail'] = $image_detail;
         }
         $result = Article::create($create);
-        if ($result) {
+        if ($result && $this->my_url != "http://localhost") {
             $message = "記事の新規登録がありました。ご確認ください。\n".$this->articles_url;
-            if ($this->my_url != "http://localhost") {
-                foreach ($this->users as $user) {
-                    Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
-                }
-            }
+            //foreach ($this->users as $user) {
+            //Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            //}
             //メールテスト用に残す。テスト時コメントアウト
-            //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
     }
@@ -160,11 +158,11 @@ class ArticleController extends Controller
         $article->update($update);
         $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
         if ($this->my_url != "http://localhost") {
-            //foreach ($this->users as $user) {
-            //Mail::to($user->email)->send(new Admin($this->name, $message, $this->my_url));
-            //}
+            foreach ($this->users as $user) {
+                Mail::to($user->email)->send(new Admin($this->name, $message, $this->my_url));
+            }
             //メールテスト用に残す。テスト時コメントアウト
-            Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         return redirect("articles/".$article->id)->with('success', '更新完了しました');
     }

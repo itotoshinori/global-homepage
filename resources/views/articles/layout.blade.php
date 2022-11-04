@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 	<meta name="description" content="株式会社グローバル　東京都杉並区のソフトウェア開発会社です">
 	<meta name="keywords" content="グローバル,宮島郁夫,国松勇次,宮坂栄一,伊藤利典,日本郵政グループ,手話言語化アプリ">
+	<link rel="icon" type="image/png" href="/favicon.png">
 	<meta charset="utf-8">
 </head>
 

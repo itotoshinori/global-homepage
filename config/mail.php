@@ -78,6 +78,9 @@ return [
                 'log',
             ],
         ],
+        'sendgrid' => [
+            'api_key' => env('SENDGRID_API_KEY'),
+        ],
     ],
 
     /*

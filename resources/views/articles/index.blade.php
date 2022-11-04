@@ -62,7 +62,7 @@
 				<div class="menu-text">
 					@foreach ($info_articles as $info)
 						<div>
-							<span class="badge bg-warning text-dark">{{ $class_func->dis_new($article->created_at) }}</span>
+							<span class="badge bg-warning text-dark">{{ $class_func->dis_new($info->created_at) }}</span>
 							<a href="{{ route('articles.show', $info->id) }}" class="link-success">{{ $info->title }}</a>
 						</div>
 					@endforeach

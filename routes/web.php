@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 Route::post('/contact', [ContactController::class,'send'])->name('contact.send');
 Route::post('/adoption', [AdoptionController::class,'send'])->name('adoption.send');
 //URL::forceScheme('https');
-Route::get('/', function () {
+Route::get('/googleff047b634a403ed8.html', function () {
     return \File::get(public_path() . '/googleff047b634a403ed8.html');
 });
 require __DIR__.'/auth.php';

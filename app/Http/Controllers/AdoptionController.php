@@ -24,6 +24,6 @@ class AdoptionController extends Controller
             //送信者にも控えを送付する
             Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
         }
-        return redirect("articles/5")->with('success', '送信完了しました。返信まで少々お待ち下さい。');
+        return redirect("adoption")->with('success', '送信完了しました。返信まで少々お待ち下さい。');
     }
 }

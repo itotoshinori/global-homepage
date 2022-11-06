@@ -2,6 +2,7 @@
 	use App\lib\My_func;
 	$class_func = new My_func();
 	$articles = $class_func->main_articles();
+	$urls = $class_func->urls();
 	$i = 0;
 @endphp
 
@@ -33,7 +34,12 @@
 					</li>
 					@foreach ($articles as $article)
 						<li class="nav-item ms-3">
-							<h4><a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a>
+							<h4>
+								@if ($article->id <= 5)
+									<a class="nav-link" href="{{ $urls[$article->id] }}" style="color:white;">{{ $article->title }}</a>
+								@else
+									<a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a>
+								@endif
 							</h4>
 						</li>
 					@endforeach

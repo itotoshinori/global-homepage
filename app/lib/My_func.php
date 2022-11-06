@@ -48,9 +48,9 @@ class My_func
         }
         return $result;
     }
-    public function categories()
+    public function urls()
     {
-        $list = array('会社概要', '事業内容', '取引先');
+        $list =  ['NG', 'company', 'business','outline','contact','adoption'];
         return $list;
     }
     public function dis_new($day)

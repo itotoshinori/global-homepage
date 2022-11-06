@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdoptionController;
+use App\lib\My_func;
 use App\Http\Controllers\ResisterProtectController;
 use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 
@@ -35,4 +36,9 @@ Route::post('/adoption', [AdoptionController::class,'send'])->name('adoption.sen
 Route::get('/googleff047b634a403ed8.html', function () {
     return \File::get(public_path() . '/googleff047b634a403ed8.html');
 });
+$my_func = new My_func();
+$urls = $my_func->urls();
+foreach ($urls as $url) {
+    Route::get('/'.$url, [ArticleController::class,'show']);
+}
 require __DIR__.'/auth.php';

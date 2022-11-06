@@ -35,8 +35,13 @@
 								@method('DELETE')
 								<div>
 									<span class="mr-2">
-										<a class="button is-primary" style="text-decoration: none;" href="{{ route('articles.show', $article->id) }}">
-											詳細へ
+										@if ($article->id <= 5)
+											<a class="button is-primary" style="text-decoration: none;" href={{ $urls[$article->id] }}>
+											@else
+												<a class="button is-primary" style="text-decoration: none;"
+													href="{{ route('articles.show', $article->id) }}">
+										@endif
+										詳細へ
 										</a>
 									</span>
 									@auth

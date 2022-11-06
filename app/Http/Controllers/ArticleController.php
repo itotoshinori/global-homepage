@@ -34,12 +34,13 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = $this->class_func->main_articles();
-        //$articles = Article::oldest()->get()->where('category', 0);
         $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(9);
+        $urls = $this->class_func->urls();
         return view('articles.index', [
             'articles' => $articles,
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
+            'urls' => $urls,
         ]);
     }
 
@@ -100,7 +101,13 @@ class ArticleController extends Controller
         $length = 4;
         $max = pow(10, $length) - 1;                    // コードの最大値算出
         $rand = random_int(0, $max);                    // 乱数生成
-        $randam_num = sprintf('%0'. $length. 'd', $rand);     // 乱数の頭0埋め
+        $randam_num = sprintf('%0'. $length. 'd', $rand);// 乱数の頭0埋め
+        $url_get = str_replace('/', '', $_SERVER['REQUEST_URI']);
+        $urls = $this->class_func->urls();
+        $result = array_search($url_get, $urls);
+        if ($result && $url_get != 'NG') {
+            $article = Article::find($result);
+        }
         return view('articles.show', [
             'article' => $article,
             'class_func' => $this->class_func,

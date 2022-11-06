@@ -50,7 +50,7 @@
 						</li>
 					@endforeach
 					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/articles/#info" style="color:white;">お知らせ</a></h4>
+						<h4><a class="nav-link" href="/#info" style="color:white;">お知らせ</a></h4>
 					</li>
 				</ul>
 			</div>

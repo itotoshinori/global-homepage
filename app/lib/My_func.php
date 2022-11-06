@@ -50,7 +50,7 @@ class My_func
     }
     public function urls()
     {
-        $list =  ['NG', 'company', 'business','outline','contact','adoption'];
+        $list =  ['NG', 'mission', 'business','company','contact','adoption'];
         return $list;
     }
     public function dis_new($day)

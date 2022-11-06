@@ -3,7 +3,8 @@
 	$class_func = new My_func();
 	$articles = $class_func->main_articles();
 	$urls = $class_func->urls();
-	$i = 0;
+	$url = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
+	$url .= $_SERVER['HTTP_HOST'];
 @endphp
 
 
@@ -36,7 +37,7 @@
 						<li class="nav-item ms-3">
 							<h4>
 								@if ($article->id <= 5)
-									<a class="nav-link" href="{{ $urls[$article->id] }}" style="color:white;">{{ $article->title }}</a>
+									<a class="nav-link" href={{ $url . '/' . $urls[$article->id] }} style="color:white;">{{ $article->title }}</a>
 								@else
 									<a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a>
 								@endif

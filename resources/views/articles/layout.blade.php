@@ -3,9 +3,13 @@
 	$class_func = new My_func();
 	$articles = $class_func->main_articles();
 	$urls = $class_func->urls();
-	
-	$url = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
-	$url = $url . $_SERVER['HTTP_HOST'];
+	$my_url = config('my-url.url');
+	if ($my_url == 'http://localhost') {
+	    $hp = 'http://';
+	} else {
+	    $hp = 'https://';
+	}
+	$url = $hp . $_SERVER['HTTP_HOST'];
 @endphp
 
 

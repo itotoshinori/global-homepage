@@ -3,8 +3,9 @@
 	$class_func = new My_func();
 	$articles = $class_func->main_articles();
 	$urls = $class_func->urls();
+	
 	$url = empty($_SERVER['HTTPS']) ? 'http://' : 'https://';
-	$url .= $_SERVER['HTTP_HOST'];
+	$url = $url . $_SERVER['HTTP_HOST'];
 @endphp
 
 

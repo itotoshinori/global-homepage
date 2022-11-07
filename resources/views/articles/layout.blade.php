@@ -74,14 +74,13 @@
 	}
 
 	.company {
-		background-color: rgb(56, 31, 1);
+		background-color: #EEEEEE;
 	}
 
 	.company-box {
 		width: 100%;
 		padding: 5px;
 		margin: 2em 0;
-		color: #232323;
 		margin: 0 auto 0 auto;
 	}
 
@@ -89,14 +88,14 @@
 		text-decoration: none;
 		font-size: 25px;
 		font-weight: bold;
-		color: #FFF;
+		color: rgb(19, 1, 1);
 	}
 
 	.company-box p {
 		margin: 0;
 		padding: 0;
 		font-size: 15px;
-		color: #FFF;
+		color: rgb(19, 1, 1);
 	}
 
 	@media screen and (min-width:600px) {
@@ -106,7 +105,6 @@
 
 		.company-box {
 			width: 85%;
-
 		}
 
 		.company-box p {

@@ -74,7 +74,7 @@
 	}
 
 	.company {
-		background-color: darkblue
+		background-color: rgb(56, 31, 1);
 	}
 
 	.company-box {

@@ -166,7 +166,7 @@ class ArticleController extends Controller
         $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
         if ($this->my_url != "http://localhost") {
             foreach ($this->users as $user) {
-                //Mail::to($user->email)->send(new Admin($this->name, $message, $this->my_url));
+                Mail::to($user->email)->send(new Admin($this->name, $message, $this->my_url));
             }
             //メールテスト用に残す。テスト時コメントアウト
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));

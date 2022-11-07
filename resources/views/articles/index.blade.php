@@ -1,6 +1,5 @@
 @extends('app')
 @extends('articles.layout')
-
 @section('content')
 	@auth
 		<h2>

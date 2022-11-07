@@ -28,16 +28,13 @@
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
 		<div class="container-fluid container">
-			<h4 style="text-decoration: none; color:white;">株式会社グローバル</h4>
+			<h4 style="text-decoration: none; color:white;">メニュー</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-5 mb-lg-0">
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/" style="color:white;">Home</a></h4>
-					</li>
 					@foreach ($articles as $article)
 						<li class="nav-item ms-3">
 							<h4>
@@ -56,6 +53,14 @@
 			</div>
 		</div>
 	</nav>
+	<div class="company">
+		<div class="company-box">
+			<h2><a href="/">株式会社グローバル</a></h2>
+			<p>
+				東京都杉並区にあるIT・ソフトウェア会社です。誠心誠意をモットーとしてシステム全般を請け負います。
+			</p>
+		</div>
+	</div>
 	<div class="container">
 		@yield('content')
 	</div>
@@ -68,9 +73,44 @@
 		width: 90%;
 	}
 
+	.company {
+		background-color: darkblue
+	}
+
+	.company-box {
+		width: 100%;
+		padding: 5px;
+		margin: 2em 0;
+		color: #232323;
+		margin: 0 auto 0 auto;
+	}
+
+	.company-box a {
+		text-decoration: none;
+		font-size: 25px;
+		font-weight: bold;
+		color: #FFF;
+	}
+
+	.company-box p {
+		margin: 0;
+		padding: 0;
+		font-size: 15px;
+		color: #FFF;
+	}
+
 	@media screen and (min-width:600px) {
 		.container {
 			width: 80%;
+		}
+
+		.company-box {
+			width: 85%;
+
+		}
+
+		.company-box p {
+			font-size: 20px;
 		}
 	}
 

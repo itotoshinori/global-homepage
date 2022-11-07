@@ -18,7 +18,8 @@
 </div>
 <div class="md-form">
 	<label>リンク</label>
-	<input type="url" name="link" class="form-control" value="{{ $article->link ?? old('link') }}">
+	<input type="url" name="link" class="form-control" placeholder="https://"
+		value="{{ $article->link ?? old('link') }}">
 </div><br />
 @if ($main)
 	<div class="md-form">

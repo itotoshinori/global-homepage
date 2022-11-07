@@ -35,6 +35,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-5 mb-lg-0">
+					<li class="nav-item ms-3">
+						<h4>
+							<a class="nav-link" href='/' style="color:white;">Home</a>
+						</h4>
+					</li>
 					@foreach ($articles as $article)
 						<li class="nav-item ms-3">
 							<h4>

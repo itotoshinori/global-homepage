@@ -109,6 +109,14 @@
 			width: 80%;
 		}
 
+		.company {
+			padding-left: 5px;
+		}
+
+		.company-box {
+			padding-left: 5px;
+		}
+
 		.company-box {
 			width: 85%;
 		}

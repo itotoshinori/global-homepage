@@ -18,14 +18,13 @@
 			<div class="menu-card">
 				<div class="menu-card-inner">
 					<div class="photo_height">
-						@if ($article->image)
-							<img class="menu-image" src="/storage/images/{{ $article->image }}">
-						@else
-							<img class="menu-image" src="https://thumb.photo-ac.com/92/921d6392ee6cd207962aeedc4fc1f639_t.jpeg">
-						@endif
-					</div>
-					<div class="menu-title mb-2">
-						{{ $article->title }}
+						<a class="main_title" href={{ $urls[$article->id] }}>
+							@if ($article->image)
+								<img class="menu-image" src="/storage/images/{{ $article->image }}">
+							@else
+								<img class="menu-image" src="https://thumb.photo-ac.com/92/921d6392ee6cd207962aeedc4fc1f639_t.jpeg">
+							@endif
+						</a>
 					</div>
 					<div class="menu-text">
 						<div>
@@ -33,18 +32,13 @@
 								@csrf
 								@method('DELETE')
 								<div>
-									<span class="mr-2">
-										@if ($article->id <= 5)
-											<a class="button is-primary" style="text-decoration: none;" href={{ $urls[$article->id] }}>
-											@else
-												<a class="button is-primary" style="text-decoration: none;"
-													href="{{ route('articles.show', $article->id) }}">
-										@endif
-										詳細へ
+									<span class="menu-title mb-2">
+										<a class="main_title" href={{ $urls[$article->id] }}>
+											{{ $article->title }}
 										</a>
 									</span>
 									@auth
-										<a class="button is-success" href="{{ route('articles.edit', $article->id) }}">編集</a>
+										<a class="btn btn-warning" href="{{ route('articles.edit', $article->id) }}">編集</a>
 										<button class="btn btn-danger" type="submit" class="btn btn-danger"
 											onclick="return confirm('本当に削除しますか?')">削除</button>
 									@endauth
@@ -84,8 +78,8 @@
 	}
 
 	.menu-card {
-		width: 90%;
-		margin-top: 35px;
+		width: 100%;
+		margin-top: 10px;
 	}
 
 	.menu-card-inner {
@@ -94,12 +88,12 @@
 		border-color: black;
 		box-shadow: 1px 1px 4px #d2d4d6;
 		text-align: center;
-		height: 350px;
+		height: 310px;
 	}
 
 	.menu-image {
 		width: 100%;
-		height: 250px;
+		height: 260px;
 		border-radius: 5px;
 	}
 
@@ -129,25 +123,20 @@
 		}
 
 		.photo_height {
-			height: 270px;
+			height: 260px;
 		}
 	}
 
 	@media screen and (min-width:1025px) {
 		.menu-card {
 			width: 33%;
-			margin-top: 35px;
+			margin-top: 20px;
 		}
 
 		.menu-card-inner {
-			padding: 0;
-			border-radius: 7px;
-			border-color: black;
-			box-shadow: 1px 1px 4px #d2d4d6;
-			text-align: center;
 			margin: 0 15px;
 			width: 400px;
-			height: 370px;
+			height: 310px;
 		}
 	}
 </style>

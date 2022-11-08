@@ -60,7 +60,7 @@
 	</nav>
 	<div class="company">
 		<div class="company-box">
-			<h2><a href="/">株式会社グローバル</a></h2>
+			<h2><a href="/" class="main_title">株式会社グローバル</a></h2>
 			<p>
 				東京都杉並区にあるＩＴ・ソフトウェア会社です。誠心誠意をモットーとしてシステム開発を請け負います。
 			</p>
@@ -90,7 +90,7 @@
 		margin: 0 auto 0 auto;
 	}
 
-	.company-box a {
+	.main_title {
 		text-decoration: none;
 		font-size: 25px;
 		font-weight: bold;

@@ -18,7 +18,7 @@
 			<div class="menu-card">
 				<div class="menu-card-inner">
 					<div class="photo_height">
-						<a class="main_title" href={{ $urls[$article->id] }}>
+						<a href={{ $urls[$article->id] }}>
 							@if ($article->image)
 								<img class="menu-image" src="/storage/images/{{ $article->image }}">
 							@else
@@ -33,7 +33,7 @@
 								@method('DELETE')
 								<div>
 									<span class="menu-title mb-2">
-										<a class="main_title" href={{ $urls[$article->id] }}>
+										<a class="article_title" href={{ $urls[$article->id] }}>
 											{{ $article->title }}
 										</a>
 									</span>
@@ -114,6 +114,13 @@
 		display: flex;
 		flex-wrap: wrap;
 		width: 100%;
+	}
+
+	.article_title {
+		text-decoration: none;
+		font-size: 25px;
+		font-weight: bold;
+		color: rgb(7, 12, 143);
 	}
 
 	@media screen and (min-width:600px) {

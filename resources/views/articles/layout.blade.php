@@ -94,6 +94,7 @@
 		text-decoration: none;
 		font-size: 25px;
 		font-weight: bold;
+		color: rgb(19, 1, 1);
 	}
 
 	.company-box p {

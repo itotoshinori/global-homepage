@@ -8,7 +8,7 @@
 			<p class="alert alert-success">
 				{{ $message }}</p>
 		@endif
-		<div class="card mt-3 border border-secondary">
+		<div class="card mt-1 border border-secondary">
 			<div class="fw-bolder fs-2 ml-5 mt-2">
 				{{ $article->title }}
 			</div>

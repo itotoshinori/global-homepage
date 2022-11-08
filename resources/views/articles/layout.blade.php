@@ -80,11 +80,12 @@
 
 	.company {
 		background-color: #EEEEEE;
+		padding: 10px;
 	}
 
 	.company-box {
 		width: 100%;
-		padding: 5px;
+		padding: 10px;
 		margin: 2em 0;
 		margin: 0 auto 0 auto;
 	}

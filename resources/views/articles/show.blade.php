@@ -83,7 +83,7 @@
 		.photo-box {
 			float: left;
 			padding: 0 15px 0 0;
-			width: 300px;
+			width: 320px;
 			height: auto;
 		}
 	}

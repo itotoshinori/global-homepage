@@ -17,7 +17,7 @@
 <html lang="ja">
 
 <head>
-	<title>グローバル ホームページ</title>
+	<title>株式会社グローバル</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 	<meta name="description" content="株式会社グローバル　東京都杉並区のソフトウェア開発会社です">
 	<meta name="keywords" content="グローバル,宮島郁夫,国松勇次,宮坂栄一,伊藤利典,日本郵政グループ,手話言語化アプリ">
@@ -27,8 +27,8 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-		<div class="container-fluid container">
-			<h4 style="text-decoration: none; color:white;">メニュー</h4>
+		<div class="container-fluid">
+			<div class="menu-title">メニュー</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -74,6 +74,12 @@
 </html>
 
 <style>
+	.menu-title {
+		padding-left: 120px;
+		font-size: 25px;
+		color: white;
+	}
+
 	.container {
 		width: 90%;
 	}

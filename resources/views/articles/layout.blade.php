@@ -27,8 +27,10 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-		<div class="container-fluid container">
-			<h4 style="color:white;">メニュー</h4>
+		<div class="container-fluid">
+			<h4 style="color:white;">
+				<span class="menu-title">メニュー</span>
+			</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -60,7 +62,7 @@
 	</nav>
 	<div class="company">
 		<div class="company-box">
-			<h2><a href="/" class="main_title">株式会社グローバル</a></h2>
+			<h4><a href="/" class="main_title">株式会社グローバル</a></h4>
 			<p>
 				東京都杉並区にあるＩＴ・ソフトウェア会社です。誠心誠意をモットーとしてシステム開発を請け負います。
 			</p>
@@ -74,10 +76,6 @@
 </html>
 
 <style>
-	.menu {
-		padding-left: 80px;
-	}
-
 	.container {
 		width: 90%;
 	}
@@ -111,6 +109,10 @@
 	@media screen and (min-width:600px) {
 		.container {
 			width: 80%;
+		}
+
+		.menu-title {
+			margin-left: 120px;
 		}
 
 		.company {

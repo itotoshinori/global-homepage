@@ -27,8 +27,8 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-		<div class="container-fluid">
-			<div class="menu-title">メニュー</div>
+		<div class="container-fluid container">
+			<h4 style="color:white;">メニュー</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -74,10 +74,8 @@
 </html>
 
 <style>
-	.menu-title {
-		padding-left: 10px;
-		font-size: 25px;
-		color: white;
+	.menu {
+		padding-left: 80px;
 	}
 
 	.container {
@@ -111,10 +109,6 @@
 	}
 
 	@media screen and (min-width:600px) {
-		.menu-title {
-			padding-left: 120px;
-		}
-
 		.container {
 			width: 80%;
 		}

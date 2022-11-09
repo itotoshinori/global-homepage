@@ -29,7 +29,7 @@
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
 		<div class="container-fluid">
 			<h4 style="color:white;">
-				<span class="menu-title">メニュー</span>
+				<span class="top-menu">メニュー</span>
 			</h4>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
 				aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,6 +80,10 @@
 		width: 90%;
 	}
 
+	.top-menu {
+		margin-left: 10px;
+	}
+
 	.company {
 		background-color: #EEEEEE;
 		padding: 10px;
@@ -111,7 +115,7 @@
 			width: 80%;
 		}
 
-		.menu-title {
+		.top-menu {
 			margin-left: 120px;
 		}
 
@@ -135,6 +139,10 @@
 	@media screen and (min-width:1025px) {
 		.container {
 			width: 60%;
+		}
+
+		.top-menu {
+			margin-left: 120px;
 		}
 	}
 </style>

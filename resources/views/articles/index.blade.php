@@ -100,7 +100,7 @@
 	.menu-title {
 		font-size: 30px;
 		text-align: left;
-		padding: 0 10px 0 10px;
+		padding: 0 10px 0 2px;
 		font-weight: bold;
 	}
 

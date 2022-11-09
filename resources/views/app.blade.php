@@ -19,7 +19,7 @@
 </html>
 <style>
 	body {
-		margin-bottom: 60px;
+		margin-bottom: 100px;
 	}
 </style>
 <script>

@@ -119,8 +119,6 @@
 	.article_title {
 		text-decoration: none;
 		font-size: 25px;
-		font-weight: bold;
-		color: rgb(7, 12, 143);
 	}
 
 	@media screen and (min-width:600px) {

@@ -75,7 +75,7 @@
 
 <style>
 	.menu-title {
-		padding-left: 120px;
+		padding-left: 10px;
 		font-size: 25px;
 		color: white;
 	}
@@ -111,6 +111,10 @@
 	}
 
 	@media screen and (min-width:600px) {
+		.menu-title {
+			padding-left: 120px;
+		}
+
 		.container {
 			width: 80%;
 		}

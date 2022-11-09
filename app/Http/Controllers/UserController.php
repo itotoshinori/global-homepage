@@ -11,8 +11,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::oldest()->get();
+        $user_emails= "";
+        foreach ($users as $user) {
+            $user_emails .= $user->email.";";
+        }
         return view('users.index', [
             'users' => $users,
+            'user_emails' =>$user_emails
         ]);
     }
     public function destroy(int $id)

@@ -33,6 +33,10 @@
 				</tr>
 			@endforeach
 		</table>
+		<div class="emails">
+			<input type="hidden" value={{ $user_emails }} />
+			<span class="btn btn-primary mt-2">全員のemailをコピーする</span>
+		</div>
 	</div>
 @endauth
 <style>

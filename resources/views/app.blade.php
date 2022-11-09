@@ -33,4 +33,12 @@
 			}
 		});
 	});
+	$(".emails span").on("click", function() {
+		// コピーするテキストを選択
+		$(".emails input").select();
+		// 選択したテキストをクリップボードにコピーする
+		document.execCommand("Copy");
+		// コピーを通知する
+		alert("全員のemailをコピーできました。BCCに貼るなどして連絡用にご活用下さい。");
+	});
 </script>

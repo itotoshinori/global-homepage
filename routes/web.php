@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\InfoController;
 use App\lib\My_func;
 use App\Http\Controllers\ResisterProtectController;
 use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
@@ -23,10 +24,12 @@ use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 //Route::get('/', function () {
 //return view('welcome');
 //});
+Route::resource('internal/infos', InfoController::class)->middleware('auth');
+Route::post('/internal/infos/download/{id}', [InfoController::class,'download'])->name('infos.download');
 Route::resource('/', ArticleController::class)->only(['index']);
 Route::resource('articles', ArticleController::class)->only(['index','show','create','edit']);
 Route::resource('articles', ArticleController::class)->except(['index','show'])->middleware('auth');
-Route::resource('/users', UserController::class)->only(['index','destroy'])->middleware('auth');
+Route::resource('/users', UserController::class)->only(['index','update','destroy'])->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

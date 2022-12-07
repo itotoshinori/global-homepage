@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use App\Models\Article;
+use App\Models\Info;
 use Carbon\Carbon;
 
 class My_func
@@ -39,6 +40,16 @@ class My_func
         ];
         return $result;
     }
+    public function request_info_content(Object $request)
+    {
+        $result=[
+            'title' => $request->title,
+            'body' => $request->body,
+            'link' => $request->link,
+            'category' => $request->category
+        ];
+        return $result;
+    }
     public function limit_setting(string $content)
     {
         if (strlen($content)>=90) {
@@ -65,5 +76,20 @@ class My_func
     {
         $articles = Article::oldest()->get()->where('category', 0);
         return $articles;
+    }
+    public function info_menus()
+    {
+        $menus = Info::oldest()->get()->where('category', 2);
+        return $menus;
+    }
+    public function info_links()
+    {
+        $links = Info::oldest()->get()->where('category', 3);
+        return $links;
+    }
+    public function info_managements()
+    {
+        $managements = Info::oldest()->get()->where('category', 4);
+        return $managements;
     }
 }

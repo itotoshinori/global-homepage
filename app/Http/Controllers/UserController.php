@@ -20,6 +20,23 @@ class UserController extends Controller
             'user_emails' =>$user_emails
         ]);
     }
+    public function update(Request $request, User $user)
+    {
+        $update=[
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+        $result=$user->update($update);
+        if ($result) {
+            $status= "success";
+            $message = "ユーザー情報を更新しました。";
+        } else {
+            $status= "success";
+            $message = "ユーザー情報に失敗しました。";
+        }
+        return redirect()->route('infos.index')
+                        ->with($status, $message);
+    }
     public function destroy(int $id)
     {
         User::where('id', $id)->delete();

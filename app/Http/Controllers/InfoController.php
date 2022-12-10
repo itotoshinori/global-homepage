@@ -110,7 +110,7 @@ class InfoController extends Controller
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $info = Info::find($id);
-        return view('Infos.show', [
+        return view('infos.show', [
         'info' => $info,
         'class_func' => $this->class_func,
         'authority_user' => $authority_user,

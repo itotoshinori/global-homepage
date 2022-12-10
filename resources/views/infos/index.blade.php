@@ -22,11 +22,16 @@
 			<p class="alert alert-danger mt-2">{{ $message }}</p>
 		@endif
 		<div class="wrapper-1">
-			<h3 class="main-title">株式会社グローバル</h3>
+			@include('infos.title')
 			@include('infos.side')
 			<div id="content">
 				<div class="inner">
-					<div class="content-title">お知らせ</div>
+					<div class="content-title">
+						<span style="margin-right:50px;">お知らせ</span>
+						@if ($authority_user)
+							<a href="/internal/infos?alldis=1">全てを表示</a>
+						@endif
+					</div>
 					<div class="content-main">
 						<table>
 							@foreach ($infos as $info)
@@ -40,7 +45,12 @@
 						</table>
 						<span style="margin:3px 0 3px 0;">{{ $infos->links() }}</span>
 					</div>
-					<div class="content-title">社員一覧</div>
+					<div class="content-title">
+						<span style="margin-right:50px;">社員一覧</span>
+						@if ($authority_user)
+							<a href="/internal/infos?alluserdis=1">退職者も含め全表示</a>
+						@endif
+					</div>
 					<label class="form-label" for="address" style="margin-top:10px; margin-left:10px;">メール送信用フォーム</label>
 					<input class="form-control iputAddress" type="text" value="" id="emailList" readonly />
 					<button style="background-color: wheat; margin: 2px 0 10px 0">
@@ -49,11 +59,12 @@
 					<button onclick="copyEmail()" class="btn btn-primary">コピー</button>
 					<button onclick="allSelect()" class="btn btn-primary">全選択</button>
 					<button onclick="location.reload()" class="btn btn-warning">リセット</button>
+					<div id="userCount" style="display:none;">{{ $user_count }}</div>
 					<table class="table table-striped">
 						@php
 							$i = 0;
 						@endphp
-						<th><span style="white-space: nowrap;">選択</span></th>
+						<th width="10px;">選</th>
 						<th>名前</th>
 						<th>email</th>
 						@foreach ($users as $user)
@@ -68,46 +79,25 @@
 								</td>
 								<td>
 									<div class="name_text" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $user->id }}">
+										@if ($authority_user && $user->authority == 1)
+											<span class="text-warning">管</span>
+										@endif
+										@if ($user->registration == false)
+											<span class="text-danger">退</span>
+										@endif
 										{{ $user->name }}
 									</div>
 								</td>
-								<td><span id="email{{ $i }}">{{ $user->email }}</span></td>
+								<td>
+									<span id="email{{ $i }}" style="word-wrap: break-word;">{{ $user->email }}</span>
+								</td>
 								<div>
 									<!-- Modal -->
-									<div class="modal fade" id="staticBackdrop{{ $user->id }}" data-bs-backdrop="static"
-										data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="staticBackdropLabel">
-														ユーザー編集
-													</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<form class="column is-8 is-offset-2" action="{{ route('users.update', $user->id) }}" method="POST">
-													@csrf
-													@method('PUT')
-													<div class="modal-body">
-														<div class="has-text-weight-bold">名前:</div>
-														<input class="form-control" type="text" name="name" value="{{ $user->name }}">
-														<div class="has-text-weight-bold">email:</div>
-														<input class="form-control" type="text" name="email" value="{{ $user->email }}">
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-															閉じる
-														</button>
-														<button type="submit" class="btn btn-primary">保存</button>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
+									@include('infos.user_modal')
 								</div>
 							</tr>
 						@endforeach
 					</table>
-					<span id="allCount" style="display:none;">{{ $i }}</span>
 				</div>
 			</div>
 			<div id="footer"></div>
@@ -146,7 +136,7 @@
 
 	function allSelect() {
 		$("#emailList").val("");
-		var allCount = $("#allCount").text();
+		var allCount = $("#userCount").text();
 		for (let id = 1; id <= allCount; id++) {
 			$("#id" + id).text("◯");
 			var email = $("#email" + id).text();

@@ -20,21 +20,36 @@ class InfoController extends Controller
         $my_url = config('my-url.url');
         $this->my_url = $my_url;
         $this->to_email = "tnitoh@global-software.co.jp";
-        $this->users = User::all();
-        $this->categories = array("お知らせ", "メニュー",  "リンク", "管理者メニュー");
+        $this->users =  User::orderBy('email')->where('registration', true)->get();
+        $this->categories = array("お知らせ", "メニュー",  "リンク", "管理者メニュー","トップにリンクなし");
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(10);
-        $users = User::orderBy('email')->get();
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        //$infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(10);
+        if ($request->alldis ==1 && $authority_user) {
+            $infos = Info::orderBy('created_at', 'desc')->paginate(100);
+        } else {
+            $infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(10);
+        }
+        if ($request->alluserdis ==1 && $authority_user) {
+            $users = User::orderBy('authority')->orderBy('email')->get();
+        } else {
+            $users = $this->users;
+        }
+        $user_count = count($users);
+        $authorities = array("管理者","一般","契約");
         return view('infos.index', [
             'users' => $users,
-            'infos' => $infos
+            'infos' => $infos,
+            'authorities'=> $authorities,
+            'user_count' => $user_count,
+            'authority_user' => $authority_user
         ]);
     }
 
@@ -45,7 +60,12 @@ class InfoController extends Controller
      */
     public function create()
     {
-        return view('infos.create', ['categories' => $this->categories]);
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        if ($authority_user) {
+            return view('infos.create', ['categories' => $this->categories,'authority_user' => $authority_user]);
+        } else {
+            return redirect()->route('infos.index')->with('danger', '権限がありません');
+        }
     }
 
     /**
@@ -63,13 +83,21 @@ class InfoController extends Controller
             $path =  $image->store('files', 'inside');
             $image = ltrim($path, 'files/');
             $create['image'] = $image;
+            $request->file("image")->getClientOriginalName();
+            $original_file_name = $request->file("image")->getClientOriginalName();
+            $create['image_file_name'] = $original_file_name;
         }
         $curret_user = Auth::user();
         $create['user_id'] = $curret_user->id;
         $result = Info::create($create);
-
-        return redirect()->route('infos.index')
-                        ->with('success', '新規作成しました。');
+        $id = Info::latest('id')->first();
+        if ($result) {
+            return redirect()->route('infos.show', $id)
+                            ->with('success', '新規作成しました。');
+        } else {
+            return redirect()->route('infos.index')
+                            ->with('danger', '新規作成に失敗しました');
+        }
     }
 
     /**
@@ -80,10 +108,12 @@ class InfoController extends Controller
      */
     public function show(int $id)
     {
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
         $info = Info::find($id);
         return view('Infos.show', [
             'info' => $info,
             'class_func' => $this->class_func,
+            'authority_user' => $authority_user,
         ]);
     }
 
@@ -95,7 +125,12 @@ class InfoController extends Controller
      */
     public function edit(Info $info)
     {
-        return view('infos.edit', compact('info'), ['categories' => $this->categories]);
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        if ($authority_user) {
+            return view('infos.edit', compact('info'), ['categories' => $this->categories,'authority_user' => $authority_user]);
+        } else {
+            return redirect()->route('infos.index')->with('danger', '権限がありません');
+        }
     }
 
     /**
@@ -113,12 +148,14 @@ class InfoController extends Controller
             $path =  $image->store('files', 'inside');
             $image = ltrim($path, 'files/');
             $update['image'] = $image;
+            $original_file_name = $request->file("image")->getClientOriginalName();
+            $update['image_file_name'] = $original_file_name;
             //前回ファイル削除
             Storage::disk('inside')->delete("/files/".$info->image);
         }
         $info->update($update);
 
-        return redirect()->route('infos.index')
+        return redirect()->route('infos.show', $info->id)
                         ->with('success', '更新しました。');
     }
 
@@ -130,17 +167,26 @@ class InfoController extends Controller
      */
     public function destroy(Info $info)
     {
-        $info->delete();
-        return redirect()->route('infos.index')
-                        ->with('success', '削除しました。');
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        if ($authority_user) {
+            $info->delete();
+            return redirect()->route('infos.index')
+                            ->with('success', '削除しました。');
+        } else {
+            return redirect()->route('infos.index')->with('danger', '権限がありません');
+        }
     }
     public function download(int $id)
     {
         $info = Info::find($id);
         $filePath = "inside/files/{$info->image}";
-        $fileName = $info->image;
-        $mimeType = Storage::mimeType($filePath);
-        $headers = [['Content-Type' => $mimeType]];
-        return Storage::download($filePath, $fileName, $headers);
+        //$fileName = $info->image;
+        //$mimeType = Storage::mimeType($filePath);
+        //$headers = [['Content-Type' => $mimeType]];
+        if ($info->image_file_name) {
+            return Storage::download($filePath, $info->image_file_name);
+        } else {
+            return Storage::download($filePath);
+        }
     }
 }

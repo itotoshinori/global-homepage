@@ -34,11 +34,11 @@
 						@csrf
 						@method('DELETE')
 						<a href="/" style="font-size:20px;margin-right:10px;">Homeへ</a>
-						@auth
+						@if ($authority_user)
 							<a class="button is-success" href="{{ route('articles.edit', $article->id) }}">編集</a>
 							<button class="btn btn-danger" type="submit" class="btn btn-danger"
 								onclick="return confirm('本当に削除しますか?')">削除</button>
-						@endauth
+						@endif
 					</form>
 				</div>
 			</div>

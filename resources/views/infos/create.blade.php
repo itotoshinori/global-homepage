@@ -7,18 +7,17 @@
 
 	<body>
 		<div class="wrapper-1">
-			<h2 class="main-title">株式会社グローバル</h2>
+			@include('infos.title')
 			@include('infos.side')
 			<div id="content">
 				<div class="inner">
-					<div class="content-title">お知らせ登録フォーム</div>
 					<div class="content-main">
 						<form method="POST" action="{{ route('infos.store') }}" enctype="multipart/form-data">
 							@csrf
 							@method('POST')
 							@include('infos.form')
 							<div class="md-group">
-								<label for="category">カテゴリー（必須　通常はお知らせ）</label>
+								<label for="category" class="form-content">カテゴリー（必須　通常はお知らせ）</label>
 								<select name="category" class="form-control">
 									@php $i=1 @endphp
 									@foreach ($categories as $category)

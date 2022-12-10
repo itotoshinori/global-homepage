@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreArticleRequest;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 use App\lib\My_func;
 use App\Mail\Admin;
@@ -33,6 +34,7 @@ class ArticleController extends Controller
 
     public function index()
     {
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
         $articles = $this->class_func->main_articles();
         $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(9);
         $urls = $this->class_func->urls();
@@ -41,6 +43,7 @@ class ArticleController extends Controller
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
             'urls' => $urls,
+            'authority_user'=> $authority_user
         ]);
     }
 
@@ -51,9 +54,15 @@ class ArticleController extends Controller
      */
     public function create(Request $request)
     {
-        $main = $request->main_content;
-        return view('articles.create', compact('main'));
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        if ($authority_user) {
+            $main = $request->main_content;
+            return view('articles.create', compact('main'));
+        } else {
+            return redirect()->route('articles.index')->with('danger', '権限がありません');
+        }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -98,6 +107,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
         $length = 4;
         $max = pow(10, $length) - 1;                    // コードの最大値算出
         $rand = random_int(0, $max);                    // 乱数生成
@@ -112,6 +122,7 @@ class ArticleController extends Controller
             'article' => $article,
             'class_func' => $this->class_func,
             'randam_num'=> $randam_num,
+            'authority_user'=> $authority_user
         ]);
     }
 
@@ -128,7 +139,12 @@ class ArticleController extends Controller
         } else {
             $main = false;
         }
-        return view('articles.edit', compact('article', 'main'));
+        $authority_user = $this->class_func->login_user_authority(Auth::user());
+        if ($authority_user) {
+            return view('articles.edit', compact('article', 'main'));
+        } else {
+            return redirect()->route('articles.index')->with('danger', '権限がありません');
+        }
     }
 
     /**

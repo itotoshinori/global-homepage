@@ -92,4 +92,25 @@ class My_func
         $managements = Info::oldest()->get()->where('category', 4);
         return $managements;
     }
+    public function retire_mail()
+    {
+        $cb = new Carbon();
+        $year= $cb->year;
+        $month = $cb->month;
+        $day = $cb->day;
+        $hour = $cb->hour;
+        $min = $cb->minute;
+        $sec = $cb->second;
+        $str = md5(uniqid());
+        return $str.$year.$month.$day.$hour.$min.$sec;
+    }
+    public function login_user_authority($login_user)
+    {
+        if ($login_user && $login_user->authority == 1) {
+            $authority_user = true;
+        } else {
+            $authority_user = false;
+        }
+        return $authority_user;
+    }
 }

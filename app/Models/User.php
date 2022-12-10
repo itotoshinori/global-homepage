@@ -24,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'authority',
+        'registration',
+        'note'
     ];
 
     /**
@@ -49,5 +52,9 @@ class User extends Authenticatable
     {
         $url = url("reset-password/${token}");
         $this->notify(new ResetPasswordNotification($url));
+    }
+    public function infos()
+    {
+        return $this->hasMany(Info::class);
     }
 }

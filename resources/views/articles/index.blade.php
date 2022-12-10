@@ -1,11 +1,11 @@
 @extends('app')
 @extends('articles.layout')
 @section('content')
-	@auth
+	@if ($authority_user)
 		<h2>
 			<a href="{{ route('articles.create', ['main_content' => true]) }}">主項目新規作成</a>
 		</h2>
-	@endauth
+	@endif
 	@if ($message = Session::get('success'))
 		<p class="alert alert-success">
 			{{ $message }}</p>
@@ -37,11 +37,6 @@
 											{{ $article->title }}
 										</a>
 									</span>
-									@auth
-										<a class="btn btn-warning" href="{{ route('articles.edit', $article->id) }}">編集</a>
-										<button class="btn btn-danger" type="submit" class="btn btn-danger"
-											onclick="return confirm('本当に削除しますか?')">削除</button>
-									@endauth
 								</div>
 							</form>
 						</div>
@@ -53,9 +48,9 @@
 			<div class="menu-card-inner">
 				<div class="menu-title mb-2" id="info">
 					お知らせ
-					@auth
+					@if ($authority_user)
 						<span class="fs-4 ml-5"><a href="{{ route('articles.create') }}">新規作成</a></span>
-					@endauth
+					@endif
 				</div>
 				<div class="menu-text">
 					@foreach ($info_articles as $info)

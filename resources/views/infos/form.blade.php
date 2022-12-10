@@ -8,24 +8,24 @@
 		</ul>
 	</div>
 @endif
-<div class="md-form">
+<div class="md-form form-content">
 	<div>タイトル（必須　全角２０文字以下） </div>
 	<input type="text" name="title" required class="form-control" placeholder="タイトル"
 		value="{{ $info->title ?? old('title') }}">
 </div>
-<div class="form-group">
+<div class="form-group form-content">
 	<label>本文（必須）</label>
 	<textarea name="body" required class="form-control" rows="5" placeholder="本文">{{ $info->body ?? old('body') }}</textarea>
 </div>
-<div class="md-form">
+<div class="md-form form-content">
 	<label>リンク</label>
 	<input type="url" name="link" class="form-control" placeholder="https://"
 		value="{{ $info->link ?? old('link') }}">
 </div><br />
-<div class="md-form photo-selection">
+<div class="md-form photo-selection form-content">
 	<div>添付ファイル</div>
-	<input type="file" name="image" id="file" accept=".png, .jpg, .jpeg, .pdf, .doc">
-	<div>画像・PDF・ワード ファイルの添付可能</div>
+	<input type="file" name="image" id="file" accept=".png, .jpg, .jpeg, .pdf, .doc, .xls, .xlsx">
+	<div>画像・PDF・ワード・エクセルファイルの添付可能</div>
 	<div>3MB以下のサイズでお願いします</div>
-	<div>添付ファイル名に_はつけないで下さい</div>
-</div><br />
+	<div>添付ファイル名に_や-など特殊な文字をファイル名にするとアップロードできないことがあります。簡潔で短いファイル名でお願いします。</div><br />
+</div>

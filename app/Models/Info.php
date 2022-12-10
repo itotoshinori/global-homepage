@@ -14,6 +14,13 @@ class Info extends Model
         'link',
         'image',
         'user_id',
-        'category'
+        'category',
+        'replay',
+        'image_file_name',
+        'addressee'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

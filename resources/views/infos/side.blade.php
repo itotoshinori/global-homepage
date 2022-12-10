@@ -25,22 +25,24 @@
 			@if ($link->link)
 				<span class="side-content"><a href={{ $link->link }}>{{ $link->title }}</a></span>
 			@else
-				<span class="side-content"><a href="{{ route('informations.show', $link->id) }}">{{ $link->title }}</a></span>
+				<span class="side-content"><a href="{{ route('infos.show', $link->id) }}">{{ $link->title }}</a></span>
 			@endif
 		@endforeach
 	</div>
-	<div class="side-title">管理者メニュー</div>
-	<div class="side">
-		<span class="side-content"><a href="/internal/infos/create">お知らせ登録</a></span>
-		@foreach ($managements as $management)
-			@if ($management->link)
-				<span class="side-content"><a href={{ $management->link }}>{{ $management->title }}</a></span>
-			@else
-				<span class="side-content"><a
-						href="{{ route('infos.show', $management->id) }}">{{ $management->title }}</a></span>
-			@endif
-		@endforeach
-	</div>
+	@if ($authority_user)
+		<div class="side-title">管理者メニュー</div>
+		<div class="side">
+			<span class="side-content"><a href="/internal/infos/create">お知らせ登録</a></span>
+			@foreach ($managements as $management)
+				@if ($management->link)
+					<span class="side-content"><a href={{ $management->link }}>{{ $management->title }}</a></span>
+				@else
+					<span class="side-content"><a
+							href="{{ route('infos.show', $management->id) }}">{{ $management->title }}</a></span>
+				@endif
+			@endforeach
+		</div>
+	@endif
 </div>
 <style>
 	#left {

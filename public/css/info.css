@@ -20,6 +20,10 @@
     border-radius: 5px;
 }
 
+.content-body {
+    padding: 10px;
+}
+
 .main-title {
     margin: 20px 10px;
 }
@@ -49,6 +53,15 @@
 .name_text {
     cursor: pointer;
     color: blue;
+    white-space: nowrap;
+}
+
+.update_button {
+    margin: 0 0 10px 10px;
+}
+
+.form-content {
+    font-size: 15px;
 }
 
 @media screen and (min-width: 1200px) {

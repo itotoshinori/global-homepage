@@ -27,9 +27,9 @@
 			<div id="content">
 				<div class="inner">
 					<div class="content-title">
-						<span style="margin-right:50px;">お知らせ</span>
+						<span style="margin-right:20px;">お知らせ</span>
 						@if ($authority_user)
-							<a href="/internal/infos?alldis=1">全てを表示</a>
+							<a href="/internal/infos?alldis=1">サイドを含め全表示</a>
 						@endif
 					</div>
 					<div class="content-main">
@@ -46,7 +46,7 @@
 						<span style="margin:3px 0 3px 0;">{{ $infos->links() }}</span>
 					</div>
 					<div class="content-title">
-						<span style="margin-right:50px;">社員一覧</span>
+						<span style="margin-right:20px;">社員一覧</span>
 						@if ($authority_user)
 							<a href="/internal/infos?alluserdis=1">退職者も含め全表示</a>
 						@endif
@@ -89,7 +89,7 @@
 									</div>
 								</td>
 								<td>
-									<span id="email{{ $i }}" style="word-wrap: break-word;">{{ $user->email }}</span>
+									<span id="email{{ $i }}">{{ $user->email }}</span>
 								</td>
 								<div>
 									<!-- Modal -->

@@ -75,7 +75,6 @@
 	.side-content {
 		list-style: none;
 		font-size: 15px;
-		margin-top: 10px;
 		padding-right: 2px;
 		white-space: nowrap;
 	}
@@ -84,7 +83,7 @@
 		text-decoration: none;
 	}
 
-	@media screen and (min-width: 600px) {
+	@media screen and (min-width: 480px) {
 		.side-title {
 			font-size: 20px;
 		}
@@ -114,7 +113,7 @@
 			padding: 0 0 0 4px;
 			list-style: none;
 			font-size: 20px;
-			margin-bottom: 10px;
+			margin-bottom: 2px;
 			display: block;
 		}
 	}

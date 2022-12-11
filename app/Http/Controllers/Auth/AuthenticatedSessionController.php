@@ -32,7 +32,20 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $my_url = config('my-url.url');
+        $this->my_url = $my_url;
+
+        if ($this->my_url != "http://localhost") {
+            return redirect("https://global-software.jp/internal/infos");
+        } else {
+            return redirect("http://localhost:8000/internal/infos");
+        }
+
+
+
+
+
+        //return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

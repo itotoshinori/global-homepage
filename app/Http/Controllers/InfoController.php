@@ -89,11 +89,12 @@ class InfoController extends Controller
             $original_file_name = $request->file("image")->getClientOriginalName();
             $create['image_file_name'] = $original_file_name;
         }
+        $all_send_mail = $request->all_send_mail;
         $curret_user = Auth::user();
         $create['user_id'] = $curret_user->id;
         $result = Info::create($create);
         $info = Info::latest('id')->first();
-        if ($result && $this->my_url != "http://localhost" && $info->category ==1) {
+        if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
             //foreach ($this->users as $user) {

@@ -39,7 +39,9 @@
 									<td style="font-size:18px; white-space: nowrap;" valign="top">
 										{{ $info->created_at->format('Y年m月d日') }}
 									</td>
-									<td> <a href="{{ route('infos.show', $info->id) }}">{{ $info->title }}</a></td>
+									<td><span class="badge bg-warning text-dark">{{ $class_func->dis_new($info->created_at) }}</span>
+										<a href="{{ route('infos.show', $info->id) }}">{{ $info->title }}</a>
+									</td>
 								</tr>
 							@endforeach
 						</table>

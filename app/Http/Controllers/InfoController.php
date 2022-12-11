@@ -49,7 +49,8 @@ class InfoController extends Controller
             'infos' => $infos,
             'authorities'=> $authorities,
             'user_count' => $user_count,
-            'authority_user' => $authority_user
+            'authority_user' => $authority_user,
+            'class_func' => $this->class_func
         ]);
     }
 

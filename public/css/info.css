@@ -38,6 +38,15 @@
     font-size: 20px;
 }
 
+.info_dis {
+    font-size: 15px;
+}
+
+.mail_form_label {
+    margin-left: 10px;
+    font-size: 15px;
+}
+
 #content ul {
     margin: 10px 0 0.5em 0;
     padding: 0;
@@ -93,6 +102,14 @@
     }
 
     .content-title {
+        font-size: 20px;
+    }
+
+    .info_dis {
+        font-size: 20px;
+    }
+
+    .mail_form_label {
         font-size: 20px;
     }
 

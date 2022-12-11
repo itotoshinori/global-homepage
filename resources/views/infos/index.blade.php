@@ -35,8 +35,8 @@
 					<div class="content-main">
 						<table>
 							@foreach ($infos as $info)
-								<tr style="font-size:18px;">
-									<td style="font-size:18px; white-space: nowrap;" valign="top">
+								<tr class="info_dis">
+									<td style="white-space: nowrap;" valign="top">
 										{{ $info->created_at->format('Y年m月d日') }}
 									</td>
 									<td><span class="badge bg-warning text-dark">{{ $class_func->dis_new($info->created_at) }}</span>
@@ -53,7 +53,7 @@
 							<a href="/internal/infos?alluserdis=1">退職者も含め全表示</a>
 						@endif
 					</div>
-					<label class="form-label" for="address" style="margin-top:10px; margin-left:10px;">メール送信用フォーム</label>
+					<label for="address" class="mail_form_label">メール送信用フォーム</label>
 					<input class="form-control iputAddress" type="text" value="" id="emailList" readonly />
 					<button style="background-color: wheat; margin: 2px 0 10px 0">
 						<span id="mail_address"><a href="mailto:">メーラー</a></span>

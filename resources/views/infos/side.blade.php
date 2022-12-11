@@ -10,7 +10,7 @@
 <div id="left">
 	<div class="side-title">メニュー</div>
 	<div class="side">
-		<span class="side-content"><a href="/internal/infos">トップへ</a></span>
+		<span class="side-content"><a href="{{ route('infos.index') }}">トップへ</a></span>
 		@foreach ($menus as $menu)
 			@if ($menu->link)
 				<span class="side-content"><a href={{ $menu->link }}>{{ $menu->title }}</a></span>

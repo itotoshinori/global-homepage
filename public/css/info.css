@@ -64,6 +64,10 @@
     font-size: 15px;
 }
 
+.email_dis {
+    font-size: 10px;
+}
+
 @media screen and (min-width: 1200px) {
     .wrapper-1 {
         width: 65%;
@@ -87,6 +91,10 @@
         padding: 0 0 0 4px;
         list-style: none;
         font-size: 20px;
+    }
+
+    .email_dis {
+        font-size: 15px;
     }
 }
 

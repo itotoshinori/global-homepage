@@ -68,6 +68,10 @@
     font-size: 10px;
 }
 
+.side-content {
+    margin-bottom: 200px;
+}
+
 @media screen and (min-width: 1200px) {
     .wrapper-1 {
         width: 65%;

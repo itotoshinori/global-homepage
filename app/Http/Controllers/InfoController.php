@@ -101,7 +101,7 @@ class InfoController extends Controller
             //Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
             //}
             //メールテスト用に残す。テスト時コメントアウト
-            Mail::to($this->to_email)->send(new Admin("グローバル社員　各位", $message, $my_url));
+            Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         if ($result) {

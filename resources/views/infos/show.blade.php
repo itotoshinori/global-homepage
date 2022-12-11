@@ -13,12 +13,13 @@
 		<div id="content">
 			<div class="inner">
 				<div class="content-title">{{ $info->title }}</div>
-				<div class="content-body" style="font-size:16px;">
+				<div class="content-body" style="font-size:17px;">
 					{!! nl2br($class_func->a_tag_change($info->body)) !!}<br />
 					@if (isset($info->link))
 						<p><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>
 						</p>
 					@endif
+					<br />
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
 					<div>
 						<form action="{{ route('infos.destroy', $info) }}" method="POST">

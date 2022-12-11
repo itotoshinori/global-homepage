@@ -60,7 +60,9 @@
 					</button>
 					<button onclick="copyEmail()" class="btn btn-primary">コピー</button>
 					<button onclick="allSelect()" class="btn btn-primary">全選択</button>
-					<button onclick="location.reload()" class="btn btn-warning">リセット</button>
+					<a onclick="window.location.reload(true);" class="reload">
+						Reset
+					</a>
 					<div id="userCount" style="display:none;">{{ $user_count }}</div>
 					<table class="table table-striped">
 						@php

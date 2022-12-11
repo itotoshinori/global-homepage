@@ -13,7 +13,7 @@
 		<div id="content">
 			<div class="inner">
 				<div class="content-title">{{ $info->title }}</div>
-				<div class="content-body">
+				<div class="content-body" style="font-size:18px;">
 					{!! nl2br($class_func->a_tag_change($info->body)) !!}<br />
 					@if (isset($info->link))
 						<p><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>

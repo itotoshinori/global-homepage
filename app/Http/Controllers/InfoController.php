@@ -115,7 +115,6 @@ class InfoController extends Controller
         'class_func' => $this->class_func,
         'authority_user' => $authority_user,
         ]);
-        //return view('Infos.show', ['info' => $info]);
     }
 
     /**

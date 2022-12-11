@@ -4,7 +4,7 @@
 }
 
 #content {
-    width: 95%;
+    width: 100%;
     background-color: #f6f3e8;
     border-radius: 5px;
     margin-bottom: 100px;
@@ -13,6 +13,7 @@
 .content-title {
     padding: 7px 15px;
     font-weight: bold;
+    font-size: 15px;
     color: #e3e3e2;
     background: #104375;
     border-top: 1px #cccacb solid;
@@ -91,9 +92,7 @@
         font-size: 20px;
     }
 
-    #content li {
-        padding: 0 0 0 4px;
-        list-style: none;
+    .content-title {
         font-size: 20px;
     }
 

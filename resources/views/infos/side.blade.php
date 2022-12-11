@@ -45,12 +45,6 @@
 	@endif
 </div>
 <style>
-	#left {
-		color: #676767;
-		font-size: 13px;
-		width: 95%;
-	}
-
 	.side-title {
 		padding: 7px 15px;
 		font-weight: bold;

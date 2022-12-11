@@ -96,11 +96,11 @@ class InfoController extends Controller
         if ($result && $this->my_url != "http://localhost" && $info->category ==1) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "社内ホームページの更新がありました。下記URLをクリックしてご確認ください。\n".$my_url;
-            foreach ($this->users as $user) {
-                //Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
-            }
+            //foreach ($this->users as $user) {
+            //Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
+            //}
             //メールテスト用に残す。テスト時コメントアウト
-            Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
+            Mail::to($this->to_email)->send(new Admin("", $message, $my_url));
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         if ($result) {

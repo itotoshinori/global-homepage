@@ -85,7 +85,35 @@
 .side-content {
     margin-bottom: 200px;
 }
+@media screen and (min-width: 600px) {
+    .content-body {
+        font-size: 20px;
+    }
 
+    .content-main {
+        font-size: 20px;
+    }
+
+    .content-title {
+        font-size: 20px;
+    }
+
+    .info_dis {
+        font-size: 20px;
+    }
+
+    .mail_form_label {
+        font-size: 20px;
+    }
+
+    .form-content {
+        font-size: 20px;
+    }
+
+    .email_dis {
+        font-size: 20px;
+    }
+}
 @media screen and (min-width: 1200px) {
     .wrapper-1 {
         width: 65%;

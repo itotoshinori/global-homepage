@@ -84,6 +84,20 @@
 		text-decoration: none;
 	}
 
+	@media screen and (min-width: 600px) {
+		.side-title {
+			font-size: 20px;
+		}
+
+		.side {
+			font-size: 20px;
+		}
+
+		.side-content {
+			font-size: 20px;
+		}
+	}
+
 	@media screen and (min-width:1200px) {
 		#left {
 			color: #676767;

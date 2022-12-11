@@ -95,7 +95,7 @@ class InfoController extends Controller
         $info = Info::latest('id')->first();
         if ($result && $this->my_url != "http://localhost" && $info->category ==1) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "社内ホームページの更新がありました。下記URLをクリックしてご確認ください。\n".$my_url;
+            $message = "{$info->title}の新規お知らせ情報の登録が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。\n";
             //foreach ($this->users as $user) {
             //Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
             //}

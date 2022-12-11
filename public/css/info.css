@@ -10,6 +10,10 @@
     margin-bottom: 100px;
 }
 
+.content-body {
+    font-size: 15px;
+}
+
 .content-title {
     padding: 7px 15px;
     font-weight: bold;
@@ -103,6 +107,10 @@
 
     .content-title {
         font-size: 20px;
+    }
+
+    .content-body {
+        font-size: 18px;
     }
 
     .info_dis {

@@ -89,7 +89,7 @@
 									</div>
 								</td>
 								<td>
-									<span id="email{{ $i }}">{{ $user->email }}</span>
+									<span id="email{{ $i }}" class="email_dis">{{ $user->email }}</span>
 								</td>
 								<div>
 									<!-- Modal -->
@@ -104,6 +104,17 @@
 		</div>
 	</body>
 @endauth
+<style>
+	.email_dis {
+		font-size: 10px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		.email_dis {
+			font-size: 15px;
+		}
+	}
+</style>
 <script>
 	$(function() {
 		$("userList").click(function() {

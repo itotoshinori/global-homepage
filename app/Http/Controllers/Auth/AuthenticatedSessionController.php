@@ -40,11 +40,6 @@ class AuthenticatedSessionController extends Controller
         } else {
             return redirect("http://localhost:8000/internal/infos");
         }
-
-
-
-
-
         //return redirect()->intended(RouteServiceProvider::HOME);
     }
 

@@ -165,7 +165,7 @@ class InfoController extends Controller
      * @param  \App\Models\Info  $info
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Info $info)
+    public function update(StoreInfoRequest $request, Info $info)
     {
         $update = $this->class_func->request_info_content($request);
         $image = $request->file('image');

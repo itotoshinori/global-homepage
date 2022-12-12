@@ -32,7 +32,6 @@ class InfoController extends Controller
     public function index(Request $request)
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
-        //$infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(10);
         if ($request->alldis ==1 && $authority_user) {
             $infos = Info::orderBy('created_at', 'desc')->paginate(100);
         } else {
@@ -169,7 +168,7 @@ class InfoController extends Controller
         $result = $info->update($update);
         if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "「{$info->title}」\nの新規お知らせ情報の更新が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
+            $message = "「{$info->title}」\nのお知らせ情報の更新が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
             //foreach ($this->users as $user) {
             //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
             //}
@@ -216,5 +215,37 @@ class InfoController extends Controller
         } else {
             return Storage::download($filePath);
         }
+    }
+    public function send_mail(Request $request, int $id)
+    {
+        $info = Info::find($id);
+        $current_user = Auth::user();
+        $user_mails = "";
+        //管理者をメールアドレスにする
+        $users =  User::orderBy('email')->where('authority', 1)->get();
+        foreach ($users as $user) {
+            if (isset($user_emails)) {
+                $user_mails = $user_mails.",".$user->email;
+            } else {
+                $user_mails = $user->email;
+            }
+        }
+        //投稿者が管理者でなければをメールアドレスに追加する
+        if ($current_user->authority != 1) {
+            $user_mails = $user_mails.",".$info->user->email;
+        }
+        $introduce = "{$current_user->name}様より\n社内ホームページから「{$info->title}」のページにメッセージがありました\nアドレス：".$current_user->email;
+        $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
+        $message = $request->message;
+        $my_url = config('my-url.url')."/internal/infos/{$info->id}";
+        dd($introduce.$message.$my_url);
+        if ($my_url != "http://localhost") {
+            Mail::to($user_mails)->send(new Admin($introduce, $message, $my_url));
+            if ($current_user->authority != 1) {
+                Mail::to($current_user->email)->send(new Admin($introduce_tosender, $message, $my_url));
+            }
+        }
+        return redirect()->route('infos.index')
+                            ->with('success', "{$info->title}に関して送信しました");
     }
 }

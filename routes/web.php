@@ -26,6 +26,7 @@ use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 //});
 Route::resource('internal/infos', InfoController::class)->middleware('auth');
 Route::post('/internal/infos/download/{id}', [InfoController::class,'download'])->name('infos.download')->middleware('auth');
+Route::post('/internal/infos/send_mail/{id}', [InfoController::class,'send_mail'])->name('infos.send_mail')->middleware('auth');
 Route::resource('/', ArticleController::class)->only(['index']);
 Route::resource('articles', ArticleController::class)->only(['index','show','create','edit']);
 Route::resource('articles', ArticleController::class)->except(['index','show'])->middleware('auth');

@@ -3,6 +3,7 @@
 <header>
 	<meta charset="utf-8" />
 	<title>株式会社グローバル</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" href="{{ asset('/css/info.css') }}">
 	<link rel="stylesheet" href="{{ secure_asset('/css/info.css') }}">
 </header>
@@ -27,16 +28,25 @@
 						<p><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>
 						</p>
 					@endif
-					<br />
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
 					<div>
+						<div style="margin-bottom:10px;">
+							<button onclick="javascript:history.back()" class="btn btn-primary">戻る</button>
+							<button class="btn btn-warning" id="contact-dis">お問合せ</button>
+						</div>
+						<div class="form-group contact-form">
+							<label for="textarea1">お問合せはこちらから</label>
+							<form method="POST" action="{{ route('infos.send_mail', $info->id) }}" enctype="multipart/form-data">
+								@csrf
+								@method('POST')
+								<textarea name="message" class="form-control"></textarea>
+								<button class="btn btn-primary" style="margin-top:4px;" type="submit" class="btn btn-danger"
+									onclick="return confirm('本当に送信しますか?')">送信</button>
+							</form>
+						</div>
 						<form action="{{ route('infos.destroy', $info) }}" method="POST">
 							@csrf
 							@method('DELETE')
-							<a href="javascript:history.back()" style="margin-right:10px;">戻る</a>
-							<a
-								href="mailto:{{ $info->user->email }}?subject={{ $info->title }}について-ホームページから問合せ-&body={{ $info->user->name }} 殿"
-								style="margin-left:5px;">お問合せ</a>
 							@if ($authority_user)
 								<a class="btn btn-warning" href="{{ route('infos.edit', $info->id) }}">編集</a>
 								<button class="btn btn-danger" type="submit" class="btn btn-danger"
@@ -58,3 +68,13 @@
 		</div>
 	</div>
 </body>
+<style>
+	.contact-form {
+		display: none;
+	}
+</style>
+<script>
+	$('#contact-dis').on('click', function() {
+		$('.contact-form').css('display', 'block');
+	});
+</script>

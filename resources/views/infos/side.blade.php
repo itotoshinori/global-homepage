@@ -48,7 +48,7 @@
 	.side-title {
 		padding: 7px 15px;
 		font-weight: bold;
-		font-size: 20px;
+		font-size: 15px;
 		color: #e3e3e2;
 		background: #003366;
 		border-top: 1px #cccacb solid;
@@ -60,7 +60,7 @@
 		background-color: #fcfcfc;
 		line-height: 170%;
 		padding: 1px;
-		font-size: 20px;
+		font-size: 15px;
 		margin: 0 0 10px 0;
 		border-bottom: 1px #cccacb solid;
 		border-right: 1px #cccacb solid;
@@ -74,7 +74,8 @@
 
 	.side-content {
 		list-style: none;
-		font-size: 20px;
+		font-size: 15px;
+		margin-top: 10px;
 		padding-right: 2px;
 		white-space: nowrap;
 	}
@@ -113,7 +114,7 @@
 			padding: 0 0 0 4px;
 			list-style: none;
 			font-size: 20px;
-			margin-bottom: 2px;
+			margin-bottom: 10px;
 			display: block;
 		}
 	}

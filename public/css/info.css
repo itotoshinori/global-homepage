@@ -17,7 +17,7 @@
 .content-title {
     padding: 7px 15px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     color: #e3e3e2;
     background: #104375;
     border-top: 1px #cccacb solid;
@@ -35,7 +35,7 @@
 
 .content-main {
     padding: 5px;
-    font-size: 20px;
+    font-size: 10px;
 }
 
 .inner {
@@ -43,12 +43,12 @@
 }
 
 .info_dis {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .mail_form_label {
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #content ul {
@@ -75,11 +75,11 @@
 }
 
 .form-content {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .email_dis {
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .side-content {
@@ -138,7 +138,7 @@
     }
 
     .content-body {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .info_dis {
@@ -150,7 +150,7 @@
     }
 
     .email_dis {
-        font-size: 20px;
+        font-size: 15px;
     }
 }
 

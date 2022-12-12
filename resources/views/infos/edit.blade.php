@@ -36,6 +36,8 @@
 							@php $i=$i+1 @endphp
 						@endforeach
 					</select>
+					<input type="checkbox" name="all_send_mail">
+					<label for="all_send_mail">社員全員に通知を送る</label>
 				</div><br />
 				<button type="submit" class="btn btn-primary update_button">更新</button>
 				</form>

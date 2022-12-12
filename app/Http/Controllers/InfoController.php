@@ -98,7 +98,7 @@ class InfoController extends Controller
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
             //foreach ($this->users as $user) {
-            //Mail::to($user->to_email)->send(new Admin("", $message, $my_url));
+            //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
             //}
             //メールテスト用に残す。テスト時コメントアウト
             Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
@@ -166,10 +166,25 @@ class InfoController extends Controller
             //前回ファイル削除
             Storage::disk('inside')->delete("/files/".$info->image);
         }
-        $info->update($update);
+        $result = $info->update($update);
+        if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
+            $my_url = $this->my_url."/internal/infos/".$info->id;
+            $message = "「{$info->title}」\nの新規お知らせ情報の更新が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
+            //foreach ($this->users as $user) {
+            //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
+            //}
+            //メールテスト用に残す。テスト時コメントアウト
+            Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
+            //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+        }
 
-        return redirect()->route('infos.show', $info->id)
-                        ->with('success', '更新しました。');
+        if ($result) {
+            return redirect()->route('infos.show', $info->id)
+                            ->with('success', '更新しました');
+        } else {
+            return redirect()->route('infos.index')
+                            ->with('danger', '更新に失敗しました');
+        }
     }
 
     /**

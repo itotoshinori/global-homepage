@@ -234,7 +234,7 @@ class InfoController extends Controller
         if ($current_user->authority != 1) {
             $user_mails = $user_mails.",".$info->user->email;
         }
-        $introduce = "{$current_user->name}様より\n社内ホームページから「{$info->title}」のページにメッセージがありました\nアドレス：".$current_user->email;
+        $introduce = "{$current_user->name}様より\n社内ホームページから「{$info->title}」のページに\nメッセージがありました\nアドレス：".$current_user->email;
         $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
         $message = $request->message;
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
@@ -245,6 +245,6 @@ class InfoController extends Controller
             }
         }
         return redirect()->route('infos.index')
-                            ->with('success', "{$info->title}に関して送信しました");
+                            ->with('success', "{$info->title}に関してコメントをメール送信しました");
     }
 }

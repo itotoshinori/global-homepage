@@ -39,7 +39,7 @@
 							<form method="POST" action="{{ route('infos.send_mail', $info->id) }}" enctype="multipart/form-data">
 								@csrf
 								@method('POST')
-								<textarea name="message" class="form-control"></textarea>
+								<textarea name="message" class="form-control" required></textarea>
 								<button class="btn btn-primary" style="margin-top:4px;" type="submit" class="btn btn-danger"
 									onclick="return confirm('本当に送信しますか?')">送信</button>
 							</form>

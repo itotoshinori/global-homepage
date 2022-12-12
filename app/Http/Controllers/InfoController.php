@@ -36,7 +36,7 @@ class InfoController extends Controller
         if ($request->alldis ==1 && $authority_user) {
             $infos = Info::orderBy('created_at', 'desc')->paginate(100);
         } else {
-            $infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(50);
+            $infos = Info::orderBy('created_at', 'desc')->where('category', 1)->paginate(5);
         }
         if ($request->alluserdis ==1 && $authority_user) {
             $users = User::orderBy('authority')->orderBy('email')->get();

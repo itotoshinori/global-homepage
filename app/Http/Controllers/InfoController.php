@@ -88,6 +88,19 @@ class InfoController extends Controller
             $original_file_name = $request->file("image")->getClientOriginalName();
             $create['image_file_name'] = $original_file_name;
         }
+        //あて先リスト作成
+        $user_mails = "";
+        //未公開中は管理者をメールアドレスにする
+        $users =  User::orderBy('email')->where('authority', 1)->get();
+        //最終は在籍社員全員
+        //$users = $this->users;
+        foreach ($users as $user) {
+            if (isset($user_emails)) {
+                $user_mails = $user_mails.",".$user->email;
+            } else {
+                $user_mails = $user->email;
+            }
+        }
         $all_send_mail = $request->all_send_mail;
         $curret_user = Auth::user();
         $create['user_id'] = $curret_user->id;
@@ -100,7 +113,7 @@ class InfoController extends Controller
             //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
             //}
             //メールテスト用に残す。テスト時コメントアウト
-            Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
+            Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         if ($result) {
@@ -176,7 +189,6 @@ class InfoController extends Controller
             Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
-
         if ($result) {
             return redirect()->route('infos.show', $info->id)
                             ->with('success', '更新しました');

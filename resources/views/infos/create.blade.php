@@ -33,7 +33,7 @@
 								</select>
 								<br />
 								<input type="checkbox" name="all_send_mail" checked>
-								<label for="all_send_mail">社員全員に通知を送る</label>
+								<label for="all_send_mail">社員全員に通知メールを送る</label><br /><br />
 							</div><br />
 							<button type="submit" class="btn btn-primary">投稿する</button>
 						</form>

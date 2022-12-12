@@ -238,7 +238,6 @@ class InfoController extends Controller
         $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
         $message = $request->message;
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
-        dd($introduce.$message.$my_url);
         if ($my_url != "http://localhost") {
             Mail::to($user_mails)->send(new Admin($introduce, $message, $my_url));
             if ($current_user->authority != 1) {

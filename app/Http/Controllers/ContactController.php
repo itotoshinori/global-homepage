@@ -17,7 +17,7 @@ class ContactController extends Controller
         $my_url = config('my-url.url');
         $users = User::all();
         //テスト送信用
-        $users =  User::orderBy('email')->where('id', 1)->get();
+        //$users =  User::orderBy('email')->where('id', 1)->get();
         if ($my_url != "http://localhost") {
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));

@@ -10,7 +10,7 @@
 @endif
 <div class="md-form form-content">
 	<div>タイトル（必須　全角２０文字以下） </div>
-	<input type="text" name="title" required class="form-control" placeholder="タイトル"
+	<input type="text" id="title" name="title" required class="form-control" placeholder="タイトル"
 		value="{{ $info->title ?? old('title') }}">
 </div>
 <div class="form-group form-content">

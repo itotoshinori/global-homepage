@@ -48,7 +48,7 @@
 	.side-title {
 		padding: 7px 15px;
 		font-weight: bold;
-		font-size: 15px;
+		font-size: 20px;
 		color: #e3e3e2;
 		background: #003366;
 		border-top: 1px #cccacb solid;
@@ -60,7 +60,7 @@
 		background-color: #fcfcfc;
 		line-height: 170%;
 		padding: 1px;
-		font-size: 15px;
+		font-size: 20px;
 		margin: 0 0 10px 0;
 		border-bottom: 1px #cccacb solid;
 		border-right: 1px #cccacb solid;
@@ -74,7 +74,7 @@
 
 	.side-content {
 		list-style: none;
-		font-size: 15px;
+		font-size: 20px;
 		padding-right: 2px;
 		white-space: nowrap;
 	}

@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $condition = config('mycondition.condition');
         if ($condition == 'production') {
             URL::forceScheme('https');
+            $this->app['request']->server->set('HTTPS', 'on');
         }
     }
 }

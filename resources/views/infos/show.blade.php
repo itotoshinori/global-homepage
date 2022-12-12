@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<title>株式会社グローバル</title>
 	<link rel="stylesheet" href="{{ asset('/css/info.css') }}">
+	<link rel="stylesheet" href="{{ secure_asset('/css/info.css') }}">
 </header>
 
 <body>

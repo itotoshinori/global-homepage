@@ -23,6 +23,7 @@ class InfoController extends Controller
         $this->to_email = "tnitoh@global-software.co.jp";
         $this->users =  User::orderBy('email')->where('registration', true)->get();
         $this->categories = array("お知らせ", "メニュー",  "リンク", "管理者メニュー","トップにリンクなし");
+        $this->send_users = array("送付なし","管理者","正社員","在籍者");
     }
     /**
      * Display a listing of the resource.
@@ -98,6 +99,7 @@ class InfoController extends Controller
         //$users =  User::orderBy('email')->where('authority', 1)->get();
         //メール本文に内容を表示させる
         $authority = $request->auth;
+        $send_user = $this->send_users[$authority];
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}の件\n$info->title$info->body";
@@ -107,7 +109,7 @@ class InfoController extends Controller
         if ($result && $this->my_url != "http://localhost" && $authority != "0") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}　各位", $message, $my_url));
             }
         }
         if ($result) {
@@ -174,18 +176,18 @@ class InfoController extends Controller
         }
         $request->replay == "on" ? $update['replay'] = 2 : $update['replay'] = 1;
         $result = $info->update($update);
-        //未公開中は管理者をメールアドレスにする
         $authority = $request->auth;
+        $send_user = $this->send_users[$authority];
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}の件\n$info->title$info->body";
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }
-        if ($result && $this->my_url != "http://localhost" && $authority != "0") {
+        if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}　各位", $message, $my_url));
             }
         }
         if ($result) {
@@ -228,7 +230,7 @@ class InfoController extends Controller
     {
         $info = Info::find($id);
         $current_user = Auth::user();
-        $introduce = "管理者各位\n社内ホームページ「{$info->title}」にメッセージがありました\n投稿者：{$current_user->name}　殿\nアドレス：{$current_user->email}";
+        $introduce = "社内ホームページ「{$info->title}」にメッセージがありました\n投稿者：{$current_user->name}　殿\nアドレス：{$current_user->email}";
         $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
         $message = $request->message;
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
@@ -237,10 +239,12 @@ class InfoController extends Controller
             if ($info->replay ==2) {
                 $users =  User::orderBy('email')->where('authority', 1)->get();
                 foreach ($users as $user) {
+                    $introduce = "管理者各位\n".$introduce;
                     Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
                 }
             //投稿者のみに返信する設定の場合
             } else {
+                $introduce = "投稿者　殿\n".$introduce;
                 Mail::to($info->user->email)->send(new Admin($introduce, $message, $my_url));
             }
             //送信者が管理者以外の場合の送信控え

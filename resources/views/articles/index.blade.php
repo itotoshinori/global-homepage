@@ -18,12 +18,16 @@
 			<div class="menu-card">
 				<div class="menu-card-inner">
 					<div class="photo_height">
-						<a href={{ $urls[$article->id] }}>
-							@if ($article->image)
-								<img class="menu-image" src="/storage/images/{{ $article->image }}">
+						@if ($article->id <= 5)
+							<a href={{ $urls[$article->id] }}>
 							@else
-								<img class="menu-image" src="https://thumb.photo-ac.com/92/921d6392ee6cd207962aeedc4fc1f639_t.jpeg">
-							@endif
+								<a href={{ route('articles.show', $article->id) }}>
+						@endif
+						@if ($article->image)
+							<img class="menu-image" src="/storage/images/{{ $article->image }}">
+						@else
+							<img class="menu-image" src="https://thumb.photo-ac.com/92/921d6392ee6cd207962aeedc4fc1f639_t.jpeg">
+						@endif
 						</a>
 					</div>
 					<div class="menu-text">
@@ -33,8 +37,12 @@
 								@method('DELETE')
 								<div>
 									<span class="menu-title mb-2">
-										<a class="article_title" href={{ $urls[$article->id] }}>
-											{{ $article->title }}
+										@if ($article->id <= 5)
+											<a class="article_title" href={{ $urls[$article->id] }}>
+											@else
+												<a href={{ route('articles.show', $article->id) }}>
+										@endif
+										{{ $article->title }}
 										</a>
 									</span>
 								</div>

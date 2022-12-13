@@ -32,7 +32,7 @@
 					<div>
 						<div style="margin-bottom:10px;">
 							<button onclick="location.href='/internal/infos'" class="btn btn-success" style="width:100px;">トップへ</button>
-							<button onclick="javascript:history.back()" class="btn btn-primary" style="width:100px;">前に戻る</button>
+							<button onclick="javascript:history.back()" class="btn btn-info" style="width:100px;">前に戻る</button>
 							<button class="btn btn-warning" id="contact-dis" style="width:100px;">お問合せ</button>
 						</div>
 						<div class="form-group contact-form">
@@ -41,7 +41,7 @@
 								@csrf
 								@method('POST')
 								<textarea name="message" class="form-control" required></textarea>
-								<button class="btn btn-primary" style="margin-top:4px;" type="submit" class="btn btn-danger"
+								<button class="btn btn-primary" style="margin-top:4px; width:100px;" type="submit" class="btn btn-danger"
 									onclick="return confirm('本当に送信しますか?')">送信</button>
 							</form>
 						</div>
@@ -49,7 +49,7 @@
 							@csrf
 							@method('DELETE')
 							@if ($authority_user)
-								<a class="btn btn-warning" href="{{ route('infos.edit', $info->id) }}" style="width:100px;">編集</a>
+								<a class="btn btn-secondary" href="{{ route('infos.edit', $info->id) }}" style="width:100px;">編集</a>
 								<button class="btn btn-danger" type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか?')"
 									style="width:100px;">削除</button>
 							@endif

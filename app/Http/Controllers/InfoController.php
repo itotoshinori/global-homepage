@@ -101,7 +101,7 @@ class InfoController extends Controller
         $all_send_mail = $request->all_send_mail;
         if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "「{$info->title}」\nの新規お知らせ情報の登録が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
+            $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
             Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
         }
         if ($result) {
@@ -167,15 +167,16 @@ class InfoController extends Controller
             Storage::disk('inside')->delete("/files/".$info->image);
         }
         $result = $info->update($update);
+        //未公開中は管理者をメールアドレスにする
+        $users =  User::orderBy('email')->where('authority', 1)->get();
+        //最終は在籍社員全員
+        //$users = $this->users;
+        //あて先リスト作成
+        $user_mails = $this->class_func->make_to_addresses($users);
         if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "「{$info->title}」\nのお知らせ情報の更新が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
-            //foreach ($this->users as $user) {
-            //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
-            //}
-            //メールテスト用に残す。テスト時コメントアウト
-            Mail::to($this->to_email)->send(new Admin("伊藤　殿", $message, $my_url));
-            //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
+            $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
+            Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)
@@ -223,13 +224,7 @@ class InfoController extends Controller
         $user_mails = "";
         //管理者をメールアドレスにする
         $users =  User::orderBy('email')->where('authority', 1)->get();
-        foreach ($users as $user) {
-            if (isset($user_emails)) {
-                $user_mails = $user_mails.",".$user->email;
-            } else {
-                $user_mails = $user->email;
-            }
-        }
+        $user_mails = $this->class_func->make_to_addresses($users);
         //投稿者が管理者でなければをメールアドレスに追加する
         if ($current_user->authority != 1) {
             $user_mails = $user_mails.",".$info->user->email;

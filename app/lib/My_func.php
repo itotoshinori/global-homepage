@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Models\Article;
 use App\Models\Info;
 use Carbon\Carbon;
+use phpDocumentor\Reflection\Types\Null_;
 
 class My_func
 {
@@ -123,9 +124,9 @@ class My_func
     //メールのあて先リスト作成メソッド
     public function make_to_addresses($users)
     {
-        $user_mails = "";
+        $user_mails = null;
         foreach ($users as $user) {
-            if (isset($user_emails)) {
+            if (isset($user_mails)) {
                 $user_mails = $user_mails.",".$user->email;
             } else {
                 $user_mails = $user->email;

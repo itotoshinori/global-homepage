@@ -98,7 +98,7 @@ class InfoController extends Controller
         //$users = $this->users;
         //メール本文に内容を表示させる
         if ($request->content_dis=="on") {
-            $message = "{$info->title}.の件\n.$info->title$info->body";
+            $message = "{$info->title}の件\n$info->title$info->body";
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
         }
@@ -177,7 +177,7 @@ class InfoController extends Controller
         $users =  User::orderBy('email')->where('authority', 1)->get();
         //メール本文に内容を表示させる
         if ($request->content_dis=="on") {
-            $message = "{$info->title}.の件\n.$info->title$info->body";
+            $message = "{$info->title}の件\n$info->title$info->body";
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }

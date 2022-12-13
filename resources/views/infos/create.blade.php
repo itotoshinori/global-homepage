@@ -31,6 +31,8 @@
 										@php $i=$i+1 @endphp
 									@endforeach
 								</select>
+								<input type="checkbox" name="content_dis">
+								<label for="content_dis">メールに本文を表示させる</label><br />
 								<input type="checkbox" name="all_send_mail" checked>
 								<label for="all_send_mail">社員全員に通知メールを送る</label><br /><br />
 							</div>

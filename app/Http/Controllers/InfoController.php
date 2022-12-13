@@ -96,10 +96,16 @@ class InfoController extends Controller
         $users =  User::orderBy('email')->where('authority', 1)->get();
         //最終は在籍社員全員
         //$users = $this->users;
+        //メール本文に内容を表示させる
+        if ($request->content_dis=="on") {
+            $message = "{$info->title}.の件\n.$info->title$info->body";
+        } else {
+            $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
+        }
         $all_send_mail = $request->all_send_mail;
         if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
+
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
             }
@@ -169,10 +175,14 @@ class InfoController extends Controller
         $result = $info->update($update);
         //未公開中は管理者をメールアドレスにする
         $users =  User::orderBy('email')->where('authority', 1)->get();
-
+        //メール本文に内容を表示させる
+        if ($request->content_dis=="on") {
+            $message = "{$info->title}.の件\n.$info->title$info->body";
+        } else {
+            $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
+        }
         if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-            $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
             }

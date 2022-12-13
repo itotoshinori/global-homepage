@@ -97,7 +97,6 @@ class InfoController extends Controller
         $info = Info::latest('id')->first();//メール送信用のために新規登録のid取得
         //$users =  User::orderBy('email')->where('authority', 1)->get();
         //メール本文に内容を表示させる
-        //未公開中は管理者をメールアドレスにする
         $authority = $request->auth;
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
@@ -178,8 +177,6 @@ class InfoController extends Controller
         //未公開中は管理者をメールアドレスにする
         $authority = $request->auth;
         $users = User::where('authority', '<=', $authority)->get();
-        //$users =  User::orderBy('email')->where('authority', 1)->get();
-        //メール本文に内容を表示させる
         if ($request->content_dis=="on") {
             $message = "{$info->title}の件\n$info->title$info->body";
         } else {
@@ -208,13 +205,13 @@ class InfoController extends Controller
      */
     public function destroy(Info $info)
     {
-        $authority_user = $this->class_func->login_user_authority(Auth::user());
-        if ($authority_user) {
-            $info->delete();
+        $result = $info->delete();
+        if ($result) {
             return redirect()->route('infos.index')
-                            ->with('success', '削除しました。');
+                                ->with('success', '削除しました');
         } else {
-            return redirect()->route('infos.index')->with('danger', '権限がありません');
+            return redirect()->route('infos.show', $info->id)
+                                ->with('danger', '削除に失敗しました');
         }
     }
     public function download(int $id)

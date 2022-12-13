@@ -62,7 +62,7 @@
 					@else
 						<input type="checkbox" name="replay" checked>
 					@endif
-					<label for="content_dis">お問合せのコメントがあった場合に管理者全員に返信</label><br /><br />
+					<label for="content_dis">コメントを管理者全員に返信</label><br /><br />
 					<input type="checkbox" name="content_dis">
 					<label for="content_dis">メールに本文を表示させる</label>
 				</div><br />

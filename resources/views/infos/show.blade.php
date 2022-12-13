@@ -28,6 +28,16 @@
 						<p><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>
 						</p>
 					@endif
+					@if (isset($info->image))
+						<br />
+						<form action="{{ route('infos.download', $info->id) }}" method="POST">
+							@csrf
+							@method('POST')
+							<label style="font-size:15px;">▼クリックしてダウンロード</label><br />
+							<button class="btn btn-secondary" type="submit"
+								onclick="return confirm('本当にダウンロードしますか?')">{{ $info->image_file_name }}</button>
+						</form>
+					@endif
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
 					<div>
 						<div style="margin-bottom:10px;">
@@ -54,15 +64,6 @@
 									style="width:100px;">削除</button>
 							@endif
 						</form>
-						@if (isset($info->image))
-							<form action="{{ route('infos.download', $info->id) }}" method="POST">
-								@csrf
-								@method('POST')
-								<label style="font-size:15px;">▼クリックしてダウンロード</label><br />
-								<button class="btn btn-secondary" type="submit"
-									onclick="return confirm('本当にダウンロードしますか?')">{{ $info->image_file_name }}</button>
-							</form>
-						@endif
 					</div>
 				</div>
 			</div>

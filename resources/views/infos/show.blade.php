@@ -49,9 +49,9 @@
 							@csrf
 							@method('DELETE')
 							@if ($authority_user)
-								<a class="btn btn-warning" href="{{ route('infos.edit', $info->id) }}">編集</a>
-								<button class="btn btn-danger" type="submit" class="btn btn-danger"
-									onclick="return confirm('本当に削除しますか?')">削除</button>
+								<a class="btn btn-warning" href="{{ route('infos.edit', $info->id) }}" style="width:100px;">編集</a>
+								<button class="btn btn-danger" type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか?')"
+									style="width:100px;">削除</button>
 							@endif
 						</form>
 						@if (isset($info->image))

@@ -90,6 +90,9 @@ class InfoController extends Controller
         }
         $curret_user = Auth::user();
         $create['user_id'] = $curret_user->id;
+        if ($request->replay == "on") {
+            $create['replay'] = 2;
+        }
         $result = Info::create($create);
         $info = Info::latest('id')->first();//メール送信用のために新規登録のid取得
         //$users =  User::orderBy('email')->where('authority', 1)->get();
@@ -170,6 +173,7 @@ class InfoController extends Controller
             //前回ファイル削除
             Storage::disk('inside')->delete("/files/".$info->image);
         }
+        $request->replay == "on" ? $update['replay'] = 2 : $update['replay'] = 1;
         $result = $info->update($update);
         //未公開中は管理者をメールアドレスにする
         $authority = $request->auth;
@@ -217,9 +221,6 @@ class InfoController extends Controller
     {
         $info = Info::find($id);
         $filePath = "inside/files/{$info->image}";
-        //$fileName = $info->image;
-        //$mimeType = Storage::mimeType($filePath);
-        //$headers = [['Content-Type' => $mimeType]];
         if ($info->image_file_name) {
             return Storage::download($filePath, $info->image_file_name);
         } else {
@@ -230,18 +231,22 @@ class InfoController extends Controller
     {
         $info = Info::find($id);
         $current_user = Auth::user();
-        $user_mails = "";
-        //管理者をメールアドレスにする
-        $users =  User::orderBy('email')->where('authority', 1)->get();
         $introduce = "管理者各位\n社内ホームページ「{$info->title}」にメッセージがありました\n投稿者：{$current_user->name}　殿\nアドレス：{$current_user->email}";
         $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
         $message = $request->message;
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
         if ($this->my_url != "http://localhost") {
-            foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
+            //管理者全員に返信する設定の場合
+            if ($info->replay ==2) {
+                $users =  User::orderBy('email')->where('authority', 1)->get();
+                foreach ($users as $user) {
+                    Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
+                }
+            //投稿者のみに返信する設定の場合
+            } else {
+                Mail::to($info->user->email)->send(new Admin($introduce, $message, $my_url));
             }
-            //送信者の送信控え
+            //送信者が管理者以外の場合の送信控え
             if ($current_user->authority != 1) {
                 Mail::to($current_user->email)->send(new Admin($introduce_tosender, $message, $my_url));
             }

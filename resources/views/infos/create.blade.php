@@ -11,6 +11,7 @@
 			@include('infos.side')
 			<div id="content">
 				<div class="inner">
+					<div class="content-title">お知らせ登録</div>
 					<div class="content-main">
 						<form method="POST" action="{{ route('infos.store') }}" enctype="multipart/form-data">
 							@csrf
@@ -30,7 +31,7 @@
 										@endif
 										@php $i=$i+1 @endphp
 									@endforeach
-								</select>
+								</select><br />
 								<label for="mail_send">通知メール</label><br />
 								<div class="form-check form-check-inline">
 									<input type="radio" name="auth" class="form-check-input" id="auth1" value="3"
@@ -51,7 +52,9 @@
 									<input type="radio" name="auth" class="form-check-input" id="auth3" value="0"
 										{{ old('auth') == '0' ? 'checked' : '' }}>
 									<label for="auth3" class="form-check-label">送付しない</label>
-								</div><br />
+								</div><br /><br />
+								<input type="checkbox" name="replay">
+								<label for="content_dis">お問合せのコメントがあった場合に管理者全員に返信</label><br /><br />
 								<input type="checkbox" name="content_dis">
 								<label for="content_dis">メールに本文を表示させる</label><br /><br />
 							</div>

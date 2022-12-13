@@ -31,8 +31,9 @@
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
 					<div>
 						<div style="margin-bottom:10px;">
-							<button onclick="javascript:history.back()" class="btn btn-primary">戻る</button>
-							<button class="btn btn-warning" id="contact-dis">お問合せ</button>
+							<button onclick="location.href='/internal/infos'" class="btn btn-success" style="width:100px;">トップへ</button>
+							<button onclick="javascript:history.back()" class="btn btn-primary" style="width:100px;">前に戻る</button>
+							<button class="btn btn-warning" id="contact-dis" style="width:100px;">お問合せ</button>
 						</div>
 						<div class="form-group contact-form">
 							<label for="textarea1">お問合せはこちらから</label>

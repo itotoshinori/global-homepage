@@ -235,6 +235,7 @@ class InfoController extends Controller
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
         if ($this->my_url != "http://localhost") {
             Mail::to($user_mails)->send(new Admin($introduce, $message, $my_url));
+            //送信者の送信控え
             if ($current_user->authority != 1) {
                 Mail::to($current_user->email)->send(new Admin($introduce_tosender, $message, $my_url));
             }

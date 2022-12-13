@@ -41,8 +41,8 @@
 								@csrf
 								@method('POST')
 								<textarea name="message" class="form-control" required></textarea>
-								<button class="btn btn-primary" style="margin-top:4px; width:100px;" type="submit" class="btn btn-danger"
-									onclick="return confirm('本当に送信しますか?')">送信</button>
+								<button class="btn btn-primary" style="margin-top:4px; width:120px;" type="submit" class="btn btn-danger"
+									onclick="return confirm('本当に送信しますか?')">メール送信</button>
 							</form>
 						</div>
 						<form action="{{ route('infos.destroy', $info) }}" method="POST">

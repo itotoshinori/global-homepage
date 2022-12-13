@@ -92,20 +92,18 @@ class InfoController extends Controller
         $create['user_id'] = $curret_user->id;
         $result = Info::create($create);
         $info = Info::latest('id')->first();//メール送信用のために新規登録のid取得
-        //未公開中は管理者をメールアドレスにする
-        $users =  User::orderBy('email')->where('authority', 1)->get();
-        //最終は在籍社員全員
-        //$users = $this->users;
+        //$users =  User::orderBy('email')->where('authority', 1)->get();
         //メール本文に内容を表示させる
+        //未公開中は管理者をメールアドレスにする
+        $authority = $request->auth;
+        $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}の件\n$info->title$info->body";
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
         }
-        $all_send_mail = $request->all_send_mail;
-        if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
+        if ($result && $this->my_url != "http://localhost" && $authority != "0") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
-
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
             }
@@ -174,14 +172,16 @@ class InfoController extends Controller
         }
         $result = $info->update($update);
         //未公開中は管理者をメールアドレスにする
-        $users =  User::orderBy('email')->where('authority', 1)->get();
+        $authority = $request->auth;
+        $users = User::where('authority', '<=', $authority)->get();
+        //$users =  User::orderBy('email')->where('authority', 1)->get();
         //メール本文に内容を表示させる
         if ($request->content_dis=="on") {
             $message = "{$info->title}の件\n$info->title$info->body";
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }
-        if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
+        if ($result && $this->my_url != "http://localhost" && $authority != "0") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));

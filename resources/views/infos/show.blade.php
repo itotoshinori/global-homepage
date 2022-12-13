@@ -25,8 +25,8 @@
 				<div class="content-body">
 					{!! nl2br($class_func->a_tag_change($info->body)) !!}<br />
 					@if (isset($info->link))
-						<p><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>
-						</p>
+						<div><a href={{ $info->link }} target="_blank">{{ $class_func->url_part($info->link) }}</a>
+						</div>
 					@endif
 					@if (isset($info->image))
 						<br />

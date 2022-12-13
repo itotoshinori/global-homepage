@@ -31,10 +31,29 @@
 										@php $i=$i+1 @endphp
 									@endforeach
 								</select>
+								<label for="mail_send">通知メール</label><br />
+								<div class="form-check form-check-inline">
+									<input type="radio" name="auth" class="form-check-input" id="auth1" value="3"
+										{{ old('auth') == '3' ? 'checked' : '' }}>
+									<label for="auth1" class="form-check-label">在籍者全員</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input type="radio" name="auth" class="form-check-input" id="auth2" value="2"
+										{{ old('auth') == '2' ? 'checked' : '' }}>
+									<label for="auth2" class="form-check-label">正社員のみ</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input type="radio" name="auth" class="form-check-input" id="auth3" value="1"
+										{{ old('auth') == '1' ? 'checked' : '' }} checked>
+									<label for="auth3" class="form-check-label">管理者のみ</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input type="radio" name="auth" class="form-check-input" id="auth3" value="0"
+										{{ old('auth') == '0' ? 'checked' : '' }}>
+									<label for="auth3" class="form-check-label">送付しない</label>
+								</div><br />
 								<input type="checkbox" name="content_dis">
-								<label for="content_dis">メールに本文を表示させる</label><br />
-								<input type="checkbox" name="all_send_mail" checked>
-								<label for="all_send_mail">社員全員に通知メールを送る</label><br /><br />
+								<label for="content_dis">メールに本文を表示させる</label><br /><br />
 							</div>
 							<button type="submit" class="btn btn-primary">投稿する</button>
 						</form>

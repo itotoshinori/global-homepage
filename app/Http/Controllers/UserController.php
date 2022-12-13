@@ -37,7 +37,7 @@ class UserController extends Controller
             'registration' => $request->registration
         ];
         $message = "";
-        if ($request->registration == "on") {
+        if ($request->authority <= 3) {
             $update['registration'] = true;
         } else {
             $update['registration'] = false;
@@ -46,7 +46,7 @@ class UserController extends Controller
             $update['email'] = $this->class_func->retire_mail()."@global-software.co.jp";
             $message = "退職者のメールアドレスはログインできぬようランダム文字に設定しました。";
         }
-        $result=$user->update($update);
+        $result = $user->update($update);
         if ($result) {
             $status= "success";
             $message = "ユーザー情報を更新しました。".$message;

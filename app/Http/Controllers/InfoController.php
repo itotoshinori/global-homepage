@@ -44,7 +44,7 @@ class InfoController extends Controller
             $users = $this->users;
         }
         $user_count = count($users);
-        $authorities = array("管理者","一般","契約");
+        $authorities = array("管理者","一般","契約","退職");
         return view('infos.index', [
             'users' => $users,
             'infos' => $infos,

@@ -32,14 +32,6 @@
 					@endif
 					<div class="has-text-weight-bold">備考(ご自由にお使い下さい):</div>
 					<input class="form-control" type="text" name="note" value="{{ $user->note }}">
-					@if ($authority_user)
-						@if ($user->registration)
-							<input type="checkbox" name="registration" checked="checked">
-						@else
-							<input type="checkbox" name="registration">
-						@endif
-						<label for="registration">在籍者（退職者はチェックを外して下さい）</label>
-					@endif
 					<br /><br />
 				</div>
 				<div class="modal-footer">

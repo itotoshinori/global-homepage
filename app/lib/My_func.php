@@ -121,17 +121,4 @@ class My_func
         $text = preg_replace($pattern, $replace, $text);
         return($text);
     }
-    //メールのあて先リスト作成メソッド
-    public function make_to_addresses($users)
-    {
-        $user_mails = null;
-        foreach ($users as $user) {
-            if (isset($user_mails)) {
-                $user_mails = $user_mails.",".$user->email;
-            } else {
-                $user_mails = $user->email;
-            }
-        }
-        return $user_mails;
-    }
 }

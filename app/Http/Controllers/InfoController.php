@@ -96,13 +96,13 @@ class InfoController extends Controller
         $users =  User::orderBy('email')->where('authority', 1)->get();
         //最終は在籍社員全員
         //$users = $this->users;
-        //あて先リスト作成
-        $user_mails = $this->class_func->make_to_addresses($users);
         $all_send_mail = $request->all_send_mail;
         if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
-            Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
+            foreach ($users as $user) {
+                Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
+            }
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)
@@ -169,14 +169,13 @@ class InfoController extends Controller
         $result = $info->update($update);
         //未公開中は管理者をメールアドレスにする
         $users =  User::orderBy('email')->where('authority', 1)->get();
-        //最終は在籍社員全員
-        //$users = $this->users;
-        //あて先リスト作成
-        $user_mails = $this->class_func->make_to_addresses($users);
+
         if ($result && $this->my_url != "http://localhost" && $request->all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
-            Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
+            foreach ($users as $user) {
+                Mail::to($user->email)->send(new Admin("社員各位", $message, $my_url));
+            }
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)
@@ -224,17 +223,14 @@ class InfoController extends Controller
         $user_mails = "";
         //管理者をメールアドレスにする
         $users =  User::orderBy('email')->where('authority', 1)->get();
-        $user_mails = $this->class_func->make_to_addresses($users);
-        //投稿者が管理者でなければをメールアドレスに追加する
-        if ($current_user->authority != 1) {
-            $user_mails = $user_mails.",".$info->user->email;
-        }
-        $introduce = "社内ホームページ「{$info->title}」にメッセージがありました\n投稿者：{$current_user->name}\nアドレス：{$current_user->email}";
+        $introduce = "管理者各位\n社内ホームページ「{$info->title}」にメッセージがありました\n投稿者：{$current_user->name}　殿\nアドレス：{$current_user->email}";
         $introduce_tosender = "{$current_user->name} 様\n下記にてメールを送信しましたので返信をお待ち下さい";
         $message = $request->message;
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
         if ($this->my_url != "http://localhost") {
-            Mail::to($user_mails)->send(new Admin($introduce, $message, $my_url));
+            foreach ($users as $user) {
+                Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
+            }
             //送信者の送信控え
             if ($current_user->authority != 1) {
                 Mail::to($current_user->email)->send(new Admin($introduce_tosender, $message, $my_url));

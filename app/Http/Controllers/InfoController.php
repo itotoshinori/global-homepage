@@ -88,33 +88,21 @@ class InfoController extends Controller
             $original_file_name = $request->file("image")->getClientOriginalName();
             $create['image_file_name'] = $original_file_name;
         }
-        //あて先リスト作成
-        $user_mails = "";
+        $curret_user = Auth::user();
+        $create['user_id'] = $curret_user->id;
+        $result = Info::create($create);
+        $info = Info::latest('id')->first();//メール送信用のために新規登録のid取得
         //未公開中は管理者をメールアドレスにする
         $users =  User::orderBy('email')->where('authority', 1)->get();
         //最終は在籍社員全員
         //$users = $this->users;
-        foreach ($users as $user) {
-            if (isset($user_emails)) {
-                $user_mails = $user_mails.",".$user->email;
-            } else {
-                $user_mails = $user->email;
-            }
-        }
+        //あて先リスト作成
+        $user_mails = $this->class_func->make_to_addresses($users);
         $all_send_mail = $request->all_send_mail;
-        $curret_user = Auth::user();
-        $create['user_id'] = $curret_user->id;
-        $result = Info::create($create);
-        $info = Info::latest('id')->first();
         if ($result && $this->my_url != "http://localhost" && $all_send_mail == "on") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が\n社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
-            //foreach ($this->users as $user) {
-            //Mail::to($user->to_email)->send(new Admin("社員各位", $message, $my_url));
-            //}
-            //メールテスト用に残す。テスト時コメントアウト
             Mail::to($user_mails)->send(new Admin("社員各位", $message, $my_url));
-            //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)

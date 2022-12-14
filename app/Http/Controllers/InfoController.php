@@ -252,7 +252,7 @@ class InfoController extends Controller
                 Mail::to($current_user->email)->send(new Admin($introduce_tosender, $message, $my_url));
             }
         }
-        return redirect()->route('infos.index')
+        return redirect()->route('infos.show', $info->id)
                             ->with('success', "{$info->title}に関してコメントをメール送信しました");
     }
 }

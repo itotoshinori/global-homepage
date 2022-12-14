@@ -74,6 +74,16 @@
 	.contact-form {
 		display: none;
 	}
+
+	.content-body {
+		font-size: 15px;
+	}
+
+	@media screen and (min-width: 480px) {
+		.content-body {
+			font-size: 18px;
+		}
+	}
 </style>
 <script>
 	$('#contact-dis').on('click', function() {

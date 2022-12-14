@@ -51,7 +51,9 @@ class RegisteredUserController extends Controller
             if ($result && $my_url != "http://localhost") {
                 $users_url = "${my_url}/users";
                 $message = $request->name."さんの新規ユーザー登録がありました。ご確認ください。";
-                $send_users = User::all();
+                //$send_users = User::all();
+                //テスト段階で伊藤にだけメールが行くようにする
+                $send_users = User::where("id", 1)->get();
                 foreach ($send_users as $send_user) {
                     Mail::to($send_user->email)->send(new Admin(null, $message, $users_url));
                 }

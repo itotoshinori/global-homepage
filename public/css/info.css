@@ -10,10 +10,6 @@
     margin-bottom: 100px;
 }
 
-.content-body {
-    font-size: 15px;
-}
-
 .content-title {
     padding: 7px 15px;
     font-weight: bold;
@@ -23,10 +19,6 @@
     border-top: 1px #cccacb solid;
     border-right: 1px #cccacb solid;
     border-radius: 5px;
-}
-
-.content-body {
-    padding: 10px;
 }
 
 .main-title {
@@ -86,10 +78,6 @@
     margin-bottom: 200px;
 }
 @media screen and (min-width: 480px) {
-    .content-body {
-        font-size: 20px;
-    }
-
     .content-main {
         font-size: 20px;
     }
@@ -135,10 +123,6 @@
 
     .content-title {
         font-size: 20px;
-    }
-
-    .content-body {
-        font-size: 18px;
     }
 
     .info_dis {

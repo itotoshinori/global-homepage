@@ -82,7 +82,7 @@
 
 	@media screen and (min-width: 480px) {
 		.content-body {
-			font-size: 18px;
+			font-size: 16px;
 		}
 	}
 </style>

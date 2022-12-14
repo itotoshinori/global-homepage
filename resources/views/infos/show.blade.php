@@ -76,7 +76,8 @@
 	}
 
 	.content-body {
-		font-size: 15px;
+		font-size: 16px;
+		padding: 10px;
 	}
 
 	@media screen and (min-width: 480px) {

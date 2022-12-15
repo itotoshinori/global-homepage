@@ -78,6 +78,7 @@ class My_func
         $articles = Article::oldest()->get()->where('category', 0);
         return $articles;
     }
+
     public function info_menus()
     {
         $menus = Info::oldest()->get()->where('category', 2);

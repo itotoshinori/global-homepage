@@ -75,7 +75,7 @@
 	.side-content {
 		list-style: none;
 		font-size: 15px;
-		margin-top: 10px;
+		margin-top: 5px;
 		padding-right: 2px;
 		white-space: nowrap;
 	}
@@ -114,7 +114,7 @@
 			padding: 0 0 0 4px;
 			list-style: none;
 			font-size: 20px;
-			margin-bottom: 10px;
+			margin-bottom: 5px;
 			display: block;
 		}
 	}

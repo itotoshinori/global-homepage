@@ -89,9 +89,14 @@ class My_func
         $links = Info::oldest()->get()->where('category', 3);
         return $links;
     }
+    public function info_bases()
+    {
+        $bases = Info::oldest()->get()->where('category', 4);
+        return $bases;
+    }
     public function info_managements()
     {
-        $managements = Info::oldest()->get()->where('category', 4);
+        $managements = Info::oldest()->get()->where('category', 5);
         return $managements;
     }
     public function retire_mail()

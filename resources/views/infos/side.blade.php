@@ -4,6 +4,7 @@
 	$class_func = new My_func();
 	$menus = $class_func->info_menus();
 	$links = $class_func->info_links();
+	$bases = $class_func->info_bases();
 	$managements = $class_func->info_managements();
 @endphp
 
@@ -26,6 +27,16 @@
 				<span class="side-content"><a href={{ $link->link }}>{{ $link->title }}</a></span>
 			@else
 				<span class="side-content"><a href="{{ route('infos.show', $link->id) }}">{{ $link->title }}</a></span>
+			@endif
+		@endforeach
+	</div>
+	<div class="side">
+		<div class="side-title">各種原紙</div>
+		@foreach ($bases as $base)
+			@if ($base->link)
+				<span class="side-content"><a href={{ $base->link }}>{{ $base->title }}</a></span>
+			@else
+				<span class="side-content"><a href="{{ route('infos.show', $base->id) }}">{{ $base->title }}</a></span>
 			@endif
 		@endforeach
 	</div>

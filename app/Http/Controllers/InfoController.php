@@ -22,7 +22,7 @@ class InfoController extends Controller
         $this->my_url = $my_url;
         $this->to_email = "tnitoh@global-software.co.jp";
         $this->users =  User::orderBy('email')->where('registration', true)->get();
-        $this->categories = array("お知らせ", "メニュー",  "リンク", "管理者メニュー","トップにリンクなし");
+        $this->categories = array("お知らせ", "メニュー",  "リンク", "各種原紙","管理者メニュー","トップにリンクなし");
         $this->send_users = array("送付なし","管理者","正社員","在籍者");
     }
     /**

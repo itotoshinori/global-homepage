@@ -102,7 +102,7 @@ class InfoController extends Controller
         $send_user = $this->send_users[$authority];
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
-            $message = "{$info->title}の件\n$info->title$info->body";
+            $message = "{$info->title}\n$info->body";
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
         }

@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
             $result = event(new Registered($user));
             $my_url = config('my-url.url');
             if ($result && $my_url != "http://localhost") {
-                $users_url = "${my_url}/users";
+                $users_url = "${my_url}/internal/infos";
                 $message = $request->name."さんの新規ユーザー登録がありました。ご確認ください。";
                 //$send_users = User::all();
                 //テスト段階で伊藤にだけメールが行くようにする

@@ -28,7 +28,7 @@ class Admin extends Mailable
      */
     public function build()
     {
-        return $this->from('tnitoh@global-software.co.jp')
+        return $this->from('info@global-software.co.jp')
                     ->subject("グローバルホームページからのお知らせ")
                     ->view('mails.admin')
                     ->with([

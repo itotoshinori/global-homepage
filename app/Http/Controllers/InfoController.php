@@ -100,7 +100,7 @@ class InfoController extends Controller
         //メール本文に内容を表示させる
         $authority = $request->auth;
         $send_user = $this->send_users[$authority];
-        $send_user = "$send_user.\n{$curret_user->name} 殿";
+        $send_user = "{$send_user}　各位\n{$curret_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n$info->body";
@@ -115,7 +115,7 @@ class InfoController extends Controller
         if ($result && $this->my_url != "http://localhost" && $authority != "0") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin("{$send_user}　各位", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
         }
         if ($result) {
@@ -185,7 +185,7 @@ class InfoController extends Controller
         $authority = $request->auth;
         $curret_user = Auth::user();
         $send_user = $this->send_users[$authority];
-        $send_user = $send_user."\n{$curret_user->name} 殿";
+        $send_user = "{$send_user} 各位\n{$curret_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n{$info->body}";
@@ -200,7 +200,7 @@ class InfoController extends Controller
         if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin("{$send_user}　各位", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
         }
         if ($result) {

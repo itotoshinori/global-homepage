@@ -188,7 +188,7 @@ class InfoController extends Controller
         $send_user = "\n{$curret_user} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
-            $message = "{$info->title}\n$info->title$info->body";
+            $message = "{$info->title}\n{$info->body}";
             //後で消す
             $message = $message."\nログイン情報";
             $message = $message."\nEmail:globalEmail";

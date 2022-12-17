@@ -38,9 +38,9 @@
 								onclick="return confirm('本当にダウンロードしますか?')">{{ $info->image_file_name }}</button>
 						</form>
 					@endif
-					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div><br />
+					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
 					<div>
-						<div style="margin-bottom:10px;">
+						<div style="margin: 5px 0 10px 0;">
 							<button onclick="location.href='/internal/infos'" class="btn btn-success" style="width:100px;">トップへ</button>
 							<button onclick="javascript:history.back()" class="btn btn-info" style="width:100px;">前に戻る</button>
 							<button class="btn btn-warning" id="contact-dis" style="width:100px;">お問合せ</button>

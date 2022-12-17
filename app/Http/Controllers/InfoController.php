@@ -103,6 +103,9 @@ class InfoController extends Controller
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n$info->body";
+            $message = $message."\nログイン情報";
+            $message = $message."\nEmail:globalEmail";
+            $message = $message."\nパスワード:{$curret_user->note}";
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
         }

@@ -195,8 +195,7 @@ class InfoController extends Controller
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }
-        if ($result &&  $authority != "0" && $result) {
-            #if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
+        if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 if ($request->content_dis=="on") {

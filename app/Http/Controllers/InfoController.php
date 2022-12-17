@@ -112,12 +112,8 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 //後で消す
                 if ($request->content_dis=="on") {
-                    $message = $message."\n\nログイン情報";
-                    $message = $message."\nEmail:{$user->email}";
-                    $message = $message."\nパスワード:{$user->note}";
-                    $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+                    $message = $this->start_user($message, $user->email, $user->note);
                 }
-            //
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
         }

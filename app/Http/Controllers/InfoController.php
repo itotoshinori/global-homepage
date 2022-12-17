@@ -111,12 +111,12 @@ class InfoController extends Controller
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 //後で消す
-                if ($request->content_dis=="on") {
-                    $message = $message."\n\nログイン情報";
-                    $message = $message."\nEmail:{$user->email}";
-                    $message = $message."\nパスワード:{$user->note}";
-                    $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
-                }
+                //if ($request->content_dis=="on") {
+                //$message = $message."\n\nログイン情報";
+                //$message = $message."\nEmail:{$user->email}";
+                //$message = $message."\nパスワード:{$user->note}";
+                //$message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+                //}
             //
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
@@ -199,12 +199,11 @@ class InfoController extends Controller
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 if ($request->content_dis=="on") {
-                    $message = "{$info->title}\n{$info->body}";
                     //後で消す
-                    $message = $message."\n\nログイン情報";
-                    $message = $message."\nEmail:{$user->email}";
-                    $message = $message."\nパスワード:{$user->note}";
-                    $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+                    //$message = $message."\n\nログイン情報";
+                    //$message = $message."\nEmail:{$user->email}";
+                    //$message = $message."\nパスワード:{$user->note}";
+                    //$message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
                     //
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));

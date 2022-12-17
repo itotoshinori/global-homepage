@@ -112,8 +112,12 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 //後で消す
                 if ($request->content_dis=="on") {
-                    $message = $this->start_message($message, $user->email, $user->note);
+                    $message = $message."\n\nログイン情報";
+                    $message = $message."\nEmail:{$user->email}";
+                    $message = $message."\nパスワード:{$user->note}";
+                    $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
                 }
+            //
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
         }
@@ -191,14 +195,21 @@ class InfoController extends Controller
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }
-        if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
+        if ($result &&  $authority != "0" && $result) {
+            #if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 if ($request->content_dis=="on") {
-                    $message = $this->start_message($message, $user->email, $user->note);
+                    //後で消す
+                    $message = $message."\n\nログイン情報";
+                    $message = $message."\nEmail:{$user->email}";
+                    $message = $message."\nパスワード:{$user->note}";
+                    $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+                    //
                 }
-                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
+                //Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
+            dd($message);
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)
@@ -264,14 +275,5 @@ class InfoController extends Controller
         }
         return redirect()->route('infos.show', $info->id)
                             ->with('success', "{$info->title}に関してコメントをメール送信しました");
-    }
-    public function start_message(String $message, String $email, String $note)
-    {
-        //後で消す
-        $message = $message."\n\nログイン情報";
-        $message = $message."\nEmail:{$email}";
-        $message = $message."\nパスワード:{$note}";
-        $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
-        return $message;
     }
 }

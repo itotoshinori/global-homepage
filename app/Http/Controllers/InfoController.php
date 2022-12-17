@@ -104,11 +104,11 @@ class InfoController extends Controller
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n$info->body";
-            //後で消す
-            $message = $message."\n\nログイン情報";
-            $message = $message."\nEmail:globalEmail";
-            $message = $message."\nパスワード:{$curret_user->note}";
-            $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+        //後で消す
+        //$message = $message."\n\nログイン情報";
+        //$message = $message."\nEmail:globalEmail";
+        //$message = $message."\nパスワード:{$curret_user->note}";
+        //$message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
             //
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
@@ -190,11 +190,11 @@ class InfoController extends Controller
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n{$info->body}";
-            //後で消す
-            $message = $message."\n\nログイン情報";
-            $message = $message."\nEmail:globalEmail";
-            $message = $message."\nパスワード:{$curret_user->note}";
-            $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+        //後で消す
+        //$message = $message."\n\nログイン情報";
+        //$message = $message."\nEmail:globalEmail";
+        //$message = $message."\nパスワード:{$curret_user->note}";
+        //$message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
             //
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";

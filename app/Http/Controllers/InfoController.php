@@ -100,14 +100,15 @@ class InfoController extends Controller
         //メール本文に内容を表示させる
         $authority = $request->auth;
         $send_user = $this->send_users[$authority];
+        $send_user = "\n{$curret_user} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
-            $message = $info->body;
+            $message = "{$info->title}\n$info->body";
             //後で消す
             $message = $message."\nログイン情報";
             $message = $message."\nEmail:globalEmail";
             $message = $message."\nパスワード:{$curret_user->note}";
-        //ここまで
+            //
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
         }
@@ -182,12 +183,13 @@ class InfoController extends Controller
         $request->replay == "on" ? $update['replay'] = 2 : $update['replay'] = 1;
         $result = $info->update($update);
         $authority = $request->auth;
+        $curret_user = Auth::user();
         $send_user = $this->send_users[$authority];
+        $send_user = "\n{$curret_user} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
-            $message = $info->body;
+            $message = "{$info->title}\n$info->title$info->body";
             //後で消す
-            $curret_user = Auth::user();
             $message = $message."\nログイン情報";
             $message = $message."\nEmail:globalEmail";
             $message = $message."\nパスワード:{$curret_user->note}";

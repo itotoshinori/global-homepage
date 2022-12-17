@@ -149,7 +149,7 @@ class InfoController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     *bnm
      * @param  \App\Models\Info  $info
      * @return \Illuminate\Http\Response
      */
@@ -207,9 +207,8 @@ class InfoController extends Controller
                     $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
                     //
                 }
-                //Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
-            dd($message);
         }
         if ($result) {
             return redirect()->route('infos.show', $info->id)

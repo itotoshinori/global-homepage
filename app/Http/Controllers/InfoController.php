@@ -100,7 +100,7 @@ class InfoController extends Controller
         //メール本文に内容を表示させる
         $authority = $request->auth;
         $send_user = $this->send_users[$authority];
-        $send_user = "\n{$curret_user} 殿";
+        $send_user = "$send_user.\n{$curret_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n$info->body";
@@ -185,7 +185,7 @@ class InfoController extends Controller
         $authority = $request->auth;
         $curret_user = Auth::user();
         $send_user = $this->send_users[$authority];
-        $send_user = "\n{$curret_user} 殿";
+        $send_user = $send_user."\n{$curret_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n{$info->body}";

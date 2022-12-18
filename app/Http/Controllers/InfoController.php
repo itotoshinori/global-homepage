@@ -203,7 +203,6 @@ class InfoController extends Controller
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));
             }
         }
-        dd($message);
         if ($result) {
             return redirect()->route('infos.show', $info->id)
                             ->with('success', '更新しました');

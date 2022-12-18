@@ -111,8 +111,6 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 //後で消す
                 if ($request->content_dis=="on" && $curret_user->id == $user->id) {
-                    //後で消す
-                    $plus_message = "";
                     $plus_message = $this->start_user($user->email, $user->note);
                     $message = $message.$plus_message;
                 }
@@ -199,11 +197,13 @@ class InfoController extends Controller
                 if ($request->content_dis=="on") {
                     //後で消す
                     $plus_message = $this->start_user($user->email, $user->note);
+                    $message = $message.$plus_message;
                     //
                 }
-                Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
         }
+        dd($message);
         if ($result) {
             return redirect()->route('infos.show', $info->id)
                             ->with('success', '更新しました');

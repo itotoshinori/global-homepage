@@ -101,7 +101,7 @@ class InfoController extends Controller
         $send_user = $this->send_users[$authority];
         $send_user = "{$send_user}　各位\n{$curret_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
-        if ($request->content_dis=="on") {
+        if ($request->content_dis == "on") {
             $message = "{$info->title}\n$info->body";
         } else {
             $message = "「{$info->title}」\nの新規お知らせ情報の登録が社内ホームページにありました。\n下記URLをクリックしてご確認ください。";
@@ -110,8 +110,11 @@ class InfoController extends Controller
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
                 //後で消す
-                if ($request->content_dis=="on") {
-                    $message = $message.$this->start_user($message, $user->email, $user->note);
+                if ($request->content_dis=="on" && $curret_user->id == $user->id) {
+                    //後で消す
+                    $plus_message = "";
+                    $plus_message = $this->start_user($user->email, $user->note);
+                    $message = $message.$plus_message;
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
@@ -193,9 +196,11 @@ class InfoController extends Controller
         if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                if ($request->content_dis=="on") {
+                if ($request->content_dis=="on" && $curret_user->id == $user->id) {
                     //後で消す
-                    $message = $message.$this->start_user($user->email, $user->note);
+                    $plus_message = "";
+                    $plus_message = $this->start_user($user->email, $user->note);
+                    $message = $message.$plus_message;
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
@@ -267,7 +272,6 @@ class InfoController extends Controller
     }
     public function start_user($email, $note)
     {
-        $plus_message = "";
         $plus_message = "\n\nログイン情報\nEmail:{$email}\nパスワード:{$note}";
         $plus_message = $plus_message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
         $plus_message =$plus_message."\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";

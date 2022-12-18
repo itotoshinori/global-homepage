@@ -59,6 +59,10 @@
 							@csrf
 							@method('DELETE')
 							@if ($authority_user)
+								<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+									title={{ $info->reader }}>
+									閲覧数：{{ $reader_count }}
+								</button>
 								<a class="btn btn-secondary" href="{{ route('infos.edit', $info->id) }}" style="width:100px;">編集</a>
 								<button class="btn btn-danger" type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか?')"
 									style="width:100px;">削除</button>

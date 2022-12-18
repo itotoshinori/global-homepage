@@ -88,8 +88,8 @@ class InfoController extends Controller
             $original_file_name = $request->file("image")->getClientOriginalName();
             $create['image_file_name'] = $original_file_name;
         }
-        $curret_user = Auth::user();
-        $create['user_id'] = $curret_user->id;
+        $current_user = Auth::user();
+        $create['user_id'] = $current_user->id;
         if ($request->replay == "on") {
             $create['replay'] = 2;
         }
@@ -99,7 +99,7 @@ class InfoController extends Controller
         //メール本文に内容を表示させる
         $authority = $request->auth;
         $send_user = $this->send_users[$authority];
-        $send_user = "{$send_user}　各位\n{$curret_user->name} 殿";
+        $send_user = "{$send_user}　各位\n{$current_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis == "on") {
             $message = "{$info->title}\n$info->body";
@@ -136,10 +136,27 @@ class InfoController extends Controller
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $info = Info::find($id);
+        $current_user = Auth::user();
+        $reader =  $info->reader;
+        $name = $current_user->name;
+        $reader_count = 0;
+        if (str_contains($reader, $name) == false && is_null($reader)) {
+            $info->reader = $name;
+            $info->save();
+        } elseif (str_contains($reader, $name) == false) {
+            $info->reader = $reader.",".$name;
+            $info->save();
+        }
+        if (str_contains($info->reader, $name) == false && isset($info->reader)) {
+            $reader_count = 1;
+        } elseif (isset($info->reader)) {
+            $reader_count = substr_count($info->reader, ",") + 1;
+        }
         return view('infos.show', [
         'info' => $info,
         'class_func' => $this->class_func,
         'authority_user' => $authority_user,
+        'reader_count' => $reader_count
         ]);
     }
 
@@ -182,9 +199,9 @@ class InfoController extends Controller
         $request->replay == "on" ? $update['replay'] = 2 : $update['replay'] = 1;
         $result = $info->update($update);
         $authority = $request->auth;
-        $curret_user = Auth::user();
+        $current_user = Auth::user();
         $send_user = $this->send_users[$authority];
-        $send_user = "{$send_user} 各位\n{$curret_user->name} 殿";
+        $send_user = "{$send_user} 各位\n{$current_user->name} 殿";
         $users = User::where('authority', '<=', $authority)->get();
         if ($request->content_dis=="on") {
             $message = "{$info->title}\n{$info->body}";

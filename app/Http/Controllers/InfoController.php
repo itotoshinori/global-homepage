@@ -267,6 +267,7 @@ class InfoController extends Controller
     }
     public function start_user($email, $note)
     {
+        $plus_message = "";
         $plus_message = "\n\nログイン情報\nEmail:{$email}\nパスワード:{$note}";
         $plus_message = $plus_message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
         $plus_message =$plus_message."\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";

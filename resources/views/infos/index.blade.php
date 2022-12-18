@@ -120,7 +120,9 @@
 													<input name="new_password" type="password" class="form-control">
 													<label>変更パスワードの確認</label>
 													<input name="new_password_confirm" type="password" class="form-control"><br />
-													<button type="submit" class="btn btn-primary">登録</button>
+													<div style="text-align: right;">
+														<button type="submit" class="btn btn-primary">変更</button>
+													</div>
 												</div>
 											</form>
 										</div>

@@ -111,7 +111,7 @@ class InfoController extends Controller
             $plus_message = "";
             foreach ($users as $user) {
                 //後で消す
-                if ($request->content_dis=="on" && $curret_user->id == $user->id) {
+                if ($request->content_dis=="on") {
                     $plus_message = $this->start_user($user->email, $user->note);
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));

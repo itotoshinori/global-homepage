@@ -273,7 +273,7 @@ class InfoController extends Controller
         $plus_message1 = "\n\nログイン情報\nEmail:{$email}\n初期パスワード:{$note}";
         $plus_message2 = "\n社内ホームページ\nhttps://global-software.jp/internal/infos";
         $plus_message3 = "\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";
-        $plus_message4 = "\n※初期パスワードは必ずパスワードは変更して下さい";
+        $plus_message4 = "\n※初期パスワードは必ず変更して下さい";
         return $plus_message1.$plus_message2.$plus_message3.$plus_message4;
     }
 }

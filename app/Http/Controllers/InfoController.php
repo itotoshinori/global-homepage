@@ -44,12 +44,14 @@ class InfoController extends Controller
             $users = $this->users;
         }
         $user_count = count($users);
+        $current_user = Auth::user();
         $authorities = array("管理者","一般","契約","退職");
         return view('infos.index', [
             'users' => $users,
             'infos' => $infos,
             'authorities'=> $authorities,
             'user_count' => $user_count,
+            'current_user' => $current_user,
             'authority_user' => $authority_user,
             'class_func' => $this->class_func
         ]);

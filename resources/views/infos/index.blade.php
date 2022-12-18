@@ -100,6 +100,35 @@
 							</tr>
 						@endforeach
 					</table>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">パスワード変更</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md">
+											<form method="POST" action="{{ route('users.pw_change', $current_user->id) }}"
+												enctype="multipart/form-data">
+												@csrf
+												@method('POST')
+												<div class="form-group">
+													<label>変更パスワード（８文字以上）</label>
+													<input name="new_password" type="password" class="form-control">
+													<label>変更パスワードの確認</label>
+													<input name="new_password_confirm" type="password" class="form-control"><br />
+													<button type="submit" class="btn btn-primary">登録</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="footer"></div>

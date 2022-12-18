@@ -31,6 +31,7 @@ Route::resource('/', ArticleController::class)->only(['index']);
 Route::resource('articles', ArticleController::class)->only(['index','show','create','edit']);
 Route::resource('articles', ArticleController::class)->except(['index','show'])->middleware('auth');
 Route::resource('/users', UserController::class)->only(['index','update','destroy'])->middleware('auth');
+Route::post('/users/pw_change/{id}', [UserController::class,'pw_change'])->name('users.pw_change')->middleware('auth');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -63,4 +63,19 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success', "削除しました。");
     }
+    public function pw_change(Request $request, int $id)
+    {
+        $new_password = $request->new_password;
+        $new_password_confirm = $request->new_password_confirm;
+        if (strlen($new_password) >= 8 && $new_password == $new_password_confirm) {
+            $user = User::find($id);
+            $user->password = bcrypt($new_password);
+            $user->save();
+            return redirect()->route('infos.index')
+                                ->with('success', "パスワードの変更に成功しました。");
+        } else {
+            return redirect()->route('infos.index')
+                                ->with('danger', "文字数の不足か変更パスワードと変更パスワード確認の不一致で変更に失敗しました。再度実施して下さい。");
+        }
+    }
 }

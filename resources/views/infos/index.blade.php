@@ -117,9 +117,9 @@
 												@method('POST')
 												<div class="form-group">
 													<label>変更パスワード（８文字以上）</label>
-													<input name="new_password" type="password" class="form-control">
+													<input name="new_password" type="password" class="form-control" required>
 													<label>変更パスワードの確認</label>
-													<input name="new_password_confirm" type="password" class="form-control"><br />
+													<input name="new_password_confirm" type="password" class="form-control" required><br />
 													<div style="text-align: right;">
 														<button type="submit" class="btn btn-primary">変更</button>
 													</div>

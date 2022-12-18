@@ -271,7 +271,6 @@ class InfoController extends Controller
         $message = $message."\nEmail:{$email}";
         $message = $message."\nパスワード:{$note}";
         $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
-        $message = $message."\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";
         return $message;
     }
 }

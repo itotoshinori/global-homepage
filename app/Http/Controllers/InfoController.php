@@ -193,16 +193,15 @@ class InfoController extends Controller
         } else {
             $message = "「{$info->title}」\nのお知らせ情報の更新がありました。\n下記URLをクリックしてご確認ください。";
         }
-        if ($result && $this->my_url != "http://localhost" && $authority != "0" && $result) {
+        if ($result && $this->my_url != "http://localhost" && $authority != "0") {
             $my_url = $this->my_url."/internal/infos/".$info->id;
             foreach ($users as $user) {
-                if ($request->content_dis=="on" && $curret_user->id == $user->id) {
+                if ($request->content_dis=="on") {
                     //後で消す
-                    $plus_message = "";
                     $plus_message = $this->start_user($user->email, $user->note);
-                    $message = $message.$plus_message;
+                    //
                 }
-                Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
+                Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));
             }
         }
         if ($result) {
@@ -272,9 +271,9 @@ class InfoController extends Controller
     }
     public function start_user($email, $note)
     {
-        $plus_message = "\n\nログイン情報\nEmail:{$email}\nパスワード:{$note}";
-        $plus_message = $plus_message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
-        $plus_message =$plus_message."\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";
-        return $plus_message;
+        $plus_message1 = "\n\nログイン情報\nEmail:{$email}\nパスワード:{$note}";
+        $plus_message2 = "\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+        $plus_message3 = "\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";
+        return $plus_message1.$plus_message2.$plus_message3;
     }
 }

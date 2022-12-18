@@ -195,7 +195,7 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 if ($request->content_dis=="on") {
                     //後で消す
-                    $message = $this->start_user($message, $user->email, $user->note);
+                    $message = $message.$this->start_user($user->email, $user->note);
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message, $my_url));
             }
@@ -265,12 +265,11 @@ class InfoController extends Controller
         return redirect()->route('infos.show', $info->id)
                             ->with('success', "{$info->title}に関してコメントをメール送信しました");
     }
-    public function start_user($message, $email, $note)
+    public function start_user($email, $note)
     {
-        $message = $message."\n\nログイン情報";
-        $message = $message."\nEmail:{$email}";
-        $message = $message."\nパスワード:{$note}";
-        $message = $message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
-        return $message;
+        $plus_message = "\n\nログイン情報\nEmail:{$email}\nパスワード:{$note}";
+        $plus_message = $plus_message."\n社内ホームページ\nhttps://global-software.jp/internal/infos";
+        $plus_message =$plus_message."\nログインできない場合はログイン画面の Forgot your password? をクリックしてパスワードを変更して下さい";
+        return $plus_message;
     }
 }

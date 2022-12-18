@@ -112,7 +112,7 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 //後で消す
                 if ($request->content_dis=="on") {
-                    $plus_message = $this->start_user($user->email, $user->note);
+                    //$plus_message = $this->start_user($user->email, $user->note);
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));
             }
@@ -214,7 +214,7 @@ class InfoController extends Controller
             foreach ($users as $user) {
                 if ($request->content_dis == "on") {
                     //後で消す
-                    $plus_message = $this->start_user($user->email, $user->note);
+                    //$plus_message = $this->start_user($user->email, $user->note);
                     //
                 }
                 Mail::to($user->email)->send(new Admin("{$send_user}", $message.$plus_message, $my_url));

@@ -14,14 +14,14 @@
 	</header>
 
 	<body>
+		@if ($message = Session::get('success'))
+			<p class="alert alert-success">
+				{{ $message }}</p>
+		@endif
+		@if ($message = Session::get('danger'))
+			<p class="alert alert-danger mt-2">{{ $message }}</p>
+		@endif
 		<div class="wrapper-1">
-			@if ($message = Session::get('success'))
-				<p class="alert alert-success">
-					{{ $message }}</p>
-			@endif
-			@if ($message = Session::get('danger'))
-				<p class="alert alert-danger mt-2">{{ $message }}</p>
-			@endif
 			@include('infos.title')
 			@include('infos.side')
 			<div id="content">
@@ -83,57 +83,62 @@
 									</userlist>
 								</td>
 								<td>
-									<div class="name_text" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $user->id }}">
-										@if ($authority_user && $user->authority == 1)
-											<span class="text-warning">管</span>
-										@endif
-										@if ($user->registration == false)
-											<span class="text-danger">退</span>
-										@endif
-										{{ $user->name }}
-									</div>
-								</td>
-								<td>
-									<span id="email{{ $i }}" class="email_dis">{{ $user->email }}</span>
-								</td>
-								<div>
-									<!-- Modal -->
-									@include('infos.user_modal')
-								</div>
-							</tr>
-						@endforeach
-					</table>
+									@if ($authority_user)
+										<div class="name_text" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $user->id }}">
+										@else
+											<div>
+									@endif
+									@if ($authority_user && $user->authority == 1)
+										<span class="text-warning">管</span>
+									@endif
+									@if ($user->registration == false)
+										<span class="text-danger">退</span>
+									@endif
+									{{ $user->name }}
+				</div>
+				</td>
+				<td>
+					<span id="email{{ $i }}" class="email_dis">{{ $user->email }}</span>
+				</td>
+				<div>
 					<!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">パスワードを変更</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<div>
-										<form method="POST" action="{{ route('users.pw_change', $current_user->id) }}" enctype="multipart/form-data">
-											@csrf
-											@method('POST')
-											<div class="form-group">
-												<label>変更パスワード（８文字以上）</label>
-												<input id="new_password" name="new_password" type="password" class="form-control" required>
-												<label>変更パスワードの確認</label>
-												<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control" required>
-												<div style="text-align: right;">
-													<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
-												</div>
+					@include('infos.user_modal')
+				</div>
+				</tr>
+				@endforeach
+				</table>
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">パスワードを変更</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div>
+									<form method="POST" action="{{ route('users.pw_change', $current_user->id) }}" enctype="multipart/form-data">
+										@csrf
+										@method('POST')
+										<div class="form-group">
+											<label>変更パスワード（８文字以上）</label>
+											<input id="new_password" name="new_password" type="password" class="form-control" required>
+											<label>変更パスワードの確認</label>
+											<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control"
+												required><br />
+											<div style="text-align: right;">
+												<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
 											</div>
-										</form>
-									</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="footer"></div>
+		</div>
+		<div id="footer"></div>
 		</div>
 	</body>
 @endauth

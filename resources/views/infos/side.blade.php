@@ -19,10 +19,6 @@
 				<span class="side-content"><a href="{{ route('infos.show', $menu->id) }}">{{ $menu->title }}</a></span>
 			@endif
 		@endforeach
-		<span class="side-content" style="color:rgba(69, 69, 242, 0.953)" class="btn btn-link" data-bs-toggle="modal"
-			data-bs-target="#exampleModal">
-			パスワード変更
-		</span>
 	</div>
 	<div class="side-title">リンク</div>
 	<div class="side">

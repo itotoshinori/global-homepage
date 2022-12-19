@@ -29,7 +29,7 @@
 					<div class="content-title">
 						<span style="margin-right:20px;">お知らせ</span>
 						@if ($authority_user)
-							<a href="/internal/infos?alldis=1">サイドを含め全表示</a>
+							<a href="/internal/infos?alldis=1" class="sub_menu">サイドを含め全表示</a>
 						@endif
 					</div>
 					<div class="content-main">
@@ -50,8 +50,11 @@
 					<div class="content-title">
 						<span style="margin-right:20px;">社員一覧</span>
 						@if ($authority_user)
-							<a href="/internal/infos?alluserdis=1">退職者も含め全表示</a>
+							<a href="/internal/infos?alluserdis=1" class="sub_menu">全表示</a>
 						@endif
+						<span class="sub_menu" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							パスワードを変更
+						</span>
 					</div>
 					<label for="address" class="mail_form_label">メール送信用フォーム</label>
 					<input class="form-control iputAddress" type="text" value="" id="emailList" readonly />
@@ -105,7 +108,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">パスワード変更</h5>
+									<h5 class="modal-title" id="exampleModalLabel">パスワードを変更</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
@@ -117,11 +120,12 @@
 												@method('POST')
 												<div class="form-group">
 													<label>変更パスワード（８文字以上）</label>
-													<input name="new_password" type="password" class="form-control" required>
+													<input id="new_password" name="new_password" type="password" class="form-control" required>
 													<label>変更パスワードの確認</label>
-													<input name="new_password_confirm" type="password" class="form-control" required><br />
+													<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control"
+														required><br />
 													<div style="text-align: right;">
-														<button type="submit" class="btn btn-primary">変更</button>
+														<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
 													</div>
 												</div>
 											</form>
@@ -137,6 +141,14 @@
 		</div>
 	</body>
 @endauth
+<style>
+	.sub_menu {
+		color: white;
+		text-decoration: none;
+		margin-left: 5px;
+		font-size: 12px;
+	}
+</style>
 <script>
 	$(function() {
 		$("userList").click(function() {
@@ -189,4 +201,17 @@
 		$("#emailList").val(emailList);
 		$("#mail_address a").attr("href", "mailto:" + emailList);
 	}
+	$(function() {
+		$("#pw_change").click(function() {
+			var new_password = $('#new_password').val();
+			var new_password_confirm = $('#new_password_confirm').val();
+			if (new_password.length <= 8) {
+				alert("8文字以上にして下さい")
+				return false
+			} else if (new_password != new_password_confirm) {
+				alert("変更パスワードと変更パスワードの確認が異なります")
+				return false
+			}
+		});
+	});
 </script>

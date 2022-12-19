@@ -205,7 +205,7 @@
 		$("#pw_change").click(function() {
 			var new_password = $('#new_password').val();
 			var new_password_confirm = $('#new_password_confirm').val();
-			if (new_password.length <= 8) {
+			if (new_password.length <= 8 && new_password.length >= 1) {
 				alert("8文字以上にして下さい")
 				return false
 			} else if (new_password != new_password_confirm) {

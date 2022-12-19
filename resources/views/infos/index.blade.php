@@ -14,14 +14,14 @@
 	</header>
 
 	<body>
-		@if ($message = Session::get('success'))
-			<p class="alert alert-success">
-				{{ $message }}</p>
-		@endif
-		@if ($message = Session::get('danger'))
-			<p class="alert alert-danger mt-2">{{ $message }}</p>
-		@endif
 		<div class="wrapper-1">
+			@if ($message = Session::get('success'))
+				<p class="alert alert-success">
+					{{ $message }}</p>
+			@endif
+			@if ($message = Session::get('danger'))
+				<p class="alert alert-danger mt-2">{{ $message }}</p>
+			@endif
 			@include('infos.title')
 			@include('infos.side')
 			<div id="content">

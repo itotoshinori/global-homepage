@@ -138,6 +138,10 @@ class InfoController extends Controller
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $info = Info::find($id);
+        if ($info == null) {
+            return redirect()->route('infos.index')
+                            ->with('danger', '該当のページは存在しません。削除された可能性があります。');
+        }
         $current_user = Auth::user();
         $reader =  $info->reader;
         $name = $current_user->name;

@@ -124,9 +124,8 @@
 											<label>変更パスワード（８文字以上）</label>
 											<input id="new_password" name="new_password" type="password" class="form-control" required>
 											<label>変更パスワードの確認</label>
-											<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control"
-												required><br />
-											<div style="text-align: right;">
+											<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control" required>
+											<div style="text-align: right; margin-top:10px;">
 												<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
 											</div>
 										</div>

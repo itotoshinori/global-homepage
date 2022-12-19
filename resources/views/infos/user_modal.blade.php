@@ -8,7 +8,7 @@
 				</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form class="column is-8 is-offset-2" action="{{ route('users.update', $user->id) }}" method="POST">
+			<form class="modal fade" action="{{ route('users.update', $user->id) }}" method="POST">
 				@csrf
 				@method('PUT')
 				<div class="modal-body">
@@ -32,7 +32,6 @@
 					@endif
 					<div class="has-text-weight-bold">備考(ご自由にお使い下さい):</div>
 					<input class="form-control" type="text" name="note" value="{{ $user->note }}">
-					<br /><br />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

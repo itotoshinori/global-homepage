@@ -112,24 +112,20 @@
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<div class="row">
-										<div class="col-md">
-											<form method="POST" action="{{ route('users.pw_change', $current_user->id) }}"
-												enctype="multipart/form-data">
-												@csrf
-												@method('POST')
-												<div class="form-group">
-													<label>変更パスワード（８文字以上）</label>
-													<input id="new_password" name="new_password" type="password" class="form-control" required>
-													<label>変更パスワードの確認</label>
-													<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control"
-														required><br />
-													<div style="text-align: right;">
-														<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
-													</div>
+									<div>
+										<form method="POST" action="{{ route('users.pw_change', $current_user->id) }}" enctype="multipart/form-data">
+											@csrf
+											@method('POST')
+											<div class="form-group">
+												<label>変更パスワード（８文字以上）</label>
+												<input id="new_password" name="new_password" type="password" class="form-control" required>
+												<label>変更パスワードの確認</label>
+												<input id="new_password_confirm" name="new_password_confirm" type="password" class="form-control" required>
+												<div style="text-align: right;">
+													<button id="pw_change" type="submit" class="btn btn-primary">変更</button>
 												</div>
-											</form>
-										</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>

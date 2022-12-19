@@ -146,7 +146,7 @@
 		color: white;
 		text-decoration: none;
 		margin-left: 5px;
-		font-size: 15px;
+		font-size: 13px;
 	}
 </style>
 <script>

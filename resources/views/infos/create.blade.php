@@ -69,6 +69,7 @@
 										{{ old('replay') == '3' ? 'checked' : '' }}>
 									<label for="replay3" class="form-check-label">コメント欄非表示</label>
 								</div><br /><br />
+								<input type="checkbox" name="content_dis">
 								<label for="content_dis">メールに本文を表示させる</label>
 								<br /><br />
 							</div>

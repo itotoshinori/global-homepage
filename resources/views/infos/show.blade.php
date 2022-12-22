@@ -39,21 +39,23 @@
 						</form>
 					@endif
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
+					<br />
 					<div>
+						@if ($info->replay <= 2)
+							<div class="form-group contact-form">
+								<label for="textarea1">お問合せはこちらから</label>
+								<form method="POST" action="{{ route('infos.send_mail', $info->id) }}" enctype="multipart/form-data">
+									@csrf
+									@method('POST')
+									<textarea name="message" class="form-control" required></textarea>
+									<button class="btn btn-primary" style="margin-top:4px; width:120px;" type="submit" class="btn btn-danger"
+										onclick="return confirm('本当に送信しますか?')">メール送信</button>
+								</form>
+							</div>
+						@endif
 						<div style="margin: 5px 0 10px 0;">
 							<button onclick="location.href='/internal/infos'" class="btn btn-success" style="width:100px;">トップへ</button>
 							<button onclick="javascript:history.back()" class="btn btn-info" style="width:100px;">前に戻る</button>
-							<button class="btn btn-warning" id="contact-dis" style="width:100px;">お問合せ</button>
-						</div>
-						<div class="form-group contact-form">
-							<label for="textarea1">お問合せはこちらから</label>
-							<form method="POST" action="{{ route('infos.send_mail', $info->id) }}" enctype="multipart/form-data">
-								@csrf
-								@method('POST')
-								<textarea name="message" class="form-control" required></textarea>
-								<button class="btn btn-primary" style="margin-top:4px; width:120px;" type="submit" class="btn btn-danger"
-									onclick="return confirm('本当に送信しますか?')">メール送信</button>
-							</form>
 						</div>
 						<form action="{{ route('infos.destroy', $info) }}" method="POST">
 							@csrf
@@ -75,10 +77,6 @@
 	</div>
 </body>
 <style>
-	.contact-form {
-		display: none;
-	}
-
 	.content-body {
 		font-size: 16px;
 		padding: 10px;
@@ -87,6 +85,10 @@
 	@media screen and (min-width: 480px) {
 		.content-body {
 			font-size: 17px;
+		}
+
+		.contact-form {
+			width: 70%;
 		}
 	}
 </style>

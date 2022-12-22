@@ -57,12 +57,22 @@
 							{{ old('auth') == '0' ? 'checked' : '' }} checked>
 						<label for="auth3" class="form-check-label">送付しない</label>
 					</div><br /><br />
-					@if ($info->replay == 1)
-						<input type="checkbox" name="replay">
-					@else
-						<input type="checkbox" name="replay" checked>
-					@endif
-					<label for="content_dis">コメントを管理者全員に返信</label><br /><br />
+					<label for="mail_send">コメント</label><br />
+					<div class="form-check form-check-inline">
+						<input type="radio" name="replay" class="form-check-input" id="replay1" value="1"
+							{{ $info->replay == '1' ? 'checked' : '' }} {{ old('replay') == '1' ? 'checked' : '' }}>
+						<label for="replay1" class="form-check-label">管理者全員に返信</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" name="replay" class="form-check-input" id="replay2" value="2"
+							{{ $info->replay == '2' ? 'checked' : '' }} {{ old('replay') == '2' ? 'checked' : '' }}>
+						<label for="replay2" class="form-check-label">投稿者のみに返信</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" name="replay" class="form-check-input" id="replay3" value="3"
+							{{ $info->replay == '3' ? 'checked' : '' }} {{ old('replay') == '3' ? 'checked' : '' }}>
+						<label for="replay3" class="form-check-label">コメント欄非表示</label>
+					</div><br /><br />
 					<input type="checkbox" name="content_dis">
 					<label for="content_dis">メールに本文を表示させる</label>
 				</div><br />

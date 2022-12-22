@@ -47,7 +47,8 @@ class My_func
             'title' => $request->title,
             'body' => $request->body,
             'link' => $request->link,
-            'category' => $request->category
+            'category' => $request->category,
+            'replay' => $request->replay
         ];
         return $result;
     }

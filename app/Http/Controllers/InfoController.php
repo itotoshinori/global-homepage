@@ -92,9 +92,9 @@ class InfoController extends Controller
         }
         $current_user = Auth::user();
         $create['user_id'] = $current_user->id;
-        if ($request->replay == "on") {
-            $create['replay'] = 2;
-        }
+        //if ($request->replay == "on") {
+        //$create['replay'] = 2;
+        //}
         $result = Info::create($create);
         $info = Info::latest('id')->first();//メール送信用のために新規登録のid取得
         //$users =  User::orderBy('email')->where('authority', 1)->get();
@@ -140,7 +140,7 @@ class InfoController extends Controller
         $info = Info::find($id);
         if ($info == null) {
             return redirect()->route('infos.index')
-                            ->with('danger', '該当のページは存在しません。削除された可能性があります。');
+                            ->with('danger', '該当のページは存在しません');
         }
         $current_user = Auth::user();
         $reader =  $info->reader;
@@ -202,7 +202,6 @@ class InfoController extends Controller
             //前回ファイル削除
             Storage::disk('inside')->delete("/files/".$info->image);
         }
-        $request->replay == "on" ? $update['replay'] = 2 : $update['replay'] = 1;
         $result = $info->update($update);
         $authority = $request->auth;
         $current_user = Auth::user();
@@ -272,14 +271,14 @@ class InfoController extends Controller
         $my_url = config('my-url.url')."/internal/infos/{$info->id}";
         if ($this->my_url != "http://localhost") {
             //管理者全員に返信する設定の場合
-            if ($info->replay ==2) {
+            if ($info->replay == 1) {
                 $users =  User::orderBy('email')->where('authority', 1)->get();
                 foreach ($users as $user) {
                     $introduce = "管理者各位\n".$introduce;
                     Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
                 }
             //投稿者のみに返信する設定の場合
-            } else {
+            } elseif ($info->replay == 2) {
                 $introduce = "投稿者　殿\n".$introduce;
                 Mail::to($info->user->email)->send(new Admin($introduce, $message, $my_url));
             }

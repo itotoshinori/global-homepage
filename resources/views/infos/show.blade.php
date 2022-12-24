@@ -29,7 +29,6 @@
 						</div>
 					@endif
 					@if (isset($info->image))
-						<br />
 						<form action="{{ route('infos.download', $info->id) }}" method="POST">
 							@csrf
 							@method('POST')

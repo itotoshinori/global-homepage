@@ -39,7 +39,6 @@
 						</form>
 					@endif
 					<div>投稿日：{{ $info->created_at->format('Y年m月d日') }}</div>
-					<br />
 					<div>
 						@if ($info->replay <= 2)
 							<div class="form-group contact-form">

@@ -24,8 +24,8 @@
 </div><br />
 <div class="md-form photo-selection form-content">
 	<div>添付ファイル</div>
-	<input type="file" name="image" id="file" accept=".png, .jpg, .jpeg, .pdf, .doc, .xls, .xlsx">
-	<div>画像・PDF・ワード・エクセルファイルの添付可能</div>
+	<input type="file" name="image" id="file" accept=".png, .jpg, .jpeg, .pdf, .doc, .xls, .xlsx, .zip, lzh">
+	<div>画像・PDF・ワード・エクセル・圧縮ファイルの添付可能</div>
 	<div>3MB以下のサイズでお願いします</div>
 	<div>添付ファイル名に_や-など特殊な文字をファイル名にするとアップロードできないことがあります。簡潔で短いファイル名でお願いします。</div><br />
 </div>

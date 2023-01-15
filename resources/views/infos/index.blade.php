@@ -50,7 +50,7 @@
 					<div class="content-title">
 						<span style="margin-right:20px;">社員一覧</span>
 						@if ($authority_user)
-							<a href="/internal/infos?alluserdis=1" class="sub_menu">退職者含全表示</a>
+							<a href="/internal/infos?alluserdis=1" class="sub_menu">全表示</a>
 						@endif
 						<span class="sub_menu" data-bs-toggle="modal" data-bs-target="#exampleModal">
 							ご自身のパスワードを変更

@@ -53,7 +53,7 @@
 							<a href="/internal/infos?alluserdis=1" class="sub_menu">退職者含全表示</a>
 						@endif
 						<span class="sub_menu" data-bs-toggle="modal" data-bs-target="#exampleModal">
-							パスワードを変更
+							ご自身のパスワードを変更
 						</span>
 					</div>
 					<label for="address" class="mail_form_label">メール送信用フォーム</label>

@@ -126,7 +126,7 @@
 
 	@media screen and (min-width:600px) {
 		.menu-card {
-			width: 80%;
+			width: 70%;
 			margin-top: 35px;
 		}
 
@@ -135,10 +135,19 @@
 		}
 	}
 
-	@media screen and (min-width:1025px) {
+	@media screen and (min-width:800px) {
+		.menu-card {
+			width: 30%;
+			margin-top: 35px;
+			margin-right: 20px;
+		}
+	}
+
+	@media screen and (min-width:1400px) {
 		.menu-card {
 			width: 33%;
 			margin-top: 20px;
+			margin-right: 0px;
 		}
 
 		.menu-card-inner {

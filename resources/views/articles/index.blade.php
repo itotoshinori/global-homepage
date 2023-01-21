@@ -117,6 +117,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		width: 100%;
+		margin: auto;
 	}
 
 	.article_title {
@@ -126,8 +127,9 @@
 
 	@media screen and (min-width:600px) {
 		.menu-card {
-			width: 70%;
+			width: 45%;
 			margin-top: 35px;
+			margin-right: 5px;
 		}
 
 		.photo_height {
@@ -135,11 +137,11 @@
 		}
 	}
 
-	@media screen and (min-width:800px) {
+	@media screen and (min-width:900px) {
 		.menu-card {
 			width: 30%;
 			margin-top: 35px;
-			margin-right: 20px;
+			margin-right: 10px;
 		}
 	}
 

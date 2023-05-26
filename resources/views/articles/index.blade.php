@@ -1,5 +1,14 @@
 @extends('app')
 
+<head>
+	<title>株式会社グローバル</title>
+	<meta name="description" content="株式会社グローバル　東京都杉並区のソフトウェア開発会社です">
+	<meta name="keywords" content="グローバル,宮島郁夫,国松勇次,宮坂栄一,伊藤利典,日本郵政グループ,手話言語化アプリ">
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	<meta charset="utf-8">
+</head>
+
 <body>
 	<link rel="stylesheet" href="{{ asset('/css/article.css') }}">
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>

@@ -18,12 +18,10 @@ class ContactController extends Controller
         //$users = User::all();
         //テスト送信用
         $users = User::where('authority', '<=', 1)->get();
-        if ($my_url != "http://localhost2") {
-            $email_users = "";
+        if ($my_url != "http://localhost") {
             foreach ($users as $user) {
-                $email_users = $email_users.$user->email.";";
+                Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
             }
-            Mail::to($email_users)->send(new Admin($introduce, $message, $my_url));
             //送信者にも控えを送付する
             Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
         }

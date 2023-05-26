@@ -108,15 +108,7 @@ class ArticleController extends Controller
         if ($create['category'] == 0) {
             $create['introductory'] ="item".strval($this->class_func->main_articles()->count() + 1);
         }
-        $result = Article::create($create);
-        //if ($result && $this->my_url != "http://localhost") {
-        //$message = "記事の新規登録がありました。ご確認ください。\n".$this->my_url;
-        //foreach ($this->users as $user) {
-        //Mail::to($user->to_email)->send(new Admin($this->name, $message, $this->my_url));
-        //}
-        //メールテスト用に残す。テスト時コメントアウト
-        //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
-        //}
+        Article::create($create);
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
     }
 
@@ -200,14 +192,6 @@ class ArticleController extends Controller
             $update['image_detail'] = null;
         }
         $article->update($update);
-        $message = "記事の更新がありました。ご確認ください\n".$this->articles_url.$article->id;
-        //if ($this->my_url != "http://localhost") {
-        //foreach ($this->users as $user) {
-        //Mail::to($user->email)->send(new Admin($this->name, $message, $this->my_url));
-        //}
-        //メールテスト用に残す。テスト時コメントアウト
-        //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
-        //}
         return redirect()->route('articles.index')->with('success', '修正しました');
     }
 

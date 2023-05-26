@@ -42,32 +42,10 @@
 							<a class="nav-link" href='/' style="color:white;">Home</a>
 						</h4>
 					</li>
-					@foreach ($articles as $article)
-						<li class="nav-item ms-3">
-							<h4>
-								@if ($article->id <= 5)
-									<a class="nav-link" href={{ $url . '/' . $urls[$article->id] }} style="color:white;">{{ $article->title }}</a>
-								@else
-									<a class="nav-link" href="/articles/{{ $article->id }}" style="color:white;">{{ $article->title }}</a>
-								@endif
-							</h4>
-						</li>
-					@endforeach
-					<li class="nav-item ms-3">
-						<h4><a class="nav-link" href="/#info" style="color:white;">お知らせ</a></h4>
-					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="company">
-		<div class="company-box">
-			<h4><a href="/" class="main_title">株式会社グローバル</a></h4>
-			<p>
-				東京都杉並区にあるＩＴ・ソフトウェア会社です。誠心誠意をモットーとしてシステム開発を請け負います。
-			</p>
-		</div>
-	</div>
 	<div class="container">
 		@yield('content')
 	</div>

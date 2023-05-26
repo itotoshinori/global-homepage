@@ -7,11 +7,12 @@
 		@csrf
 		@method('POST')
 		@include('articles.form')
-		@if ($main)
-			<input type="hidden" name="category" value="0" />
+		@if ($category)
+			<input type="hidden" name="category" value={{ $category }} />
 		@else
-			<input type="hidden" name="category" value="1" />
+			<input type="hidden" name="category" value="0" />
 		@endif
-		<button type="submit" class="btn btn-primary">投稿する</button>
+		<button type="submit" class="btn btn-primary">投稿</button>
+		<button type="button" class="btn btn-danger" onclick="history.back()">戻る</button>
 	</form>
 @endsection

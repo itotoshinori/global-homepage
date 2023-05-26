@@ -36,13 +36,31 @@ class ArticleController extends Controller
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $articles = $this->class_func->main_articles();
-        $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(9);
+        $article_count = $articles->count();
+        //一般記事最大数
+        $article_max = 7;
+        $headline = Article::where('category', 3)->first();
+        $contact_article = Article::where('category', 4)->first();
+        $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(20);
+        $info_new = $this->class_func->dis_new($info_articles->max('created_at'));
+        $content_articles = Article::oldest()->get()->where('category', 2);
+        $length = 4;
+        $max = pow(10, $length) - 1;                    // コードの最大値算出
+        $rand = random_int(0, $max);                    // 乱数生成
+        $randam_num = sprintf('%0'. $length. 'd', $rand);// 乱数の頭0埋め
         $urls = $this->class_func->urls();
         return view('articles.index', [
             'articles' => $articles,
+            'article_count'=> $article_count,
+            'article_max' => $article_max,
+            'headline' => $headline,
+            'contact_article' => $contact_article,
+            'info_new' => $info_new,
+            'content_articles'=> $content_articles,
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
             'urls' => $urls,
+            'randam_num' => $randam_num,
             'authority_user'=> $authority_user
         ]);
     }
@@ -55,9 +73,9 @@ class ArticleController extends Controller
     public function create(Request $request)
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
+        $category = $request->query('category');
         if ($authority_user) {
-            $main = $request->main_content;
-            return view('articles.create', compact('main'));
+            return view('articles.create', compact('category'));
         } else {
             return redirect()->route('articles.index')->with('danger', '権限がありません');
         }
@@ -86,6 +104,9 @@ class ArticleController extends Controller
             $path =  $image_detail->store('images', 'public');
             $image_detail = ltrim($path, 'images/');
             $create['image_detail'] = $image_detail;
+        }
+        if ($create['category'] == 0) {
+            $create['introductory'] ="item".strval($this->class_func->main_articles()->count() + 1);
         }
         $result = Article::create($create);
         if ($result && $this->my_url != "http://localhost") {
@@ -134,7 +155,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        if ($article->category==0) {
+        if ($article->category == 0) {
             $main = true;
         } else {
             $main = false;
@@ -187,7 +208,7 @@ class ArticleController extends Controller
             //メールテスト用に残す。テスト時コメントアウト
             //Mail::to($this->to_email)->send(new Admin($this->name, $message, $this->my_url));
         }
-        return redirect("articles/".$article->id)->with('success', '更新完了しました');
+        return redirect()->route('articles.index')->with('success', '修正しました');
     }
 
     /**

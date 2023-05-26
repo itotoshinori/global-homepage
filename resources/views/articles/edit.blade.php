@@ -7,17 +7,9 @@
 		@csrf
 		@method('PUT')
 		@include('articles.form')
-		<input type="hidden" name="category" value={{ $article->category }} />
-		<div>
-			@if ($article->image)
-				<input type="checkbox" name="image_del">
-				<label for="image_del">Home画像ファイルを削除する</label>
-			@endif
-			@if ($article->image_detail)
-				<input type="checkbox" name="image_detail_del">
-				<label for="image_detail_del">詳細の画像ファイルを削除する</label>
-			@endif
-		</div><br />
-		<button type="submit" class="btn btn-primary" onclick="return confirm('本当に更新しますか?')">更新する</button>
+
+		<input type="hidden" name="category" value={{ $article->category ? $article->category : 0 }} />
+		<button type="submit" class="btn btn-primary" onclick="return confirm('本当に更新しますか?')">更新</button>
+		<button type="button" class="btn btn-danger" onclick="history.back()">戻る</button>
 	</form>
 @endsection

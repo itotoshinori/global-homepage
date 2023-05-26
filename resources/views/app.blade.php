@@ -30,6 +30,8 @@
 			if (num != comment_num) {
 				alert("正しい数字を入力してください！")
 				return false;
+			} else {
+				$("#js-send").addClass("open");
 			}
 		});
 	});

@@ -71,7 +71,7 @@
 				</div>
 				<div>{!! nl2br($headline->body) !!}</div>
 				@if ($headline->link)
-					<a href={{ $headline->link }}>{{ $headline->link }}</a>
+					<a href={{ $headline->link }}>🏠</a>
 				@endif
 			</div>
 		@endif
@@ -93,7 +93,7 @@
 							<p>{{ $content->title }}<br />
 								{!! nl2br($content->body) !!}
 								@if ($content->link)
-									<div><a href={{ $content->link }}>{{ $content->link }}</a></div>
+									<div><a href={{ $content->link }}>🏠</a></div>
 								@endif
 							</p>
 							<p>
@@ -124,7 +124,7 @@
 				</div>
 				<div>{!! nl2br($contact_article->body) !!}</div>
 				@if ($contact_article->link)
-					<a href={{ $contact_article->link }}>{{ $contact_article->link }}</a>
+					<a href={{ $contact_article->link }}>🏠</a>
 				@endif
 				<br />
 				<div class="content">
@@ -153,7 +153,7 @@
 							<br />
 							{!! nl2br($info->body) !!}<br />
 							@if ($info->link)
-								<div><a href={{ $info->link }}>{{ $info->link }}</a></div>
+								<div><a href={{ $info->link }}>🏠</a></div>
 							@endif
 						</p>
 						<p>

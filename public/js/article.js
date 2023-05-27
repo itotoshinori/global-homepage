@@ -61,7 +61,3 @@ function scrolle(status, num) {
         $('input[id="nav-input"]').prop("checked", false);
     }
 }
-$("#js-open").on("click", function () {
-    //ボタンをクリックしたら
-    $("#js-send").addClass("open"); // sendクラスにopenクラス付与
-});

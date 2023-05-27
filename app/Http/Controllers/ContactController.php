@@ -22,7 +22,6 @@ class ContactController extends Controller
             foreach ($users as $user) {
                 Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
             }
-
             //送信者にも控えを送付する
             Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
         }

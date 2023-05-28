@@ -12,7 +12,7 @@ class ContactController extends Controller
     public function send(Request $request)
     {
         $introduce = $request->name."様より\nホームページお問合せページからメッセージがありました\nアドレス：".$request->email."\n電話番号：".$request->tel;
-        $introduce_tosender = $request->name." 様\n下記にてメールを送信しましたので返信をお待ち下さい\nアドレス：".$request->email."\n電話番号：".$request->tel;
+        $introduce_tosender = $request->name." 様\n下記にてメールを送信しました\nアドレス：".$request->email."\n電話番号：".$request->tel;
         $message = $request->message;
         $my_url = config('my-url.url');
         //$users = User::all();

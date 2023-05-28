@@ -200,6 +200,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		background: rgb(226, 225, 240);
+		z-index: 9;
 		display: none;
 	}
 
@@ -222,7 +223,8 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		opacity: 0.55;
-		background: rgb(242, 221, 221);
+		background: black;
+		z-index: 5;
 		display: none;
 	}
 

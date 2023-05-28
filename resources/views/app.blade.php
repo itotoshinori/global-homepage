@@ -40,6 +40,7 @@
 				return false;
 			} else if (email && name && message) {
 				$("#js-send").addClass("open");
+				$("#js-send-back").addClass("open");
 			}
 		});
 	});

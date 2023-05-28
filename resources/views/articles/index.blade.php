@@ -64,9 +64,6 @@
 		@if ($message = Session::get('danger'))
 			<p class="alert alert-danger mt-2">{{ $message }}</p>
 		@endif
-		<div class="send" id="js-send">
-			<p>送信中 お待ちください</p>
-		</div>
 		@if ($authority_user && $article_count <= $article_max)
 			<div class="new_article">
 				<span style="margin-right:5px;"><a
@@ -144,6 +141,11 @@
 				</div>
 			</div>
 		@endif
+		<div class="send" id="js-send">
+			<p>送信中 お待ちください</p>
+		</div>
+		<div class="send-back" id="js-send-back">
+		</div>
 		@if (isset($info_articles))
 			<span id=information></span>
 			<div class="box">
@@ -211,7 +213,24 @@
 		font-size: 15px;
 	}
 
+	.send-back {
+		width: 100%;
+		height: 100%;
+		border: 1px solid #000;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0.55;
+		background: rgb(242, 221, 221);
+		display: none;
+	}
+
 	.send.open {
+		display: block;
+	}
+
+	.send-back.open {
 		display: block;
 	}
 
@@ -221,9 +240,3 @@
 		}
 	}
 </style>
-<script>
-	$("#js-open").on("click", function() {
-		//ボタンをクリックしたら
-		$("#js-send").addClass("open"); // sendクラスにopenクラス付与
-	});
-</script>

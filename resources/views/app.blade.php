@@ -35,7 +35,9 @@
 			}
 			let message = $("#message").val();
 			let comment_num = $("#comment_num").text();
-			if (num != comment_num) {
+			if (!email || !name || !message || !num) {
+				alert("必須項目に入力して下さい")
+			} else if (num != comment_num) {
 				alert("正しい数字を入力してください！")
 				return false;
 			} else if (email && name && message) {

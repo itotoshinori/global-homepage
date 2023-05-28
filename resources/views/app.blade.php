@@ -25,12 +25,20 @@
 <script>
 	$(function() {
 		$("#btn1").on("click", function() {
-			let num = $("#btn2").val()
+			let num = $("#input_num").val();
+			let name = $("#name").val();
+			let email = $("#email").val();
+			const regexp =
+				/^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+			if (!regexp.test(email)) {
+				email = '';
+			}
+			let message = $("#message").val();
 			let comment_num = $("#comment_num").text();
 			if (num != comment_num) {
 				alert("正しい数字を入力してください！")
 				return false;
-			} else {
+			} else if (email && name && message) {
 				$("#js-send").addClass("open");
 			}
 		});

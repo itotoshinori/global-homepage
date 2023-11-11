@@ -84,12 +84,13 @@ body {
 }
 
 .box {
-    margin: 20px 0 20px 0;
+    margin: 10px auto;
     padding: 15px;
-    background-color: #eef4f4;
+    background-color: rgba(0, 0, 0, 0.22);
     /* 背景色 */
-    border-radius: 15px;
+    border-radius: 20px;
     /*ボックス角の丸み*/
+    width:80%;
 }
 
 .information_box {

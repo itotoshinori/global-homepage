@@ -22,7 +22,7 @@
     <div class="md-form">
         <label>
             <h6>右の番号を入力して下さい
-                <span class="text-danger mr-2"><img src="https://sibu.info-proffer.com/storage/images/{{$file_list['file']}}"></span>
+                <span class="text-danger mr-2"><img src="https://global-software.jp/storage/images/{{$file_list['file']}}"></span>
                 <span class="essential ml-2">※{{$errors->first()}}</span>
             </h6>
         </label>

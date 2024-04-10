@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\lib\My_func;
 use App\Mail\Admin;
+use Illuminate\Support\Facades\Log;
+use App\Consts\NumConst;
+use SebastianBergmann\Type\NullType;
 
 class ArticleController extends Controller
 {
@@ -47,21 +50,30 @@ class ArticleController extends Controller
         $length = 4;
         $max = pow(10, $length) - 1;                    // コードの最大値算出
         $rand = random_int(0, $max);                    // 乱数生成
-        $randam_num = sprintf('%0'. $length. 'd', $rand);// 乱数の頭0埋め
+        $randam_num = sprintf('%0' . $length . 'd', $rand); // 乱数の頭0埋め
         $urls = $this->class_func->urls();
+        //最小値と最大値を指定
+        $min = 1;
+        $max = 3;
+        //乱数を生成する
+        $random_number = rand($min, $max);
+        $file_list = NumConst::LIST[$random_number];
+        Log::info($file_list['file']);
         return view('articles.index', [
             'articles' => $articles,
-            'article_count'=> $article_count,
+            'article_count' => $article_count,
             'article_max' => $article_max,
             'headline' => $headline,
             'contact_article' => $contact_article,
             'info_new' => $info_new,
-            'content_articles'=> $content_articles,
+            'content_articles' => $content_articles,
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
             'urls' => $urls,
             'randam_num' => $randam_num,
-            'authority_user'=> $authority_user
+            'authority_user' => $authority_user,
+            'random_number' => $random_number,
+            'file_list' => $file_list
         ]);
     }
 
@@ -106,7 +118,7 @@ class ArticleController extends Controller
             $create['image_detail'] = $image_detail;
         }
         if ($create['category'] == 0) {
-            $create['introductory'] ="item".strval($this->class_func->main_articles()->count() + 1);
+            $create['introductory'] = "item" . strval($this->class_func->main_articles()->count() + 1);
         }
         Article::create($create);
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');
@@ -124,7 +136,7 @@ class ArticleController extends Controller
         $length = 4;
         $max = pow(10, $length) - 1;                    // コードの最大値算出
         $rand = random_int(0, $max);                    // 乱数生成
-        $randam_num = sprintf('%0'. $length. 'd', $rand);// 乱数の頭0埋め
+        $randam_num = sprintf('%0' . $length . 'd', $rand); // 乱数の頭0埋め
         $url_get = str_replace('/', '', $_SERVER['REQUEST_URI']);
         $urls = $this->class_func->urls();
         $result = array_search($url_get, $urls);
@@ -134,8 +146,8 @@ class ArticleController extends Controller
         return view('articles.show', [
             'article' => $article,
             'class_func' => $this->class_func,
-            'randam_num'=> $randam_num,
-            'authority_user'=> $authority_user
+            'randam_num' => $randam_num,
+            'authority_user' => $authority_user
         ]);
     }
 
@@ -177,7 +189,7 @@ class ArticleController extends Controller
             $update['image'] = $image;
         } elseif ($request->image_del == "on") {
             //ファイル削除システム
-            Storage::disk('public')->delete("/images/".$article->image);
+            Storage::disk('public')->delete("/images/" . $article->image);
             $update['image'] = null;
         }
         $image_detail = $request->file('image_detail');
@@ -188,7 +200,7 @@ class ArticleController extends Controller
             $update['image_detail'] = $image_detail;
         } elseif ($request->image_detail_del == "on") {
             //ファイル削除システム
-            Storage::disk('public')->delete("/images/".$article->image_detail);
+            Storage::disk('public')->delete("/images/" . $article->image_detail);
             $update['image_detail'] = null;
         }
         $article->update($update);
@@ -205,10 +217,10 @@ class ArticleController extends Controller
     {
         //画像ファイルを削除
         if (isset($article->image)) {
-            Storage::disk('public')->delete("/images/".$article->image);
+            Storage::disk('public')->delete("/images/" . $article->image);
         }
         $article->delete();
         return redirect()->route('articles.index')
-                        ->with('success', '削除しました。');
+            ->with('success', '削除しました。');
     }
 }

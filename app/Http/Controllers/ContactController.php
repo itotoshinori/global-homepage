@@ -6,17 +6,30 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Admin;
+use Illuminate\Support\Facades\Log;
+use App\Consts\NumConst;
 
 class ContactController extends Controller
 {
     public function send(Request $request)
     {
-        $introduce = $request->name."様より\nホームページお問合せページからメッセージがありました\nアドレス：".$request->email."\n電話番号：".$request->tel;
-        $introduce_tosender = $request->name." 様\n下記にてメールを送信しました\nアドレス：".$request->email."\n電話番号：".$request->tel;
+        $file_list = NumConst::LIST[$request->random_number];
+        if ($request->img_num == $file_list['num']) {
+            $request = $request->merge(['img_number' => 'OK']);
+        } else {
+            $request = $request->merge(['img_number' => null]);
+        }
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'img_number' => 'required',
+            'message' => 'required',
+        ]);
+        $file_list = NumConst::LIST[$request->random_number];
+        $introduce = $request->name . "様より\nホームページお問合せページからメッセージがありました\nアドレス：" . $request->email . "\n電話番号：" . $request->tel;
+        $introduce_tosender = $request->name . " 様\n下記にてメールを送信しました\nアドレス：" . $request->email . "\n電話番号：" . $request->tel;
         $message = $request->message;
         $my_url = config('my-url.url');
-        //$users = User::all();
-        //テスト送信用
         $users = User::where('authority', '<=', 1)->get();
         if ($my_url != "http://localhost") {
             foreach ($users as $user) {
@@ -25,6 +38,8 @@ class ContactController extends Controller
             //送信者にも控えを送付する
             Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
         }
-        return redirect()->route('articles.index')->with('success', '送信完了しました');
+        $message_status = 'success';
+        $message = '送信に成功しました';
+        return redirect()->route('articles.index')->with($message_status, $message);
     }
 }

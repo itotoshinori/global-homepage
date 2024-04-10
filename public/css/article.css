@@ -86,7 +86,7 @@ body {
 .box {
     margin: 20px auto;
     padding: 15px;
-    background-color: hsla(125, 74%, 65%, 0.537);
+    background-color:#ddf;
     /* 背景色 */
     border-radius: 5px;
     /*ボックス角の丸み*/
@@ -226,7 +226,7 @@ nav {
 }
 
 footer {
-    margin-bottom: 400px;
+    margin-bottom: 200px;
 }
 
 .content-box {
@@ -273,8 +273,5 @@ footer {
         font-size: 15px;
         font-weight: 800;
         color: rgb(190, 7, 245);
-    }
-    footer {
-        margin-bottom: 500px;
     }
 }

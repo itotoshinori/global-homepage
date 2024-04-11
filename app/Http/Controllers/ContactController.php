@@ -15,14 +15,14 @@ class ContactController extends Controller
     {
         $file_list = NumConst::LIST[$request->random_number];
         if ($request->img_num == $file_list['num']) {
-            $request = $request->merge(['img_number' => 'OK']);
+            $request = $request->merge(['imgnumber' => 'OK']);
         } else {
-            $request = $request->merge(['img_number' => null]);
+            $request = $request->merge(['imgnumber' => null]);
         }
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'img_number' => 'required',
+            'email' => 'required|email',
+            'imgnumber' => 'required',
             'message' => 'required',
         ]);
         $file_list = NumConst::LIST[$request->random_number];

@@ -68,6 +68,15 @@
         <div class="alert alert-danger mt-2">
             送信に失敗しました
         </div>
+        <div class="card" style="width: 40rem; margin-top:10px;">
+            <div class="card-body">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li class="text-danger font-weight-bold">{{$class_func->warning_change($error)}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
         @endif
         @if ($authority_user && $article_count <= $article_max) <div class="new_article">
             <span style="margin-right:5px;"><a href="/articles/create?category=0">項目新規</a></span>（あと{{ $article_max - $article_count }}項目追加可能）

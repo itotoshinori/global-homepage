@@ -11,7 +11,7 @@
         <label>
             <h6>メールアドレス <span class="essential">※</span></h6>
         </label>
-        <input type="email" name="email" id="email" value="{{ old('email') }}" required class="form-control mb-4" style="border-color: black;">
+        <input type="text" name="email" id="email" value="{{ old('email') }}" required class="form-control mb-4" style="border-color: black;">
     </div>
     <div class="md-form">
         <label>
@@ -23,7 +23,7 @@
         <label>
             <h6>右の番号を入力して下さい
                 <span class="text-danger mr-2"><img src="https://global-software.jp/storage/images/{{$file_list['file']}}" width="60" height="20"></span>
-                <span class="essential ml-2">※{{$errors->first()}}</span>
+                <span class="essential ml-2">※</span>
             </h6>
         </label>
         <input type="text" name="img_num" id="img_num" value="{{ old('img_num') }}" class="form-control mb-4" style="border-color: black;" required>

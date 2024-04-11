@@ -58,7 +58,6 @@ class ArticleController extends Controller
         //乱数を生成する
         $random_number = rand($min, $max);
         $file_list = NumConst::LIST[$random_number];
-        Log::info($file_list['file']);
         return view('articles.index', [
             'articles' => $articles,
             'article_count' => $article_count,

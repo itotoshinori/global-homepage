@@ -24,8 +24,8 @@ class My_func
     }
     public function url_part(string $content)
     {
-        if (strlen($content) >50) {
-            $result = substr($content, 0, 49)."...";
+        if (strlen($content) > 50) {
+            $result = substr($content, 0, 49) . "...";
             return $result;
         } else {
             return $content;
@@ -33,7 +33,7 @@ class My_func
     }
     public function request_content(Object $request)
     {
-        $result=[
+        $result = [
             'title' => $request->title,
             'body' => $request->body,
             'link' => $request->link,
@@ -43,7 +43,7 @@ class My_func
     }
     public function request_info_content(Object $request)
     {
-        $result=[
+        $result = [
             'title' => $request->title,
             'body' => $request->body,
             'link' => $request->link,
@@ -54,8 +54,8 @@ class My_func
     }
     public function limit_setting(string $content)
     {
-        if (strlen($content)>=90) {
-            $result = mb_substr($content, 0, 89, 'UTF-8')."...";
+        if (strlen($content) >= 90) {
+            $result = mb_substr($content, 0, 89, 'UTF-8') . "...";
         } else {
             $result = $content;
         }
@@ -63,14 +63,14 @@ class My_func
     }
     public function urls()
     {
-        $list =  ['NG', 'mission', 'business','company','contact','adoption'];
+        $list =  ['NG', 'mission', 'business', 'company', 'contact', 'adoption'];
         return $list;
     }
     public function dis_new($day)
     {
-        $carbon= Carbon::now();
+        $carbon = Carbon::now();
         $ten_day_before = $carbon->subDays(10);
-        if ($day>$ten_day_before) {
+        if ($day > $ten_day_before) {
             return "New!";
         }
     }
@@ -102,14 +102,14 @@ class My_func
     public function retire_mail()
     {
         $cb = new Carbon();
-        $year= $cb->year;
+        $year = $cb->year;
         $month = $cb->month;
         $day = $cb->day;
         $hour = $cb->hour;
         $min = $cb->minute;
         $sec = $cb->second;
         $str = md5(uniqid());
-        return $str.$year.$month.$day.$hour.$min.$sec;
+        return $str . $year . $month . $day . $hour . $min . $sec;
     }
     public function login_user_authority($login_user)
     {
@@ -120,11 +120,21 @@ class My_func
         }
         return $authority_user;
     }
-    public function a_tag_change($text)
+    public function a_tag_change(String $text)
     {
         $pattern = '/((?:https?|http):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+)/';
         $replace = '<a href="$1">$1</a>';
         $text = preg_replace($pattern, $replace, $text);
-        return($text);
+        return ($text);
+    }
+    public function warning_change(String $text)
+    {
+        if ($text == "imgnumberは必ず指定してください。") {
+            return "正しい数字を入力して下さい。";
+        } else if ($text == "emailには、有効なメールアドレスを指定してください。") {
+            return "有効なメールアドレスを指定してください。";
+        } else {
+            return $text;
+        }
     }
 }

@@ -30,6 +30,10 @@
             let email = $("#email").val();
             let img_num = $("#img_num").val();
             let message = $("#message").val();
+            if (!email.match(/.+@.+\..+/)) {
+                window.alert('メールアドレスをご確認ください');
+                return;
+            }
             if (email && name && img_num && message) {
                 $("#js-send").addClass("open");
                 $("#js-send-back").addClass("open");

@@ -5,7 +5,7 @@
         <label>
             <h6>会社名及びお名前 <span class="essential">※</span></h6>
         </label>
-        <input name="name" type="text" id="name" value="{{ old('name') }}" class="form-control mb-4" style="border-color: black;" required>
+        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control mb-4" style="border-color: black;" required>
     </div>
     <div class="md-form">
         <label>

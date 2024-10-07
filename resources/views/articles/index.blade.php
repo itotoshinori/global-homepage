@@ -108,6 +108,9 @@
             @endif
         </div>
         <div>{!! nl2br($article->body) !!}</div>
+        @if ($article->link)
+        <div><a href={{ $article->link }}>リンク</a></div>
+        @endif
         @if ($article->introductory == 'item2' && isset($content_articles))
         @foreach ($content_articles as $content)
         <div class="content-box">

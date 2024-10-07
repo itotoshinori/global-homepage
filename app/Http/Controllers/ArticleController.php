@@ -47,10 +47,6 @@ class ArticleController extends Controller
         $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(20);
         $info_new = $this->class_func->dis_new($info_articles->max('created_at'));
         $content_articles = Article::oldest()->get()->where('category', 2);
-        $length = 4;
-        $max = pow(10, $length) - 1;                    // コードの最大値算出
-        $rand = random_int(0, $max);                    // 乱数生成
-        $randam_num = sprintf('%0' . $length . 'd', $rand); // 乱数の頭0埋め
         $urls = $this->class_func->urls();
         //最小値と最大値を指定
         $min = 1;
@@ -69,7 +65,6 @@ class ArticleController extends Controller
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
             'urls' => $urls,
-            'randam_num' => $randam_num,
             'authority_user' => $authority_user,
             'random_number' => $random_number,
             'file_list' => $file_list

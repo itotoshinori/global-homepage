@@ -100,9 +100,6 @@
     <span id={{ $article->introductory }}></span>
     <div class="box">
         <div class="box_title">{{ $article->title }}
-            @if ($article->introductory == 'item2' && $authority_user)
-            <a class="btn btn-primary btn-sm" href="/articles/create?category=2">新規</a>
-            @endif
             @if ($authority_user)
             <a class="btn btn-warning btn-sm edit_button" href="{{ route('articles.edit', $article->id) }}">編集</a>
             @endif
@@ -114,18 +111,18 @@
             <p>{{ $content->title }}<br />
                 {!! nl2br($content->body) !!}
                 @if ($content->link)
-                <div><a href={{ $content->link }}>🏠</a></div>
-                @endif
+            <div><a href={{ $content->link }}>🏠</a></div>
+            @endif
             </p>
             <p>
                 @if ($authority_user)
-                <form action="{{ route('articles.destroy', $content->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $content->id) }}">編集</a>
-                    <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
-                </form>
-                @endif
+            <form action="{{ route('articles.destroy', $content->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $content->id) }}">編集</a>
+                <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
+            </form>
+            @endif
             </p>
         </div>
         @endforeach
@@ -177,18 +174,18 @@
                 <br />
                 {!! nl2br($info->body) !!}<br />
                 @if ($info->link)
-                <div><a href={{ $info->link }}>🏠</a></div>
-                @endif
+            <div><a href={{ $info->link }}>🏠</a></div>
+            @endif
             </p>
             <p>
                 @if ($authority_user)
-                <form action="{{ route('articles.destroy', $info->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $info->id) }}">編集</a>
-                    <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
-                </form>
-                @endif
+            <form action="{{ route('articles.destroy', $info->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $info->id) }}">編集</a>
+                <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
+            </form>
+            @endif
             </p>
         </div>
         @endforeach
@@ -249,5 +246,4 @@
             font-size: 40px;
         }
     }
-
 </style>

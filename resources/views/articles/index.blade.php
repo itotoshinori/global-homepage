@@ -100,6 +100,9 @@
     <span id={{ $article->introductory }}></span>
     <div class="box">
         <div class="box_title">{{ $article->title }}
+            @if ($article->introductory == 'item2' && $authority_user)
+            <a class="btn btn-primary btn-sm" href="/articles/create?category=2">新規</a>
+            @endif
             @if ($authority_user)
             <a class="btn btn-warning btn-sm edit_button" href="{{ route('articles.edit', $article->id) }}">編集</a>
             @endif

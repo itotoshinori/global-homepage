@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+body {
+    margin-top: 0;
+}
+
 .alert_success {
     margin-top: 15px;
     padding: 15px;
@@ -57,10 +61,6 @@ nav a:hover {
     font-size: 19px;
     margin-top: -5px;
     color: rgb(11, 199, 23);
-}
-
-body {
-    margin-top: 0;
 }
 
 .new_article {

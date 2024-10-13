@@ -112,7 +112,7 @@
                     @endif
                 </form>
                 @endif
-                <div>{!! nl2br($article->body) !!}</div>
+                <div class="fs-6">{!! nl2br($article->body) !!}</div>
                 @if ($article->introductory == 'item2' && isset($content_articles))
                 @foreach ($content_articles as $content)
                 <div class="content-box">
@@ -120,7 +120,7 @@
                         @if ($content->link)
                         <span class="ml-1"><a href={{ $content->link }}>🏠</a></span>
                         @endif
-                    <div>{!! nl2br($content->body) !!}</div>
+                    <div class="fs-6">{!! nl2br($content->body) !!}</div>
                     </p>
                     <p>
                         @if ($authority_user)
@@ -175,26 +175,23 @@
                 @foreach ($info_articles as $info)
                 <div class="information_box">
                     <div class="information_box_title">
-                        {{ $info->title }}
+                        <div class="fs-6">{{ $info->title }}</div>
                         @if($info->link)
                         <span class="ml-1"><a href={{ $info->link }}>🏠</a></span>
                         @endif
                     </div>
-                    <p>
+                    <p class="fs-6">
                         投稿日：
                         {{ $info->created_at->format('Y年m月d日') }}
                         ({{ $class_func->week_dis($info->created_at->format('w')) }})
                         <br />
-                        {!! nl2br($info->body) !!}<br />
-                        @if ($info->link)
-                        @endif
+                        {!! nl2br($info->body) !!}
                     </p>
                     <p>
                         @if ($authority_user)
                     <form action="{{ route('articles.destroy', $info->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-
                         <a class="btn btn-warning btn-sm edit_button"
                             href="{{ route('articles.edit', $info->id) }}">編集</a>
                         <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm"

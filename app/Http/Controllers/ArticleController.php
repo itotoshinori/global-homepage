@@ -39,7 +39,7 @@ class ArticleController extends Controller
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $articles = $this->class_func->main_articles();
-        $article_count = $articles->count();
+        $article_count = Article::whereNotNull('introductory')->count();
         //一般記事最大数
         $article_max = 7;
         $headline = Article::where('category', 3)->first();
@@ -87,7 +87,6 @@ class ArticleController extends Controller
         }
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -112,7 +111,15 @@ class ArticleController extends Controller
             $create['image_detail'] = $image_detail;
         }
         if ($create['category'] == 0) {
-            $create['introductory'] = "item" . strval($this->class_func->main_articles()->count() + 1);
+            //$create['introductory'] = "item" . strval($this->class_func->main_articles()->count() + 1);
+            $articles = Article::whereNotNull('introductory')->get(); // null の場合
+            //itemの番号を空き番に設定する
+            for ($i = 1; $i <= 7; $i++) {
+                if ($articles->where('introductory', "item" . strval($i))->count() == 0) {
+                    $create['introductory'] = "item" . strval($i);
+                    break;
+                }
+            }
         }
         Article::create($create);
         return redirect()->route('articles.index')->with('success', '新規登録完了しました');

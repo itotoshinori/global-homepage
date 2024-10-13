@@ -64,139 +64,148 @@
         @if ($message = Session::get('danger'))
         <p class="alert alert-danger mt-2">{{ $message }}</p>
         @endif
-        @if($errors->any())
-        <div class="alert alert-danger mt-2">
-            送信に失敗しました
-        </div>
-        <div class="card" style="width: 40rem; margin-top:10px;">
-            <div class="card-body">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li class="text-danger font-weight-bold">{{$class_func->warning_change($error)}}</li>
-                    @endforeach
-                </ul>
+        @if ($authority_user && $article_count < $article_max)
+            <div class="new_article">
+            <span style="margin-right:5px;"><a
+                    href="/articles/create?category=0">項目新規</a></span>（あと{{ $article_max - $article_count }}項目追加可能）
+            @elseif ($authority_user && $article_count >= $article_max)
+            <div class="new_article">
+                <span style="margin-right:5px;">項目の追加はできません</span>
             </div>
-        </div>
-        @endif
-        @if ($authority_user && $article_count <= $article_max) <div class="new_article">
-            <span style="margin-right:5px;"><a href="/articles/create?category=0">項目新規</a></span>（あと{{ $article_max - $article_count }}項目追加可能）
-    </div>
-    @endif
-    @if (isset($headline))
-    <div class="box">
-        <div class="box_title">
-            {{ $headline->title }}
-            @if ($authority_user)
-            <a class="btn btn-warning btn-sm edit_button" href="{{ route('articles.edit', $headline->id) }}">編集</a>
             @endif
-        </div>
-        <div>{!! nl2br($headline->body) !!}</div>
-        @if ($headline->link)
-        <a href={{ $headline->link }}>🏠</a>
-        @endif
-    </div>
-    @endif
-    @foreach ($articles as $article)
-    <span id={{ $article->introductory }}></span>
-    <div class="box">
-        <div class="box_title">{{ $article->title }}
-            @if ($article->introductory == 'item2' && $authority_user)
-            <a class="btn btn-primary btn-sm" href="/articles/create?category=2">新規</a>
+            @if (isset($headline))
+            <div class="box">
+                <div class="box_title">
+                    {{ $headline->title }}
+                    @if ($headline->link)
+                    <span class="ml-1"><a href={{ $headline->link }}>🏠</a></span>
+                    @endif
+                    @if ($authority_user)
+                    <a class="btn btn-warning btn-sm" href="{{ route('articles.edit', $headline->id) }}">編集</a>
+                    @endif
+                </div>
+                <div>{!! nl2br($headline->body) !!}</div>
+            </div>
             @endif
-            @if ($authority_user)
-            <a class="btn btn-warning btn-sm edit_button" href="{{ route('articles.edit', $article->id) }}">編集</a>
-            @endif
-        </div>
-        <div>{!! nl2br($article->body) !!}</div>
-        @if ($article->link)
-        <div><a href={{ $article->link }}>リンク</a></div>
-        @endif
-        @if ($article->introductory == 'item2' && isset($content_articles))
-        @foreach ($content_articles as $content)
-        <div class="content-box">
-            <p>{{ $content->title }}<br />
-                {!! nl2br($content->body) !!}
-                @if ($content->link)
-            <div><a href={{ $content->link }}>🏠</a></div>
-            @endif
-            </p>
-            <p>
+            @foreach ($articles as $article)
+            <span id={{ $article->introductory }}></span>
+            <div class="box">
+                <div class="box_title">
+                    {{ $article->title }}
+                    @if($article->link)
+                    <span><a href={{ $article->link }}>🏠</a></span>
+                    @endif
+                </div>
                 @if ($authority_user)
-            <form action="{{ route('articles.destroy', $content->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $content->id) }}">編集</a>
-                <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
-            </form>
-            @endif
-            </p>
-        </div>
-        @endforeach
-        @endif
-    </div>
-    @endforeach
-    @if (isset($contact_article))
-    <span id="contact"></span>
-    <div class="box">
-        <div class="box_title">
-            {{ $contact_article->title }}
-            @if ($authority_user)
-            <a class="btn btn-warning btn-sm edit_button" href="{{ route('articles.edit', $contact_article->id) }}">編集</a>
-            @endif
-        </div>
-        <div>{!! nl2br($contact_article->body) !!}</div>
-        @if ($contact_article->link)
-        <a href={{ $contact_article->link }}>🏠</a>
-        @endif
-        <br />
-        <div class="content">
-            @include('articles.contact')
-        </div>
-    </div>
-    @endif
-    <div class="send" id="js-send">
-        <p>送信中 お待ちください</p>
-    </div>
-    <div class="send-back" id="js-send-back">
-    </div>
-    @if (isset($info_articles))
-    <span id=information></span>
-    <div class="box">
-        <div class="box_title">
-            お知らせ
-            @if ($authority_user)
-            <a class="btn btn-primary btn-sm" href="/articles/create?category=1">新規</a>
-            @endif
-        </div>
-        @foreach ($info_articles as $info)
-        <div class="information_box">
-            <div class="information_box_title">
-                {{ $info->title }}
+                <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    @if ($article->introductory == 'item2' && $authority_user)
+                    <a class="btn btn-primary btn-sm" href="/articles/create?category=2">新規</a>
+                    @endif
+                    <a class="btn btn-warning btn-sm" href="{{ route('articles.edit', $article->id) }}">編集</a>
+                    @if(!in_array($article->introductory, ['item1', 'item2', 'item3']))
+                    <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('本当に削除しますか?')">
+                        削除
+                    </button>
+                    @endif
+                </form>
+                @endif
+                <div>{!! nl2br($article->body) !!}</div>
+                @if ($article->introductory == 'item2' && isset($content_articles))
+                @foreach ($content_articles as $content)
+                <div class="content-box">
+                    <p>{{ $content->title }}
+                        @if ($content->link)
+                        <span class="ml-1"><a href={{ $content->link }}>🏠</a></span>
+                        @endif
+                    <div>{!! nl2br($content->body) !!}</div>
+                    </p>
+                    <p>
+                        @if ($authority_user)
+                    <form action="{{ route('articles.destroy', $content->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a class="btn btn-warning btn-sm"
+                            href="{{ route('articles.edit', $content->id) }}">編集</a>
+                        <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('本当に削除しますか?')">削除</button>
+                    </form>
+                    @endif
+                    </p>
+                </div>
+                @endforeach
+                @endif
             </div>
-            <p>
-                投稿日：
-                {{ $info->created_at->format('Y年m月d日') }}
-                ({{ $class_func->week_dis($info->created_at->format('w')) }})
+            @endforeach
+            @if (isset($contact_article))
+            <span id="contact"></span>
+            <div class="box">
+                <div class="box_title">
+                    {{ $contact_article->title }}
+                    @if ($contact_article->link)
+                    <span class="ml-1"><a href={{ $contact_article->link }}>🏠</a></span>
+                    @endif
+                    @if ($authority_user)
+                    <a class="btn btn-warning btn-sm" href="{{ route('articles.edit', $contact_article->id) }}">編集</a>
+                    @endif
+                </div>
+                <div>{!! nl2br($contact_article->body) !!}</div>
                 <br />
-                {!! nl2br($info->body) !!}<br />
-                @if ($info->link)
-            <div><a href={{ $info->link }}>🏠</a></div>
+                <div class="content">
+                    @include('articles.contact')
+                </div>
+            </div>
             @endif
-            </p>
-            <p>
-                @if ($authority_user)
-            <form action="{{ route('articles.destroy', $info->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <a class="btn btn-warning btn-sm" style="margin-left:5px;" href="{{ route('articles.edit', $info->id) }}">編集</a>
-                <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('本当に削除しますか?')">削除</button>
-            </form>
+            <div class="send" id="js-send">
+                <p>送信中 お待ちください</p>
+            </div>
+            <div class="send-back" id="js-send-back">
+            </div>
+            @if (isset($info_articles))
+            <span id=information></span>
+            <div class="box">
+                <div class="box_title">
+                    お知らせ
+                    @if ($authority_user)
+                    <a class="btn btn-primary btn-sm" href="/articles/create?category=1">新規</a>
+                    @endif
+                </div>
+                @foreach ($info_articles as $info)
+                <div class="information_box">
+                    <div class="information_box_title">
+                        {{ $info->title }}
+                        @if($info->link)
+                        <span class="ml-1"><a href={{ $info->link }}>🏠</a></span>
+                        @endif
+                    </div>
+                    <p>
+                        投稿日：
+                        {{ $info->created_at->format('Y年m月d日') }}
+                        ({{ $class_func->week_dis($info->created_at->format('w')) }})
+                        <br />
+                        {!! nl2br($info->body) !!}<br />
+                        @if ($info->link)
+                        @endif
+                    </p>
+                    <p>
+                        @if ($authority_user)
+                    <form action="{{ route('articles.destroy', $info->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <a class="btn btn-warning btn-sm edit_button"
+                            href="{{ route('articles.edit', $info->id) }}">編集</a>
+                        <button class="btn btn-danger btn-sm" type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('本当に削除しますか?')">削除</button>
+                    </form>
+                    @endif
+                    </p>
+                </div>
+                @endforeach
+            </div>
             @endif
-            </p>
-        </div>
-        @endforeach
-    </div>
-    @endif
     </div>
     <script src="{{ asset('/js/article.js') }}"></script>
 </body>

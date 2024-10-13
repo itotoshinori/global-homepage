@@ -34,7 +34,7 @@ $("#item5_link_hm").on("click", function () {
 $("#item6_link").on("click", function () {
     scrolle("#item6", 1);
 });
-$("#6_link_hm").on("click", function () {
+$("#item6_link_hm").on("click", function () {
     scrolle("#item6", 2);
 });
 $("#item7_link").on("click", function () {

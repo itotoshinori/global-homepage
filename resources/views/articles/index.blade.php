@@ -84,7 +84,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('articles.edit', $headline->id) }}">編集</a>
                     @endif
                 </div>
-                <div>{!! nl2br($headline->body) !!}</div>
+                <div class="fs-6">{!! nl2br($headline->body) !!}</div>
             </div>
             @endif
             @foreach ($articles as $article)
@@ -116,12 +116,11 @@
                 @if ($article->introductory == 'item2' && isset($content_articles))
                 @foreach ($content_articles as $content)
                 <div class="content-box">
-                    <p>{{ $content->title }}
-                        @if ($content->link)
-                        <span class="ml-1"><a href={{ $content->link }}>🏠</a></span>
-                        @endif
+                    <span class="fs-5">{{ $content->title }}</span>
+                    @if ($content->link)
+                    <span class="ml-1 fs-5"><a href={{ $content->link }}>🏠</a></span>
+                    @endif
                     <div class="fs-6">{!! nl2br($content->body) !!}</div>
-                    </p>
                     <p>
                         @if ($authority_user)
                     <form action="{{ route('articles.destroy', $content->id) }}" method="POST">
@@ -151,7 +150,7 @@
                     <a class="btn btn-warning btn-sm" href="{{ route('articles.edit', $contact_article->id) }}">編集</a>
                     @endif
                 </div>
-                <div>{!! nl2br($contact_article->body) !!}</div>
+                <div class="fs-6">{!! nl2br($contact_article->body) !!}</div>
                 <br />
                 <div class="content">
                     @include('articles.contact')

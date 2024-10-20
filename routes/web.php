@@ -22,14 +22,11 @@ use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 |
 */
 
-//Route::get('/', function () {
-//return view('welcome');
-//});
 Route::resource('internal/infos', InfoController::class)->middleware('auth');
 Route::post('/internal/infos/download/{id}', [InfoController::class, 'download'])->name('infos.download')->middleware('auth');
 Route::post('/internal/infos/send_mail/{id}', [InfoController::class, 'send_mail'])->name('infos.send_mail')->middleware('auth');
-Route::resource('/', ArticleController::class)->only(['index']);
-Route::resource('articles', ArticleController::class)->only(['index', 'show', 'create', 'edit']);
+Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+Route::resource('articles', ArticleController::class)->only(['show', 'create', 'edit']);
 Route::resource('articles', ArticleController::class)->except(['index', 'show'])->middleware('auth');
 Route::resource('/users', UserController::class)->only(['index', 'update', 'destroy'])->middleware('auth');
 Route::post('/users/pw_change/{id}', [UserController::class, 'pw_change'])->name('users.pw_change')->middleware('auth');
@@ -38,7 +35,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::post('/adoption', [AdoptionController::class, 'send'])->name('adoption.send');
-//URL::forceScheme('https');
 Route::get('/googleff047b634a403ed8.html', function () {
     return \File::get(public_path() . '/googleff047b634a403ed8.html');
 });

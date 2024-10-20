@@ -18,6 +18,9 @@ class ContactController extends Controller
             $request = $request->merge(['imgnumber' => 'OK']);
         } else {
             $request = $request->merge(['imgnumber' => null]);
+            $message_status = "danger";
+            $message = '送信に失敗しました。恐れ入りますが、お問合せタブをクリックして再送信をお願いします。';
+            return redirect()->route('articles.index')->with($message_status, $message);
         }
         $request->validate([
             'name' => 'required',
@@ -31,15 +34,13 @@ class ContactController extends Controller
         $message = $request->message;
         $my_url = config('my-url.url');
         $users = User::where('authority', '<=', 1)->get();
-        if ($my_url != "http://localhost") {
-            foreach ($users as $user) {
-                Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
-            }
-            //送信者にも控えを送付する
-            Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
+        foreach ($users as $user) {
+            Mail::to($user->email)->send(new Admin($introduce, $message, $my_url));
         }
+        //送信者にも控えを送付する
+        Mail::to($request->email)->send(new Admin($introduce_tosender, $message, $my_url));
         $message_status = 'success';
-        $message = '送信に成功しました';
+        $message = 'メール送信に成功しました';
         return redirect()->route('articles.index')->with($message_status, $message);
     }
 }

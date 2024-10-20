@@ -27,47 +27,57 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->class_func = new My_func();
-        $this->name = "";
-        $my_url = config('my-url.url');
-        $this->my_url = $my_url;
-        $this->articles_url = "${my_url}/articles/";
-        $this->to_email = "tnitoh@global-software.co.jp";
-        $this->users = User::all();
+        //$this->name = "";
+        //$my_url = config('my-url.url');
+        //$this->my_url = $my_url;
+        //$this->articles_url = "${my_url}/articles/";
+        //$this->to_email = "tnitoh@global-software.co.jp";
+        //$this->users = User::all();
     }
 
     public function index()
     {
         $authority_user = $this->class_func->login_user_authority(Auth::user());
         $articles = $this->class_func->main_articles();
-        $article_count = Article::whereNotNull('introductory')->count();
+        $article_count = Article::where('category', 4)->count();
         //一般記事最大数
         $article_max = 7;
-        $headline = Article::where('category', 3)->first();
-        $contact_article = Article::where('category', 4)->first();
-        $info_articles = Article::where('category', '=', 1)->orderBy('id', 'desc')->paginate(20);
-        $info_new = $this->class_func->dis_new($info_articles->max('created_at'));
+        $line_count = 6;
+        //$headline = Article::where('category', 2)->orderBy('id', 'desc')->first();
+        $contact_article = Article::where('category', 4)->orderBy('id', 'desc')->first();
+        $info_articles = Article::where('category', '=', 2)->orderBy('id', 'desc')->paginate(20);
+        //新着情報
+        $info_new = Article::where('category', 2)->orderBy('id', 'desc')->first();
+        //$info_new = $this->class_func->dis_new($info_articles->max('created_at'));
         $content_articles = Article::oldest()->get()->where('category', 2);
-        $urls = $this->class_func->urls();
+        //$urls = $this->class_func->urls();
         //最小値と最大値を指定
         $min = 1;
         $max = 3;
         //乱数を生成する
         $random_number = rand($min, $max);
         $file_list = NumConst::LIST[$random_number];
+        //新ホームページ用
+        $article_top = Article::where('introductory', 'top')->first();
+        $article_business = Article::where('introductory', 'business')->first();
+        $articles = Article::where('category', '>=', 3)->orderBy('category', 'asc')->orderBy('created_at', 'asc')->get();
         return view('articles.index', [
             'articles' => $articles,
             'article_count' => $article_count,
             'article_max' => $article_max,
-            'headline' => $headline,
+            'line_count' => $line_count,
+            //'headline' => $headline,
             'contact_article' => $contact_article,
             'info_new' => $info_new,
             'content_articles' => $content_articles,
             'info_articles' => $info_articles,
             'class_func' => $this->class_func,
-            'urls' => $urls,
+            //'urls' => $urls,
             'authority_user' => $authority_user,
             'random_number' => $random_number,
-            'file_list' => $file_list
+            'file_list' => $file_list,
+            'article_top' => $article_top,
+            'article_business' => $article_business,
         ]);
     }
 
@@ -110,11 +120,10 @@ class ArticleController extends Controller
             $image_detail = ltrim($path, 'images/');
             $create['image_detail'] = $image_detail;
         }
-        if ($create['category'] == 0) {
-            //$create['introductory'] = "item" . strval($this->class_func->main_articles()->count() + 1);
+        if ($create['category'] == 4) {
             $articles = Article::whereNotNull('introductory')->get(); // null の場合
             //itemの番号を空き番に設定する
-            for ($i = 1; $i <= 7; $i++) {
+            for ($i = 1; $i <= 10; $i++) {
                 if ($articles->where('introductory', "item" . strval($i))->count() == 0) {
                     $create['introductory'] = "item" . strval($i);
                     break;

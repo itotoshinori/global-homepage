@@ -1,63 +1,45 @@
-$("#close").on("click", function () {
-    $('input[id="nav-input"]').prop("checked", false);
-});
-$("#item1_link").on("click", function () {
-    scrolle("#item1", 1);
-});
-$("#item1_link_hm").on("click", function () {
-    scrolle("#item1", 2);
-});
-$("#item2_link").on("click", function () {
-    scrolle("#item2", 1);
-});
-$("#item2_link_hm").on("click", function () {
-    scrolle("#item2", 2);
-});
-$("#item3_link").on("click", function () {
-    scrolle("#item3", 1);
-});
-$("#item3_link_hm").on("click", function () {
-    scrolle("#item3", 2);
-});
-$("#item4_link").on("click", function () {
-    scrolle("#item4", 1);
-});
-$("#item4_link_hm").on("click", function () {
-    scrolle("#item4", 2);
-});
-$("#item5_link").on("click", function () {
-    scrolle("#item5", 1);
-});
-$("#item5_link_hm").on("click", function () {
-    scrolle("#item5", 2);
-});
-$("#item6_link").on("click", function () {
-    scrolle("#item6", 1);
-});
-$("#item6_link_hm").on("click", function () {
-    scrolle("#item6", 2);
-});
-$("#item7_link").on("click", function () {
-    scrolle("#item7", 1);
-});
-$("#item7_link_hm").on("click", function () {
-    scrolle("#item7", 2);
-});
-$("#contact_link").on("click", function () {
-    scrolle("#contact", 1);
-});
-$("#contact_link_hm").on("click", function () {
-    scrolle("#contact", 2);
-});
-$("#information_link").on("click", function () {
-    scrolle("#information", 1);
-});
-$("#information_link_hm").on("click", function () {
-    scrolle("#information", 2);
-});
-function scrolle(status, num) {
-    $(window).scrollTop($(status).position().top - 150);
-    if (num == 2) {
-        $('input[id="nav-input"]').prop("checked", false);
+$('#btn1').on('click', function (event) {
+    if ($("#name").val() == "") {
+        alert("お名前が空です");
+        event.preventDefault(); // 送信処理を停止
+        return false;
     }
-}
+
+    // メールアドレスの取得
+    var email = $('#email').val();
+
+    // 空欄チェック
+    if (email == "") {
+        alert("メールアドレスが空です");
+        event.preventDefault(); // 送信処理を停止
+        return false;
+    }
+
+    // メールアドレス形式のバリデーション
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        alert("正しいメールアドレスを入力してください");
+        event.preventDefault(); // 送信処理を停止
+        return false;
+    }
+
+    // 番号のチェック
+    if ($("#img_num").val() == "") {
+        alert("番号を入力してください");
+        event.preventDefault(); // 送信処理を停止
+        return false;
+    }
+
+    // 本文のチェック
+    if ($("#message").val() == "") {
+        alert("本文を入力してください");
+        event.preventDefault(); // 送信処理を停止
+        return false;
+    }
+
+    // ボタンを非表示にする
+    $('#btn1').hide();
+
+    // 送信中メッセージを表示する
+    $('#sendingMessage').show();
+});

@@ -16,12 +16,6 @@
 </script>
 
 </html>
-<style>
-    body {
-        margin-bottom: 80px;
-    }
-
-</style>
 <script>
     $(function() {
         $("#btn1").on("click", function() {
@@ -44,5 +38,4 @@
         // コピーを通知する
         alert("全員のemailをコピーできました。BCCに貼るなどして連絡用にご活用下さい。");
     });
-
 </script>

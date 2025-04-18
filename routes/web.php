@@ -8,8 +8,6 @@ use App\Http\Controllers\AdoptionController;
 use App\Http\Controllers\ImageUpController;
 use App\Http\Controllers\InfoController;
 use App\lib\My_func;
-use App\Http\Controllers\ResisterProtectController;
-use PHPUnit\Framework\MockObject\Rule\InvokedAtIndex;
 
 /*
 |--------------------------------------------------------------------------

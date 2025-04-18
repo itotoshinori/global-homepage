@@ -18,18 +18,27 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $date = new Carbon();
-        //DB::table('users')->insert([
-        //[
-        //'name' => 'itoテスト3',
-        //'email' => 'test24@test.com',
-        //'password' => bcrypt('okuwa3358'),
-        //'created_at' => $date,
-        //'updated_at' => $date,
-        //],
-        //]);
-        //DB::table('users')->insert([['name' =>'山田太郎','email' =>'yamada-taro@kje.biglobe.ne.jp','password' => bcrypt('okuwa3358'),'created_at' => $date,'updated_at' => $date,],]);
-        //DB::table('users')->insert([['name' =>'山田二郎','email' =>'yamada-jiro@kje.biglobe.ne.jp','password' => bcrypt('okuwa3358'),'created_at' => $date,'updated_at' => $date,],]);
-        //DB::table('users')->insert([['name' =>'山田山郎','email' =>'yamada-sabu@kje.biglobe.ne.jp','password' => bcrypt('okuwa33583'),'note' => 'okuwa33583','created_at' => $date,'updated_at' => $date,],]);
-        //DB::table('users')->insert([['name' =>'山田氏郎','email' =>'yamada-shiro@kje.biglobe.ne.jp','password' => bcrypt('okuwa33584'),'note' => 'okuwa33584','created_at' => $date,'updated_at' => $date,],]);
+        DB::table('users')->insert([
+            [
+                'name' => '伊藤利典',
+                'email' => 'tnitoh@global-software.co.jp',
+                'password' => bcrypt('okuwa3358'),
+                'created_at' => $date,
+                'updated_at' => $date,
+                'authority' => 1,
+                'registration' => true,
+                'note' => null,
+            ],
+            [
+                'name' => '宮島郁夫',
+                'email' => 'mah00132@kje.biglobe.ne.jp',
+                'password' => bcrypt('pontas'),
+                'created_at' => $date,
+                'updated_at' => $date,
+                'authority' => 1,
+                'registration' => true,
+                'note' => null,
+            ],
+        ]);
     }
 }

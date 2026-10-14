@@ -3,7 +3,7 @@
 <head>
     <title>株式会社グローバル</title>
     <meta name="description" content="株式会社グローバル　東京都杉並区のソフトウェア開発会社です">
-    <meta name="keywords" content="グローバル,宮島郁夫,国松勇次,宮坂栄一,伊藤利典,日本郵政グループ,手話言語化アプリ">
+    <meta name="keywords" content="グローバル,宮島郁夫,国松勇次,宮坂栄一,日本郵政グループ,手話言語化アプリ">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta charset="utf-8">
@@ -71,6 +71,9 @@
             <div>ファーストビル阿佐谷</div>
             <div>
                 TEL 03-3292-5461 FAX 03-5929-8730
+            </div>
+            <div>
+                <a href="/privacypolicy" target="_blank" class="text-white">プライバシーポリシー</a>
             </div>
         </div>
     </div>

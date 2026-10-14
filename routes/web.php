@@ -7,7 +7,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdoptionController;
 use App\Http\Controllers\ImageUpController;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\lib\My_func;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,8 @@ use App\lib\My_func;
 */
 
 Route::resource('internal/infos', InfoController::class)->middleware('auth');
+Route::resource('privacypolicy', PrivacyPolicyController::class)->only('index');
+Route::resource('privacypolicy', PrivacyPolicyController::class)->only('edit', 'update')->middleware('auth');
 Route::post('/internal/infos/download/{id}', [InfoController::class, 'download'])->name('infos.download')->middleware('auth');
 Route::post('/internal/infos/send_mail/{id}', [InfoController::class, 'send_mail'])->name('infos.send_mail')->middleware('auth');
 Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
